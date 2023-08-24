@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Exportar a Excel - Version 2.0";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>Exportar Datos a Excel</h1>
+    @using (Html.BeginForm("Exportar", "Home", FormMethod.Post))
+    {
+        <input type="submit" value="Exportar a Excel" />
+    }
+</body>
+</html>
