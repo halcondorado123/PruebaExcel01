@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using OfficeOpenXml.Drawing;
 using PruebaExcel01.Models;
 using System;
 using System.Diagnostics;
+
 
 namespace PruebaExcel01.Controllers
 {
@@ -49,11 +51,19 @@ namespace PruebaExcel01.Controllers
             CentrarContenido(range);
         }
 
+        public static void AplicarBordesIzquierda(ExcelRange range, ExcelBorderStyle borderStyle = ExcelBorderStyle.Thin)
+        {
+            range.Style.Border.Top.Style = borderStyle;
+            range.Style.Border.Left.Style = borderStyle;
+            range.Style.Border.Right.Style = borderStyle;
+            range.Style.Border.Bottom.Style = borderStyle;
+            IzquierdaContenido(range);
+        }
+
         public static void AplicarBordeTipoFirma(ExcelRange range, ExcelBorderStyle borderStyle = ExcelBorderStyle.Thin)
         {
             range.Style.Border.Bottom.Style = borderStyle;
         }
-
 
 
         public static void CentrarContenido(ExcelRange range)
@@ -65,6 +75,12 @@ namespace PruebaExcel01.Controllers
         public static void DerechaContenido(ExcelRange range)
         {
             range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+            range.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+        }
+
+        public static void IzquierdaContenido(ExcelRange range)
+        {
+            range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
             range.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
         }
         public static void AplicarNegrita(ExcelRange range, bool negrita = true)
@@ -98,6 +114,8 @@ namespace PruebaExcel01.Controllers
         [HttpPost]
         public ActionResult Exportar()
         {
+
+
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage())
             {
@@ -108,6 +126,13 @@ namespace PruebaExcel01.Controllers
 
                 // Crear Hoja xlsx
                 var worksheet = package.Workbook.Worksheets.Add("nombreHoja");
+
+                //------------------- SHEET SIZE--------------------//
+                //int columnaIndex = 1; // Índice de la columna que deseas modificar (empezando desde 1)
+                //double nuevoAncho = 20; // Nuevo ancho de la columna en puntos
+
+                //worksheet.Column(columnaIndex).Width = nuevoAncho;00
+                // -------------------------------------------------- //
 
                 // Labels Registro Fecha y Hora
                 string fechaRegistro = "Fecha Registro:";
@@ -123,9 +148,12 @@ namespace PruebaExcel01.Controllers
                 var celdaHora = worksheet.Cells[1, 2];
                 celdaFecha.Value = fechaRegistro;
                 celdaFecha.Style.Font.Bold = true; // Aplica formato negrita
-                worksheet.Column(1).Width = 29.78; // Cambia el valor 15 según tus necesidades
-                //hoja.Row(2).Height = 20; // Cambia el valor 20 según tus necesidades
-
+                worksheet.Column(2).Width = 29.78; // Cambia el valor 15 según tus necesidades
+                
+                
+                // Ajuste de Row para la firma
+                var filaFirma = worksheet.Row(66);
+                filaFirma.Height = 93.60;
 
                 celdaHora.Value = HoraRegistro;
                 celdaHora.Style.Font.Bold = true; // Aplica formato negrita
@@ -138,13 +166,13 @@ namespace PruebaExcel01.Controllers
                 //worksheet.Cells[6, 1].Value = "Bruce Banner";
                 //worksheet.Cells[6, 2].Value = "elvengadormasfuerte@gmail.com";
 
-                var logoCelda = worksheet.Cells[1, 2];
-                celdaFecha.Value = fechaRegistro;
-                celdaFecha.Style.Font.Bold = true; // Aplica formato negrita
-                worksheet.Column(1).Width = 29.78;
+                //var logoCelda = worksheet.Cells[1, 2];
+                //celdaFecha.Value = fechaRegistro;
+                //celdaFecha.Style.Font.Bold = true; // Aplica formato negrita
+                //worksheet.Column(1).Width = 29.78;
 
 
-                // LogoCelda Square
+                // LogoCelda Square (Por parametrizar)
                 ExcelRange logoSquare = GetExcelRange(worksheet, 1, 1, 5, 2);
                 logoSquare.Value = "LOGOTIPO SAMPLE";
                 UnirCeldas(logoSquare);
@@ -640,10 +668,6 @@ namespace PruebaExcel01.Controllers
                 AplicarBordes(LabelTotalCreditos);
                 FormatoGeneralTexto(LabelTotalCreditos);
 
-                // El codigo queda por modificar aqui //
-                // Comentarios pruebas de Git Hub //
-
-
                 ExcelRange celdasMateriasTotales = GetExcelRange(worksheet, 46, 8, 48, 10);
                 AplicarBordes(celdasMateriasTotales);
 
@@ -665,57 +689,166 @@ namespace PruebaExcel01.Controllers
                 var TotalPendienteProfesional = worksheet.Cells["I48"];
                 TotalPendienteProfesional.Formula = $"({TotalCreditosProfesional.Address}) - ({TotalAprobadoProfesional.Address})";
 
+
+                // IMPORTANTE: CODIGO PROPENSO A SER MODIFICADO //
+                var cellsToSetZero = new List<ExcelRange>
+                {
+                    worksheet.Cells["H46"],
+                    worksheet.Cells["J46"],
+                    worksheet.Cells["H47"],
+                    worksheet.Cells["J47"],
+                    worksheet.Cells["H48"],
+                    worksheet.Cells["J48"]
+                };
+
+                // Asigna el valor cero a todas las celdas usando un bucle
+                foreach (var cell in cellsToSetZero)
+                {
+                    cell.Value = 0;
+                }
+
+                // --------------------------------------------------------------------- //
+
+                // --------------------- PARRAFO ALCARACIONES --------------------------- //
+
                 // Unir celdas horizontalmente y verticalmente
-                ExcelRange labelTitle2 = worksheet.Cells[50, 1, 50, 2]; // Desde celda A1 hasta E1
-                labelTitle2.Merge = true;
+                ExcelRange labelTitle2 = worksheet.Cells[50, 1, 50, 2];
                 labelTitle2.Value = "Aclaraciones";
-                labelTitle2.Style.Font.Bold = true;
-                labelTitle2.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                AplicarNegrita(labelTitle2);
+                UnirCeldas(labelTitle2);
+                IzquierdaContenido(labelTitle2);
 
-                ExcelRange ContextA = worksheet.Cells[51, 1, 51, 24]; // Desde celda A1 hasta E1
-                ContextA.Merge = true;
+                ExcelRange ContextA = worksheet.Cells[51, 1, 51, 24];
                 ContextA.Value = "Los créditos académicos faltantes para cumplir a cabalidad con la oferta académica del nivel técnico profesional y/o tecnológico y/o  profesional deben ser cursados y aprobados conforme las reglamentaciones institucionales vigentes.";
-                ContextA.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                UnirCeldas(ContextA);
+                IzquierdaContenido(ContextA);
 
-                ExcelRange ContextB = worksheet.Cells[52, 1, 52, 24]; // Desde celda A1 hasta E1
-                ContextB.Merge = true;
-                // Verificar si es factible ajustar texto
+                ExcelRange ContextB = worksheet.Cells[52, 1, 52, 24];
                 ContextB.Value = "La Escuela de Ciencias Administrativas de la Corporación Unificada Nacional -CUN, reconoce las asignaturas del programa de  Administración de Servicios de Salud   del nivel técnico ( 1 - 3  semestre) para que dar continuidad a su proceso de formación académica a partir de las asignaturas de nivel tecnológico correspondientes a (  4 - 5  semestre) Y profesional correspondientes a ( 6 - 9  semestre)";
-                ContextB.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                UnirCeldas(ContextB);
+                IzquierdaContenido(ContextB);
 
-                ExcelRange ContextC = worksheet.Cells[53, 1, 53, 24]; // Desde celda A1 hasta E1
-                ContextC.Merge = true;
+                ExcelRange ContextC = worksheet.Cells[53, 1, 53, 24];
                 ContextC.Value = "La prueba TyT del ciclo técnico es homologable en la institución. El estudiante deberá presentar la prueba saber TyT para el ciclo tecnológico y Saber PRO para el ciclo profesional.";
-                ContextC.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                UnirCeldas(ContextC);
+                IzquierdaContenido(ContextC);
 
-                ExcelRange ContextD = worksheet.Cells[54, 1, 54, 24]; // Desde celda A1 hasta E1
-                ContextD.Merge = true;
+                ExcelRange ContextD = worksheet.Cells[54, 1, 54, 24];
                 ContextD.Value = "Teniendo en cuenta que el plan de estudios vigente del programa  Administración de Servicios de Salud   no incluye los respectivos niveles de inglés requeridos para obtener las diferentes tituluaciones, el estudiante deberá garantizar lo pertinente al momento de radicar su solilctud de grado, para ello se cuenta con la oferta del centro de Idiomas de la intitución.";
-                ContextD.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                UnirCeldas(ContextD);
+                IzquierdaContenido(ContextD);
 
-                ExcelRange labelTitle3 = worksheet.Cells[56, 1, 56, 2]; // Desde celda A1 hasta E1
-                labelTitle3.Merge = true;
+                ExcelRange labelTitle3 = worksheet.Cells[56, 1, 56, 2];
                 labelTitle3.Value = "Manifestación expresa del estudiante";
-                labelTitle3.Style.Font.Bold = true;
-                labelTitle3.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                AplicarNegrita(labelTitle3);
+                UnirCeldas(labelTitle3);
+                IzquierdaContenido(labelTitle3);
 
-                ExcelRange finalParraf = worksheet.Cells[57, 1, 57, 24]; // Desde celda A1 hasta E1
-                finalParraf.Merge = true;
+                ExcelRange finalParraf = worksheet.Cells[57, 1, 57, 24];
                 finalParraf.Value = "Con el presente documento manifiesto expresamente y sin que medie ninguna clase de vicio o limitación a mi consentimiento, mi plena conformidad con las asignaturas y/o créditos reconocidos u homologados para mi ingreso al nivel técnico profesional y/o tecnológico y/o profesional del programa   Administración de Servicios de Salud    de la Corporación Unificada Nacional de Educación Superior CUN. Las competencias que considere me hagan falta, del ciclo técnico, las podré realizar voluntariamente a través de tutorías en cada área transversal o del programa, talleres nivelatorios y/o participando como asistente a clases sin que estos generen nota alguna y solicitando previamente el ingreso a la clase o tutoría.";
-                finalParraf.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                UnirCeldas(finalParraf);
+                IzquierdaContenido(finalParraf);
 
-                ExcelRange labelTitle4 = worksheet.Cells[63, 1, 63, 3]; // Desde celda A1 hasta E1
-                labelTitle4.Merge = true;
+                var labelTitle4 = worksheet.Cells[63, 1];
                 labelTitle4.Value = "En Constancia de lo anterior firman:";
-                labelTitle4.Style.Font.Bold = true;
-                labelTitle4.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                AplicarNegrita(labelTitle3);
+                UnirCeldas(labelTitle3);
+                IzquierdaContenido(labelTitle3);
+
+                // -------------------------------------------------------------------------- //
+
+                // ----------------------------- SIGNATURE INFO ----------------------------- //
+
+                string imagePath = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
+                int widthInPixels = 230;
+                int heightInPixels = 70;
+
+                var picture = worksheet.Drawings.AddPicture("Firma", new FileInfo(imagePath));
+
+                picture.SetPosition(66, -80, 1, -30);
+                picture.SetSize(widthInPixels, heightInPixels);
+                picture.Locked = true;
+
+                ExcelRange cellSignatureLiderPrograma = worksheet.Cells[66, 1, 66, 2];
+                AplicarBordeTipoFirma(cellSignatureLiderPrograma);
+
+                ExcelRange labelSignature1 = worksheet.Cells[67, 1, 67, 3];
+                labelSignature1.Value = "Líder de Programa";
+                UnirCeldas(labelSignature1);
+                IzquierdaContenido(labelSignature1);
+
+                ExcelRange labelSignature2 = worksheet.Cells[68, 1, 68, 3];
+                labelSignature2.Value = "Nombre: SAMPLE NAME";  // Convertir y generar valor dinámico
+                UnirCeldas(labelSignature2);
+                IzquierdaContenido(labelSignature2);
+
+                var parrafSquare = worksheet.Cells[66, 7];
+                parrafSquare.Value = "finalParraf";
+                CentrarContenido(parrafSquare);
+                UnirCeldas(parrafSquare);
+
+                // Asignar un valor dinámico para la firma (ESTEBAN)
+
+                ExcelRange cellSignatureStudent = worksheet.Cells[66, 9, 66, 12];
+                AplicarBordeTipoFirma(cellSignatureStudent);
+
+                ExcelRange labelSignature3 = worksheet.Cells[67, 9, 67, 12];
+                labelSignature3.Value = "Estudiante: "; // Convertir y generar valor dinámico
+                UnirCeldas(labelSignature3);
+                IzquierdaContenido(labelSignature3);
+
+                ExcelRange labelSignature4 = worksheet.Cells[68, 9, 68, 12];
+                labelSignature4.Value = "Nombre: ";  // Convertir y generar valor dinámico
+                UnirCeldas(labelSignature4);
+                IzquierdaContenido(labelSignature4);
+
+                ExcelRange labelSignature5 = worksheet.Cells[69, 9, 69, 12];
+                labelSignature5.Value = "Doc de Identidad: "; // Convertir y generar valor dinámico
+                UnirCeldas(labelSignature5);
+                IzquierdaContenido(labelSignature5);
+
+                // ------------------------------ FOOTER -----------------------------------//
+                ExcelRange CellFooter1 = worksheet.Cells[71, 1, 71, 4];
+                CellFooter1.Value = "ELABORÓ: "; // Convertir y generar valor dinámico
+                AplicarBordesIzquierda(CellFooter1);
+                UnirCeldas(CellFooter1);
+
+                ExcelRange CellFooter2 = worksheet.Cells[71, 5, 71, 10];
+                CellFooter2.Value = "FECHA"; // Convertir y generar valor dinámico
+                AplicarBordesIzquierda(CellFooter2);
+                UnirCeldas(CellFooter2);
+
+                ExcelRange CellFooter3 = worksheet.Cells[71, 11, 71, 15];
+                CellFooter3.Value = "REVISÓ: "; // Convertir y generar valor dinámico
+                AplicarBordesIzquierda(CellFooter3);
+                UnirCeldas(CellFooter3);
+
+                ExcelRange CellFooter4 = worksheet.Cells[71, 11, 71, 15];
+                CellFooter4.Value = "FECHA"; // Convertir y generar valor dinámico
+                AplicarBordesIzquierda(CellFooter4);
+                UnirCeldas(CellFooter4);
+
+                ExcelRange CellFooter5 = worksheet.Cells[69, 9, 69, 12];
+                CellFooter5.Value = "APROBÓ: "; // Convertir y generar valor dinámico
+                AplicarBordesIzquierda(CellFooter5);
+                UnirCeldas(CellFooter5);
+
+                ExcelRange CellFooter6 = worksheet.Cells[71, 11, 71, 15];
+                CellFooter6.Value = "FECHA: "; // Convertir y generar valor dinámico
+                AplicarBordesIzquierda(CellFooter6);
+                UnirCeldas(CellFooter6);
 
 
-                // Agrega datos a las celdas
-                // Aquí deberías obtener tus datos y llenar las celdas según tu lógica
+
+
+                // ------------------------------ END FOOTER --------------------------------//
+
 
                 var filePath = @"C:\Users\Jhonattan_Casallas\Downloads\" + nombreArchivo;
                 package.SaveAs(new System.IO.FileInfo(filePath));
+
+
+
 
                 return File(filePath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nombreArchivo);
             }
