@@ -119,20 +119,23 @@ namespace PruebaExcel01.Controllers
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage())
             {
+
                 var fechaHoraActual = DateTime.Now;
+                
                 string formatoFecha = "yyyyMMdd_HHmmss";
+
+                #region infoDownloadDoc
+
+                // Crea el nombre de mi documento 
+
                 string nombreArchivo = "Datos_Docs_Est_" + fechaHoraActual.ToString(formatoFecha) + ".xlsx";
                 string nombreHoja = "docs_titulos_01" + fechaHoraActual;
 
                 // Crear Hoja xlsx
                 var worksheet = package.Workbook.Worksheets.Add("nombreHoja");
 
-                //------------------- SHEET SIZE--------------------//
-                //int columnaIndex = 1; // Índice de la columna que deseas modificar (empezando desde 1)
-                //double nuevoAncho = 20; // Nuevo ancho de la columna en puntos
+                #endregion
 
-                //worksheet.Column(columnaIndex).Width = nuevoAncho;00
-                // -------------------------------------------------- //
 
                 // Labels Registro Fecha y Hora
                 string fechaRegistro = "Fecha Registro:";
@@ -173,6 +176,19 @@ namespace PruebaExcel01.Controllers
 
 
                 // LogoCelda Square (Por parametrizar)
+
+                string imagePathLogo = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\log1.png";
+                int widthLogoInPixels = 255;
+                int heightLogoInPixels = 98;
+
+                var pictureLogo = worksheet.Drawings.AddPicture("Logo", new FileInfo(imagePathLogo));
+
+                pictureLogo.SetPosition(1, -20, 1, -50);
+                pictureLogo.SetSize(widthLogoInPixels, heightLogoInPixels);
+                pictureLogo.Locked = true;
+
+
+
                 ExcelRange logoSquare = GetExcelRange(worksheet, 1, 1, 5, 2);
                 logoSquare.Value = "LOGOTIPO SAMPLE";
                 UnirCeldas(logoSquare);
@@ -759,15 +775,15 @@ namespace PruebaExcel01.Controllers
 
                 // ----------------------------- SIGNATURE INFO ----------------------------- //
 
-                string imagePath = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
-                int widthInPixels = 230;
-                int heightInPixels = 70;
+                string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
+                int widthSignatureInPixels = 230;
+                int heightSignatureInPixels = 70;
 
-                var picture = worksheet.Drawings.AddPicture("Firma", new FileInfo(imagePath));
+                var pictureSignature = worksheet.Drawings.AddPicture("Firma", new FileInfo(imagePathSignature));
 
-                picture.SetPosition(66, -80, 1, -30);
-                picture.SetSize(widthInPixels, heightInPixels);
-                picture.Locked = true;
+                pictureSignature.SetPosition(66, -80, 1, -30);
+                pictureSignature.SetSize(widthSignatureInPixels, heightSignatureInPixels);
+                pictureSignature.Locked = true;
 
                 ExcelRange cellSignatureLiderPrograma = worksheet.Cells[66, 1, 66, 2];
                 AplicarBordeTipoFirma(cellSignatureLiderPrograma);
@@ -808,35 +824,39 @@ namespace PruebaExcel01.Controllers
                 IzquierdaContenido(labelSignature5);
 
                 // ------------------------------ FOOTER -----------------------------------//
+                ExcelRange tableFooter = worksheet.Cells[71, 1, 72, 15];
+                IzquierdaContenido(tableFooter);
+
                 ExcelRange CellFooter1 = worksheet.Cells[71, 1, 71, 4];
                 CellFooter1.Value = "ELABORÓ: "; // Convertir y generar valor dinámico
                 AplicarBordesIzquierda(CellFooter1);
                 UnirCeldas(CellFooter1);
 
-                ExcelRange CellFooter2 = worksheet.Cells[71, 5, 71, 10];
-                CellFooter2.Value = "FECHA"; // Convertir y generar valor dinámico
+                ExcelRange CellFooter2 = worksheet.Cells[72, 1, 72, 4];
+                CellFooter2.Value = "FECHA: "; // Convertir y generar valor dinámico
                 AplicarBordesIzquierda(CellFooter2);
                 UnirCeldas(CellFooter2);
 
-                ExcelRange CellFooter3 = worksheet.Cells[71, 11, 71, 15];
+                ExcelRange CellFooter3 = worksheet.Cells[71, 5, 71, 10];
                 CellFooter3.Value = "REVISÓ: "; // Convertir y generar valor dinámico
                 AplicarBordesIzquierda(CellFooter3);
                 UnirCeldas(CellFooter3);
 
-                ExcelRange CellFooter4 = worksheet.Cells[71, 11, 71, 15];
-                CellFooter4.Value = "FECHA"; // Convertir y generar valor dinámico
+                ExcelRange CellFooter4 = worksheet.Cells[72, 5, 72, 10];
+                CellFooter4.Value = "FECHA:"; // Convertir y generar valor dinámico
                 AplicarBordesIzquierda(CellFooter4);
                 UnirCeldas(CellFooter4);
 
-                ExcelRange CellFooter5 = worksheet.Cells[69, 9, 69, 12];
-                CellFooter5.Value = "APROBÓ: "; // Convertir y generar valor dinámico
+                ExcelRange CellFooter5 = worksheet.Cells[71, 11, 71, 15];
+                CellFooter5.Value = "APROBÓ:"; // Convertir y generar valor dinámico
                 AplicarBordesIzquierda(CellFooter5);
                 UnirCeldas(CellFooter5);
 
-                ExcelRange CellFooter6 = worksheet.Cells[71, 11, 71, 15];
-                CellFooter6.Value = "FECHA: "; // Convertir y generar valor dinámico
+                ExcelRange CellFooter6 = worksheet.Cells[72, 11, 72, 15];
+                CellFooter6.Value = "FECHA:"; // Convertir y generar valor dinámico
                 AplicarBordesIzquierda(CellFooter6);
                 UnirCeldas(CellFooter6);
+
 
 
 
