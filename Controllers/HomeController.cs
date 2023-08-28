@@ -116,8 +116,14 @@ namespace PruebaExcel01.Controllers
             ApplyBorders(range);
             ContentLeft(range);
         }
+        public static void ApplyBackgroundColorToRange(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn, System.Drawing.Color color)
+        {
+            var range = worksheet.Cells[startRow, startColumn, endRow, endColumn];
+            range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            range.Style.Fill.BackgroundColor.SetColor(color);
+        }
 
-        
+
         // Seleccion de celdas por rango
         public static ExcelRange GetExcelRange(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn)
         {
@@ -144,22 +150,21 @@ namespace PruebaExcel01.Controllers
                 string nombreArchivo = "Datos_Docs_Est_" + fechaHoraActual.ToString(formatoFecha) + ".xlsx";
                 string nombreHoja = "docs_titulos_01" + fechaHoraActual;
 
+
                 // Crear Hoja xlsx
 
                 #endregion
                
                 var worksheet = package.Workbook.Worksheets.Add("nombreHoja");
 
-                // Manejo de tamaños de celdas [Rows][Columns] //
-                // Índices de las columnas con diferentes anchos
+                ApplyBackgroundColorToRange(worksheet, 1, 1, 72, 24, System.Drawing.Color.White);
+
                 int[] columnIndices = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
 
-                // Anchura respectiva para cada columna
                 double[] columnWidths = { 5.89, 29.78, 10.78, 10.22, 14.56, 14.78, 14.89, 7.56, 12.56, 14.89,
                                         9.56, 10.78, 14.33, 14.22, 14.22, 6.33, 9.89, 9.89, 7.22, 8.33,
                                         13.56, 16.56, 14.89, 13.56,};
 
-                // Ajustar los anchos de las columnas en función de los índices y los anchos
                 for (int i = 0; i < columnIndices.Length; i++)
                 {
                     int columnIndex = columnIndices[i];
@@ -167,41 +172,29 @@ namespace PruebaExcel01.Controllers
                     worksheet.Column(columnIndex).Width = columnWidth;
                 }
 
-                //// Agrega encabezados de columnas
-                //var celdaFecha = worksheet.Cells[1, 1];
-                //celdaFecha.Value = fechaRegistro;
-                //celdaFecha.Style.Font.Bold = true; // Aplica formato negrita
-                //worksheet.Column(1).Width = 5.89; // Cambia el valor 15 según tus necesidades
-                ////worksheet.Row(2).Height = 20; // Cambia el valor 20 según tus necesidades
+                int[] rowIndices = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+                                    31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+                                    41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+                                    51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+                                    61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72};
 
-                //var celdaHora = worksheet.Cells[1, 2];
-                //celdaFecha.Value = fechaRegistro;
-                //celdaFecha.Style.Font.Bold = true; // Aplica formato negrita
-                //worksheet.Column(2).Width = 29.78; // Cambia el valor 15 según tus necesidades
+                double[] rowHeights = {12.60, 13.20, 12.60, 12.60, 25.20, 12.60, 12.60, 25.20, 12.60, 38.40,
+                                        37.20, 12.60, 12.60, 21.00, 24.00, 15.60, 12.60, 33.60, 12.60, 25.20,
+                                        12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
+                                        51.00, 12.60, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20,
+                                        25.20, 12.60, 13.20, 12.60, 12.60, 12.60, 12.60, 13.20, 12.60, 12.60,
+                                        15.60, 51.60, 16.20, 39.00, 24.00, 12.60, 55.80, 18.60, 24.60, 19.20,
+                                        12.60, 12.60, 12.60, 12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60,
+                                        12.60, 12.60};
 
-
-                //// Ajuste de Row para la firma
-                //var filaFirma = worksheet.Row(66);
-                //filaFirma.Height = 93.60;
-
-                //celdaHora.Value = HoraRegistro;
-                //celdaHora.Style.Font.Bold = true; // Aplica formato negrita
-
-
-                //worksheet.Cells[2, 1].Value = fechaHoraActual.ToString("yyyy-MM-dd");
-                //worksheet.Cells[2, 2].Value = fechaHoraActual.ToString("HH:mm:ss");
-                //worksheet.Cells[5, 1].Value = "Nombre";
-                //worksheet.Cells[5, 2].Value = "Correo electrónico";
-                //worksheet.Cells[6, 1].Value = "Bruce Banner";
-                //worksheet.Cells[6, 2].Value = "elvengadormasfuerte@gmail.com";
-
-                //var logoCelda = worksheet.Cells[1, 2];
-                //celdaFecha.Value = fechaRegistro;
-                //celdaFecha.Style.Font.Bold = true; // Aplica formato negrita
-                //worksheet.Column(1).Width = 29.78;
-
-
-                // LogoCelda Square (Por parametrizar)
+                for (int i = 0; i < rowIndices.Length; i++)
+                {
+                    int rowIndex = rowIndices[i];
+                    double rowHeight = rowHeights[i];
+                    worksheet.Row(rowIndex).Height = rowHeight;
+                }
 
                 string imagePathLogo = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\log1.png";
                 int widthLogoInPixels = 255;
@@ -227,20 +220,12 @@ namespace PruebaExcel01.Controllers
                 ContentCenter(logoDate);
                 WhiteColor(logoDate);
 
-
-                //ExcelRange logoTime = GetExcelRange(worksheet, 3, 1, 3, 2);
-                //logoTime.Value = fechaHoraActual.ToString("yyyy-MM-dd");
-                //MergedCells(logoTime);
-                ////CellCenter(logoTime);
-
-
                 // Header Rectangle
                 ExcelRange headerRectangle = GetExcelRange(worksheet, 1, 3, 3, 24);
                 headerRectangle.Value = "ACTA DE RECONOCIMIENTO DE TITULO";
                 CellCenter(headerRectangle);
                 MergedCells(headerRectangle);
                 FontWeightBold(headerRectangle);
-
 
                 ExcelRange labelFormA = GetExcelRange(worksheet, 5, 8, 5, 10);
                 labelFormA.Value = "INTERNA";
