@@ -6,6 +6,7 @@ using PruebaExcel01.Models;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection.Metadata;
 
 namespace PruebaExcel01.Controllers
 {
@@ -130,12 +131,314 @@ namespace PruebaExcel01.Controllers
             return worksheet.Cells[startRow, startColumn, endRow, endColumn];
         }
 
+        private void AddLogo(ExcelWorksheet worksheet)
+        {
+            string imagePathLogo = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\log1.png";
+            int widthLogoInPixels = 255;
+            int heightLogoInPixels = 98;
+
+            var pictureLogo = worksheet.Drawings.AddPicture("Logo", new FileInfo(imagePathLogo));
+
+            pictureLogo.SetPosition(1, -20, 1, -50);
+            pictureLogo.SetSize(widthLogoInPixels, heightLogoInPixels);
+            pictureLogo.Locked = true;
+        }
+
+        private void AddHeaderInfo(ExcelWorksheet worksheet)
+        {
+            string fechaRegistro = "Fecha Registro / Hora Registro";
+            DateTime fechaHoraActual = DateTime.Now;
+
+            ExcelRange logoSpace = GetExcelRange(worksheet, 1, 1, 1, 2);
+            logoSpace.Value = fechaRegistro;
+            MergedCells(logoSpace);
+            ContentCenter(logoSpace);
+            WhiteColor(logoSpace);
+
+            ExcelRange logoDate = GetExcelRange(worksheet, 2, 1, 5, 2);
+            logoDate.Value = fechaHoraActual.ToString("yyyy-MM-dd \n" + fechaHoraActual.ToString("HH:mm:ss"));
+            MergedCells(logoDate);
+            ContentCenter(logoDate);
+            WhiteColor(logoDate);
+
+            ExcelRange headerRectangle = GetExcelRange(worksheet, 1, 3, 3, 24);
+            headerRectangle.Value = "ACTA DE RECONOCIMIENTO DE TITULO";
+            CellCenter(headerRectangle);
+            MergedCells(headerRectangle);
+            FontWeightBold(headerRectangle);
+        }
+
+        private void AddFormUserContent(ExcelWorksheet worksheet)
+        {
+            #region FirstDivision
+
+            ExcelRange labelFormA = GetExcelRange(worksheet, 5, 8, 5, 10);
+            labelFormA.Value = "INTERNA";
+            MergedCells(labelFormA);
+            FontWeightBold(labelFormA);
+            ContentCenter(labelFormA);
+
+            ExcelRange txtbox1 = GetExcelRange(worksheet, 5, 11, 5, 12);
+            // TARGET //
+            MergedCells(txtbox1);
+            ApplyBorders(txtbox1);
+
+
+            ExcelRange labelFormB = GetExcelRange(worksheet, 5, 14, 5, 15);
+            labelFormB.Value = "EXTERNA";
+            MergedCells(labelFormB);
+            FontWeightBold(labelFormB);
+            ContentCenter(labelFormB);
+
+            ExcelRange txtbox2 = GetExcelRange(worksheet, 5, 16, 5, 17);
+            // TARGET //               
+            MergedCells(txtbox2);
+            ApplyBorders(txtbox2);
+            #endregion      
+
+            #region SecondDivision
+            ExcelRange labelFormC = GetExcelRange(worksheet, 5, 20, 5, 22);
+            labelFormC.Value = "PERIODO ACADÉMICO";
+            MergedCells(labelFormC);
+            FontWeightBold(labelFormC);
+            ContentCenter(labelFormC);
+
+            var txtbox3 = worksheet.Cells[5, 23];
+            // TARGET //               
+            ApplyBorders(txtbox3);
+
+            var labelFormD = worksheet.Cells[8, 7];
+            labelFormD.Value = "MODALIDAD:";
+            FontWeightBold(labelFormD);
+            ContentCenter(labelFormD);
+
+            ExcelRange labelFormE = GetExcelRange(worksheet, 8, 8, 8, 9);
+            labelFormE.Value = "DISTANCIA";
+            MergedCells(labelFormE);
+            FontWeightBold(labelFormE);
+            ContentCenter(labelFormE);
+
+            var txtbox4 = worksheet.Cells[8, 10];
+            // TARGET //               
+            ApplyBorders(txtbox4);
+
+            ExcelRange labelFormF = GetExcelRange(worksheet, 8, 14, 8, 15);
+            labelFormF.Value = "PRESENCIAL";
+            MergedCells(labelFormF);
+            FontWeightBold(labelFormF);
+            ContentCenter(labelFormF);
+
+            ExcelRange txtbox5 = GetExcelRange(worksheet, 8, 16, 8, 17);
+            // TARGET //               
+            MergedCells(txtbox5);
+            ApplyBorders(txtbox5);
+
+            ExcelRange labelFormG = GetExcelRange(worksheet, 8, 19, 8, 20);
+            labelFormG.Value = "VIRTUAL";
+            MergedCells(labelFormG);
+            FontWeightBold(labelFormG);
+            ContentCenter(labelFormG);
+
+            var txtbox6 = worksheet.Cells[8, 21];
+            // TARGET //               
+            ApplyBorders(txtbox6);
+
+            #endregion
+
+            #region ThirdDivision
+
+            ExcelRange txtbox7 = GetExcelRange(worksheet, 10, 3, 10, 5);
+            // TARGET //               
+            MergedCells(txtbox7);
+            ApplySignatureBorders(txtbox7);
+
+            ExcelRange labelFormH = GetExcelRange(worksheet, 11, 3, 12, 5);
+            labelFormH.Value = "REGIONAL - SEDE O CUNAD";
+            MergedCells(labelFormH);
+            FontWeightBold(labelFormH);
+            ContentCenter(labelFormH);
+
+            ExcelRange txtbox8 = GetExcelRange(worksheet, 10, 8, 10, 10);
+            // TARGET //               
+            MergedCells(txtbox8);
+            ApplySignatureBorders(txtbox8);
+
+            ExcelRange labelFormI = GetExcelRange(worksheet, 11, 8, 11, 10);
+            labelFormI.Value = "FECHA DEL RECONOCIMIENTO";
+            MergedCells(labelFormI);
+            FontWeightBold(labelFormI);
+            ContentCenter(labelFormI);
+
+            ExcelRange txtbox9 = GetExcelRange(worksheet, 10, 15, 10, 16);
+            // TARGET //               
+            MergedCells(txtbox9);
+            ApplySignatureBorders(txtbox9);
+
+            ExcelRange labelFormJ = GetExcelRange(worksheet, 11, 15, 11, 16);
+            labelFormJ.Value = "PLAN DE ESTUDIOS A APLICAR";
+            MergedCells(labelFormJ);
+            FontWeightBold(labelFormJ);
+            ContentCenter(labelFormJ);
+
+            ExcelRange txtbox10 = GetExcelRange(worksheet, 10, 21, 10, 22);
+            // TARGET //               
+            MergedCells(txtbox10);
+            ApplySignatureBorders(txtbox10);
+
+            ExcelRange labelFormK = GetExcelRange(worksheet, 11, 21, 11, 22);
+            labelFormK.Value = "CÓDIGO DEL PLAN DE ESTUDIOS A APLICAR";
+            MergedCells(labelFormK);
+            FontWeightBold(labelFormK);
+            ContentCenter(labelFormK);
+
+
+            ExcelRange txtbox11 = GetExcelRange(worksheet, 14, 3, 14, 5);
+            // TARGET //               
+            MergedCells(txtbox11);
+            ApplySignatureBorders(txtbox11);
+
+            #endregion
+
+            #region FourthDivision
+
+            ExcelRange labelFormL = GetExcelRange(worksheet, 15, 3, 15, 5);
+            labelFormL.Value = "APELLIDOS Y NOMBRES DEL ESTUDIANTE";
+            MergedCells(labelFormL);
+            FontWeightBold(labelFormL);
+            ContentCenter(labelFormL);
+
+            ExcelRange txtbox12 = GetExcelRange(worksheet, 14, 8, 14, 10);
+            // TARGET //               
+            MergedCells(txtbox12);
+            ApplySignatureBorders(txtbox12);
+
+            ExcelRange labelFormM = GetExcelRange(worksheet, 15, 8, 15, 10);
+            labelFormM.Value = "DOCUMENTO DE IDENTIDAD";
+            MergedCells(labelFormM);
+            FontWeightBold(labelFormM);
+            ContentCenter(labelFormM);
+
+            ExcelRange txtbox13 = GetExcelRange(worksheet, 14, 15, 14, 16);
+            // TARGET //               
+            MergedCells(txtbox13);
+            ApplySignatureBorders(txtbox13);
+
+            ExcelRange labelFormO = GetExcelRange(worksheet, 15, 15, 15, 16);
+            labelFormO.Value = "CORREO ELECTRONICO";
+            MergedCells(labelFormO);
+            FontWeightBold(labelFormO);
+            ContentCenter(labelFormO);
+
+            ExcelRange txtbox14 = GetExcelRange(worksheet, 14, 21, 14, 22);
+            // TARGET //               
+            MergedCells(txtbox14);
+            ApplySignatureBorders(txtbox14);
+
+            ExcelRange labelFormP = GetExcelRange(worksheet, 15, 21, 15, 22);
+            labelFormP.Value = "TELEFONO FIJO - CELULAR";
+            MergedCells(labelFormP);
+            FontWeightBold(labelFormP);
+            ContentCenter(labelFormP);
+
+            ExcelRange txtbox15 = GetExcelRange(worksheet, 18, 3, 18, 5);
+            // TARGET //               
+            MergedCells(txtbox15);
+            ApplySignatureBorders(txtbox15);
+
+            #endregion
+
+            #region FifthDivision
+            ExcelRange labelFormQ = GetExcelRange(worksheet, 19, 3, 19, 5);
+            labelFormQ.Value = "INSTITUCIÓN DE DONDE PROVIENE";
+            MergedCells(labelFormQ);
+            FontWeightBold(labelFormQ);
+            ContentCenter(labelFormQ);
+
+            ExcelRange txtbox16 = GetExcelRange(worksheet, 18, 8, 18, 10);
+            // TARGET //               
+            MergedCells(txtbox16);
+            ApplySignatureBorders(txtbox16);
+
+            ExcelRange labelFormR = GetExcelRange(worksheet, 19, 8, 19, 10);
+            labelFormR.Value = "PROGRAMA CURSADO";
+            MergedCells(labelFormR);
+            FontWeightBold(labelFormR);
+            ContentCenter(labelFormR);
+
+            ExcelRange txtbox17 = GetExcelRange(worksheet, 18, 14, 18, 16);
+            // TARGET //               
+            MergedCells(txtbox17);
+            ApplySignatureBorders(txtbox17);
+
+            ExcelRange labelFormS = GetExcelRange(worksheet, 19, 14, 19, 16);
+            labelFormS.Value = "PROGRAMA A CURSAR";
+            MergedCells(labelFormS);
+            FontWeightBold(labelFormS);
+            ContentCenter(labelFormS);
+
+            #endregion
+        }
+
+        private void AddSenaStructureInformation(ExcelWorksheet worksheet)
+        {
+             // Evaluar esta expresion para crear nuevas celdas
+            var numbSena = worksheet.Cells[22, 1];
+            int startRow = 22; // Fila inicial
+            for (int i = 1; i <= 7; i++)
+            {
+                var cell = worksheet.Cells[startRow + i - 1, 1];
+                cell.Value = i;
+                ContentRight(cell);
+            }
+
+            ExcelRange labelTitle1 = GetExcelRange(worksheet, 21, 1, 21, 24);
+            labelTitle1.Value = "ESTRUCTURA CURRICULAR SENA";
+            CellCenter(labelTitle1);
+            MergedCells(labelTitle1);
+            FontWeightBold(labelTitle1);
+
+            ExcelRange Context1 = GetExcelRange(worksheet, 22, 2, 22, 24);
+            Context1.Value = "ADMITIR AL USUARIO EN LA RED DE SERVICIOS DE SALUD SEGÚN NIVELES DE ATENCIÓN Y NORMATIVA VIGENTE.";
+            ContentLeft(Context1);
+            MergedCells(Context1);
+
+            ExcelRange Context2 = GetExcelRange(worksheet, 23, 2, 23, 24);
+            Context2.Value = "AFILIAR A LA POBLACIÓN AL SISTEMA GENERAL DE SEGURIDAD SOCIAL EN SALUD SEGÚN NORMATIVIDAD VIGENTE.";
+            MergedCells(Context2);
+            ContentLeft(Context2);
+
+            ExcelRange Context3 = GetExcelRange(worksheet, 24, 2, 24, 24);
+            Context3.Value = "FACTURAR LA PRESTACIÓN DE LOS SERVICIOS DE SALUD SEGÚN NORMATIVIDAD Y CONTRATACIÓN";
+            MergedCells(Context3);
+            ContentLeft(Context3);
+
+            ExcelRange Context4 = GetExcelRange(worksheet, 25, 2, 25, 24);
+            Context4.Value = "MANEJAR VALORES E INGRESOS RELACIONADOS CON LA OPERACIÓN DEL ESTABLECIMIENTO. (EQUIVALE A LA NORMA NTS 005 DEL MINCOMERCIO, INDUSTRIA Y TURISMO)";
+            MergedCells(Context4);
+            ContentLeft(Context4);
+
+            ExcelRange Context5 = GetExcelRange(worksheet, 26, 2, 26, 24);
+            Context5.Value = "ORIENTAR AL USUARIO EN RELACIÓN CON SUS NECESIDADES Y EXPECTATIVAS DE ACUERDO CON POLÍTICAS INSTITUCIONALES Y NORMAS DE SALUD VIGENTES.";
+            MergedCells(Context5);
+            ContentLeft(Context5);
+
+            ExcelRange Context6 = GetExcelRange(worksheet, 27, 2, 27, 24);
+            Context6.Value = "PROMOVER LA INTERACCION IDONEA CONSIGO MISMO, CON LOS DEMAS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.";
+            MergedCells(Context6);
+            ContentLeft(Context6);
+
+            ExcelRange Context7 = GetExcelRange(worksheet, 28, 2, 28, 24);
+            Context7.Value = "RESULTADOS DE APRENDIZAJE ETAPA PRACTICA";
+            ApplySignatureBorders(Context7);
+            MergedCells(Context7);
+            ContentLeft(Context7);
+
+        }
+
 
         [HttpPost]
         public ActionResult Exportar()
         {
-
-
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage())
             {
@@ -154,7 +457,8 @@ namespace PruebaExcel01.Controllers
                 // Crear Hoja xlsx
 
                 #endregion
-               
+
+                #region Cellsizes
                 var worksheet = package.Workbook.Worksheets.Add("nombreHoja");
 
                 ApplyBackgroundColorToRange(worksheet, 1, 1, 72, 24, System.Drawing.Color.White);
@@ -196,286 +500,16 @@ namespace PruebaExcel01.Controllers
                     worksheet.Row(rowIndex).Height = rowHeight;
                 }
 
-                string imagePathLogo = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\log1.png";
-                int widthLogoInPixels = 255;
-                int heightLogoInPixels = 98;
+                #endregion
 
-                var pictureLogo = worksheet.Drawings.AddPicture("Logo", new FileInfo(imagePathLogo));
+                #region DocumentContent
 
-                pictureLogo.SetPosition(1, -20, 1, -50);
-                pictureLogo.SetSize(widthLogoInPixels, heightLogoInPixels);
-                pictureLogo.Locked = true;
+                AddLogo(worksheet);
+                AddHeaderInfo(worksheet);
 
-                string fechaRegistro = "Fecha Registro / Hora Registro";
-                
-                ExcelRange logoSpace = GetExcelRange(worksheet, 1, 1, 1, 2);
-                logoSpace.Value = fechaRegistro;
-                MergedCells(logoSpace);
-                ContentCenter(logoSpace);
-                WhiteColor(logoSpace);
+                AddFormUserContent(worksheet);
+                AddSenaStructureInformation(worksheet);
 
-                ExcelRange logoDate = GetExcelRange(worksheet, 2, 1, 5, 2);
-                logoDate.Value = fechaHoraActual.ToString("yyyy-MM-dd \n" + fechaHoraActual.ToString("HH:mm:ss"));
-                MergedCells(logoDate);
-                ContentCenter(logoDate);
-                WhiteColor(logoDate);
-
-                // Header Rectangle
-                ExcelRange headerRectangle = GetExcelRange(worksheet, 1, 3, 3, 24);
-                headerRectangle.Value = "ACTA DE RECONOCIMIENTO DE TITULO";
-                CellCenter(headerRectangle);
-                MergedCells(headerRectangle);
-                FontWeightBold(headerRectangle);
-
-                ExcelRange labelFormA = GetExcelRange(worksheet, 5, 8, 5, 10);
-                labelFormA.Value = "INTERNA";
-                MergedCells(labelFormA);
-                FontWeightBold(labelFormA);
-                ContentCenter(labelFormA);
-
-                ExcelRange txtbox1 = GetExcelRange(worksheet, 5, 11, 5, 12);
-                // TARGET //
-                MergedCells(txtbox1);
-                ApplyBorders(txtbox1);
-
-                ExcelRange labelFormB = GetExcelRange(worksheet, 5, 14, 5, 15);
-                labelFormB.Value = "EXTERNA";
-                MergedCells(labelFormB);
-                FontWeightBold(labelFormB);
-                ContentCenter(labelFormB);
-
-                ExcelRange txtbox2 = GetExcelRange(worksheet, 5, 16, 5, 17);
-                // TARGET //               
-                MergedCells(txtbox2);
-                ApplyBorders(txtbox2);
-
-                ExcelRange labelFormC = GetExcelRange(worksheet, 5, 20, 5, 22);
-                labelFormC.Value = "PERIODO ACADÉMICO";
-                MergedCells(labelFormC);
-                FontWeightBold(labelFormC);
-                ContentCenter(labelFormC);
-
-                var txtbox3 = worksheet.Cells[5, 23];
-                // TARGET //               
-                ApplyBorders(txtbox3);
-
-                var labelFormD = worksheet.Cells[8, 7];
-                labelFormD.Value = "MODALIDAD:";
-                FontWeightBold(labelFormD);
-                ContentCenter(labelFormD);
-
-                ExcelRange labelFormE = GetExcelRange(worksheet, 8, 8, 8, 9);
-                labelFormE.Value = "DISTANCIA";
-                MergedCells(labelFormE);
-                FontWeightBold(labelFormE);
-                ContentCenter(labelFormE);
-
-                var txtbox4 = worksheet.Cells[8, 10];
-                // TARGET //               
-                ApplyBorders(txtbox4);
-
-                ExcelRange labelFormF = GetExcelRange(worksheet, 8, 14, 8, 15);
-                labelFormF.Value = "PRESENCIAL";
-                MergedCells(labelFormF);
-                FontWeightBold(labelFormF);
-                ContentCenter(labelFormF);
-
-                ExcelRange txtbox5 = GetExcelRange(worksheet, 8, 16, 8, 17);
-                // TARGET //               
-                MergedCells(txtbox5);
-                ApplyBorders(txtbox5);
-
-                ExcelRange labelFormG = GetExcelRange(worksheet, 8, 19, 8, 20);
-                labelFormG.Value = "VIRTUAL";
-                MergedCells(labelFormG);
-                FontWeightBold(labelFormG);
-                ContentCenter(labelFormG);
-
-                var txtbox6 = worksheet.Cells[8, 21];
-                // TARGET //               
-                ApplyBorders(txtbox6);
-
-                // ------------------------------------------------------------------------------------- //
-
-                ExcelRange txtbox7 = GetExcelRange(worksheet, 10, 3, 10, 5);
-                // TARGET //               
-                MergedCells(txtbox7);
-                ApplySignatureBorders(txtbox7);
-
-                ExcelRange labelFormH = GetExcelRange(worksheet, 11, 3, 12, 5);
-                labelFormH.Value = "REGIONAL - SEDE O CUNAD";
-                MergedCells(labelFormH);
-                FontWeightBold(labelFormH);
-                ContentCenter(labelFormH);
-
-                ExcelRange txtbox8 = GetExcelRange(worksheet, 10, 8, 10, 10);
-                // TARGET //               
-                MergedCells(txtbox8);
-                ApplySignatureBorders(txtbox8);
-
-                ExcelRange labelFormI = GetExcelRange(worksheet, 11, 8, 11, 10);
-                labelFormI.Value = "FECHA DEL RECONOCIMIENTO";
-                MergedCells(labelFormI);
-                FontWeightBold(labelFormI);
-                ContentCenter(labelFormI);
-
-                ExcelRange txtbox9 = GetExcelRange(worksheet, 10, 15, 10, 16);
-                // TARGET //               
-                MergedCells(txtbox9);
-                ApplySignatureBorders(txtbox9);
-
-                ExcelRange labelFormJ = GetExcelRange(worksheet, 11, 15, 11, 16);
-                labelFormJ.Value = "PLAN DE ESTUDIOS A APLICAR";
-                MergedCells(labelFormJ);
-                FontWeightBold(labelFormJ);
-                ContentCenter(labelFormJ);
-
-                ExcelRange txtbox10 = GetExcelRange(worksheet, 10, 21, 10, 22);
-                // TARGET //               
-                MergedCells(txtbox10);
-                ApplySignatureBorders(txtbox10);
-
-                ExcelRange labelFormK = GetExcelRange(worksheet,11, 21, 11, 22);
-                labelFormK.Value = "CÓDIGO DEL PLAN DE ESTUDIOS A APLICAR";
-                MergedCells(labelFormK);
-                FontWeightBold(labelFormK);
-                ContentCenter(labelFormK);
-
-                // ------------------------------------------------------------------------------------- //
-
-
-                ExcelRange txtbox11 = GetExcelRange(worksheet, 14, 3, 14, 5);
-                // TARGET //               
-                MergedCells(txtbox11);
-                ApplySignatureBorders(txtbox11);
-
-                ExcelRange labelFormL = GetExcelRange(worksheet, 15, 3, 15, 5);
-                labelFormL.Value = "APELLIDOS Y NOMBRES DEL ESTUDIANTE";
-                MergedCells(labelFormL);
-                FontWeightBold(labelFormL);
-                ContentCenter(labelFormL);
-
-                ExcelRange txtbox12 = GetExcelRange(worksheet, 14, 8, 14, 10);
-                // TARGET //               
-                MergedCells(txtbox12);
-                ApplySignatureBorders(txtbox12);
-
-                ExcelRange labelFormM = GetExcelRange(worksheet, 15, 8, 15, 10);
-                labelFormM.Value = "DOCUMENTO DE IDENTIDAD";
-                MergedCells(labelFormM);
-                FontWeightBold(labelFormM);
-                ContentCenter(labelFormM);
-
-                ExcelRange txtbox13 = GetExcelRange(worksheet, 14, 15, 14, 16);
-                // TARGET //               
-                MergedCells(txtbox13);
-                ApplySignatureBorders(txtbox13);
-
-                ExcelRange labelFormO = GetExcelRange(worksheet, 15, 15, 15, 16);
-                labelFormO.Value = "CORREO ELECTRONICO";
-                MergedCells(labelFormO);
-                FontWeightBold(labelFormO);
-                ContentCenter(labelFormO);
-
-                ExcelRange txtbox14 = GetExcelRange(worksheet, 14, 21, 14, 22);
-                // TARGET //               
-                MergedCells(txtbox14);
-                ApplySignatureBorders(txtbox14);
-
-                ExcelRange labelFormP = GetExcelRange(worksheet, 15, 21, 15, 22);
-                labelFormP.Value = "TELEFONO FIJO - CELULAR";
-                MergedCells(labelFormP);
-                FontWeightBold(labelFormP);
-                ContentCenter(labelFormP);
-
-                // ------------------------------------------------------------------------------------- //
-
-                ExcelRange txtbox15 = GetExcelRange(worksheet, 18, 3, 18, 5);
-                // TARGET //               
-                MergedCells(txtbox15);
-                ApplySignatureBorders(txtbox15);
-
-                ExcelRange labelFormQ = GetExcelRange(worksheet, 19, 3, 19, 5);
-                labelFormQ.Value = "INSTITUCIÓN DE DONDE PROVIENE";
-                MergedCells(labelFormQ);
-                FontWeightBold(labelFormQ);
-                ContentCenter(labelFormQ);
-
-                ExcelRange txtbox16 = GetExcelRange(worksheet, 18, 8, 18, 10);
-                // TARGET //               
-                MergedCells(txtbox16);
-                ApplySignatureBorders(txtbox16);
-
-                ExcelRange labelFormR = GetExcelRange(worksheet, 19, 8, 19, 10);
-                labelFormR.Value = "PROGRAMA CURSADO";
-                MergedCells(labelFormR);
-                FontWeightBold(labelFormR);
-                ContentCenter(labelFormR);
-
-                ExcelRange txtbox17 = GetExcelRange(worksheet, 18, 14, 18, 16);
-                // TARGET //               
-                MergedCells(txtbox17);
-                ApplySignatureBorders(txtbox17);
-
-                ExcelRange labelFormS = GetExcelRange(worksheet, 19, 14, 19, 16);
-                labelFormS.Value = "PROGRAMA A CURSAR";
-                MergedCells(labelFormS);
-                FontWeightBold(labelFormS);
-                ContentCenter(labelFormS);
-
-                // ------------------------------------------------------------------------------------- //
-
-                var numbSena = worksheet.Cells[22, 1];
-                int startRow = 22; // Fila inicial
-                for (int i = 1; i <= 7; i++)
-                {
-                    var cell = worksheet.Cells[startRow + i - 1, 1];
-                    cell.Value = i;
-                    cell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
-                }
-
-                ExcelRange labelTitle1 = GetExcelRange(worksheet, 21, 1, 21, 24);
-                labelTitle1.Value = "ESTRUCTURA CURRICULAR SENA";
-                CellCenter(labelTitle1);
-                MergedCells(labelTitle1);
-                FontWeightBold(labelTitle1);
-
-                // Evaluar la posibilidad de unir las filas y enviarlas a la izquierda en una sola formula
-
-                ExcelRange Context1 = GetExcelRange(worksheet, 22, 2, 22, 24);
-                Context1.Value = "ADMITIR AL USUARIO EN LA RED DE SERVICIOS DE SALUD SEGÚN NIVELES DE ATENCIÓN Y NORMATIVA VIGENTE.";
-                CellLeft(Context1);
-                MergedCells(Context1);
-
-                ExcelRange Context2 = GetExcelRange(worksheet, 23, 2, 23, 24);
-                Context2.Value = "AFILIAR A LA POBLACIÓN AL SISTEMA GENERAL DE SEGURIDAD SOCIAL EN SALUD SEGÚN NORMATIVIDAD VIGENTE.";
-                MergedCells(Context2);
-                ContentLeft(Context2);
-
-                ExcelRange Context3 = GetExcelRange(worksheet, 24, 2, 24, 24);
-                Context3.Value = "FACTURAR LA PRESTACIÓN DE LOS SERVICIOS DE SALUD SEGÚN NORMATIVIDAD Y CONTRATACIÓN";
-                MergedCells(Context3);
-                ContentLeft(Context3);
-
-                ExcelRange Context4 = GetExcelRange(worksheet, 25, 2, 25, 24);
-                Context4.Value = "MANEJAR VALORES E INGRESOS RELACIONADOS CON LA OPERACIÓN DEL ESTABLECIMIENTO. (EQUIVALE A LA NORMA NTS 005 DEL MINCOMERCIO, INDUSTRIA Y TURISMO)";
-                MergedCells(Context4);
-                ContentLeft(Context4);
-
-                ExcelRange Context5 = GetExcelRange(worksheet, 26, 2, 26, 24);
-                Context5.Value = "ORIENTAR AL USUARIO EN RELACIÓN CON SUS NECESIDADES Y EXPECTATIVAS DE ACUERDO CON POLÍTICAS INSTITUCIONALES Y NORMAS DE SALUD VIGENTES.";
-                MergedCells(Context5);
-                ContentLeft(Context5);
-
-                ExcelRange Context6 = GetExcelRange(worksheet, 27, 2, 27, 24);
-                Context6.Value = "PROMOVER LA INTERACCION IDONEA CONSIGO MISMO, CON LOS DEMAS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.";
-                MergedCells(Context6);
-                ContentLeft(Context6);
-
-                ExcelRange Context7 = GetExcelRange(worksheet, 28, 2, 28, 24);
-                Context7.Value = "RESULTADOS DE APRENDIZAJE ETAPA PRACTICA";
-                MergedCells(Context7);
-                ContentLeft(Context7);
 
                 // ----------------------- INSCRIPCION DE MATERIAS (Main Table)------------------------------ //
 
@@ -627,6 +661,9 @@ namespace PruebaExcel01.Controllers
                 ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 41, 24);
                 CellCenter(celdasMaterias);
 
+
+                // Show and hide cells for add information
+                // .legth por numero de materias
                 var numbCeldasMaterias = worksheet.Cells[33, 1];
                 int initCell= 33;
                 for (int i = 1; i <= 9; i++)
@@ -889,7 +926,7 @@ namespace PruebaExcel01.Controllers
                 //ApplyBorders(CellFooter6);
                 MergedCells(CellFooter6);
 
-
+                #endregion
                 // ------------------------------ END FOOTER --------------------------------//
 
 
