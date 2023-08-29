@@ -41,11 +41,110 @@ namespace PruebaExcel01.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Exportar()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage())
+            {
+
+                var fechaHoraActual = DateTime.Now;
+
+                string formatoFecha = "yyyyMMdd_HHmmss";
+
+                #region infoDownloadDoc
+
+                // Crea el nombre de mi documento 
+                string nombreArchivo = "Datos_Docs_Est_" + fechaHoraActual.ToString(formatoFecha) + ".xlsx";
+                string nombreHoja = "docs_titulos_01" + fechaHoraActual;
+
+
+                // Crear Hoja xlsx
+
+                #endregion
+
+                #region Cellsizes
+                var worksheet = package.Workbook.Worksheets.Add("nombreHoja");
+
+                ApplyBackgroundColorToRange(worksheet, 1, 1, 72, 24, System.Drawing.Color.White);
+
+                int[] columnIndices = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                                       11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                       21, 22, 23, 24};
+
+                double[] columnWidths = { 5.89, 29.78, 10.78, 10.22, 14.56, 14.78, 14.89, 7.56, 12.56, 14.89,
+                                        9.56, 10.78, 14.33, 14.22, 14.22, 6.33, 9.89, 9.89, 7.22, 8.33,
+                                        13.56, 16.56, 14.89, 13.56,};
+
+                for (int i = 0; i < columnIndices.Length; i++)
+                {
+                    int columnIndex = columnIndices[i];
+                    double columnWidth = columnWidths[i];
+                    worksheet.Column(columnIndex).Width = columnWidth;
+                }
+
+                int[] rowIndices = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+                                    31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+                                    41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+                                    51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+                                    61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72};
+
+                double[] rowHeights = {12.60, 13.20, 12.60, 12.60, 25.20, 12.60, 12.60, 25.20, 12.60, 38.40,
+                                        37.20, 12.60, 12.60, 21.00, 24.00, 15.60, 12.60, 33.60, 12.60, 25.20,
+                                        12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
+                                        51.00, 12.60, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20,
+                                        25.20, 12.60, 13.20, 12.60, 12.60, 12.60, 12.60, 13.20, 12.60, 12.60,
+                                        15.60, 51.60, 16.20, 39.00, 24.00, 12.60, 55.80, 18.60, 24.60, 19.20,
+                                        12.60, 12.60, 12.60, 12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60,
+                                        12.60, 12.60};
+
+                for (int i = 0; i < rowIndices.Length; i++)
+                {
+                    int rowIndex = rowIndices[i];
+                    double rowHeight = rowHeights[i];
+                    worksheet.Row(rowIndex).Height = rowHeight;
+                }
+
+                #endregion
+
+                #region DocumentContent
+
+                AddLogo(worksheet);
+                AddHeaderInfo(worksheet);
+
+                AddFormUserContent(worksheet);
+                AddSenaStructureInformation(worksheet);
+                ConstructionHeaderTable(worksheet);
+                ContentTable(worksheet);
+
+                RecognizedCredits(worksheet);
+                ConditionLabels(worksheet);
+                StudentStatement(worksheet);
+                ContractArea(worksheet);
+                ApplyCellsFooter(worksheet);
+
+                #endregion
+
+
+                var filePath = @"C:\Users\Jhonattan_Casallas\Downloads\" + nombreArchivo;
+                package.SaveAs(new System.IO.FileInfo(filePath));
+
+                return File(filePath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nombreArchivo);
+
+            }
+        }
+
+
+
         // Propiedades generales del texto
         public static void ContentCenter(ExcelRange range)
         {
+
             range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             range.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            range.Style.WrapText = true;
         }
 
         // DerechaContenido
@@ -53,17 +152,19 @@ namespace PruebaExcel01.Controllers
         {
             range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
             range.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            range.Style.WrapText = true;
         }
 
         // IzquierdaContenido
-        public static void ContentLeft (ExcelRange range)
+        public static void ContentLeft(ExcelRange range)
         {
             range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
             range.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            range.Style.WrapText = true;
         }
 
         // Aplicar Negrilla
-        public static void FontWeightBold (ExcelRange range, bool bold = true)
+        public static void FontWeightBold(ExcelRange range, bool bold = true)
         {
             range.Style.Font.Bold = bold;
         }
@@ -101,7 +202,7 @@ namespace PruebaExcel01.Controllers
         public static void CellCenter(ExcelRange range, ExcelBorderStyle borderStyle = ExcelBorderStyle.Thin)
         {
             ApplyBorders(range);
-            ContentCenter(range); 
+            ContentCenter(range);
         }
 
         // Aplicar bordes + Texto Derecha
@@ -124,12 +225,31 @@ namespace PruebaExcel01.Controllers
             range.Style.Fill.BackgroundColor.SetColor(color);
         }
 
+        #region GetCellAddition
+        private ExcelRange GetTotalSubjects1(ExcelWorksheet worksheet)
+        {
+            return worksheet.Cells[42, 3];
+        }
+
+        private ExcelRange GetTotalSubjects2(ExcelWorksheet worksheet)
+        {
+            return worksheet.Cells[42, 11];
+        }
+
+        private ExcelRange GetTotalSubjects3(ExcelWorksheet worksheet)
+        {
+            return worksheet.Cells[42, 20];
+        }
+        #endregion
+
 
         // Seleccion de celdas por rango
         public static ExcelRange GetExcelRange(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn)
         {
             return worksheet.Cells[startRow, startColumn, endRow, endColumn];
         }
+
+
 
         private void AddLogo(ExcelWorksheet worksheet)
         {
@@ -381,9 +501,8 @@ namespace PruebaExcel01.Controllers
 
         private void AddSenaStructureInformation(ExcelWorksheet worksheet)
         {
-             // Evaluar esta expresion para crear nuevas celdas
             var numbSena = worksheet.Cells[22, 1];
-            int startRow = 22; // Fila inicial
+            int startRow = 22;
             for (int i = 1; i <= 7; i++)
             {
                 var cell = worksheet.Cells[startRow + i - 1, 1];
@@ -391,392 +510,271 @@ namespace PruebaExcel01.Controllers
                 ContentRight(cell);
             }
 
+            var numbSenaLastCell = worksheet.Cells[28, 1];
+            ApplySignatureBorders(numbSenaLastCell);
+
+
             ExcelRange labelTitle1 = GetExcelRange(worksheet, 21, 1, 21, 24);
             labelTitle1.Value = "ESTRUCTURA CURRICULAR SENA";
             CellCenter(labelTitle1);
             MergedCells(labelTitle1);
             FontWeightBold(labelTitle1);
 
-            ExcelRange Context1 = GetExcelRange(worksheet, 22, 2, 22, 24);
-            Context1.Value = "ADMITIR AL USUARIO EN LA RED DE SERVICIOS DE SALUD SEGÚN NIVELES DE ATENCIÓN Y NORMATIVA VIGENTE.";
-            ContentLeft(Context1);
-            MergedCells(Context1);
+            ExcelRange context1 = GetExcelRange(worksheet, 22, 2, 22, 24);
+            context1.Value = "ADMITIR AL USUARIO EN LA RED DE SERVICIOS DE SALUD SEGÚN NIVELES DE ATENCIÓN Y NORMATIVA VIGENTE.";
+            ContentLeft(context1);
+            MergedCells(context1);
 
-            ExcelRange Context2 = GetExcelRange(worksheet, 23, 2, 23, 24);
-            Context2.Value = "AFILIAR A LA POBLACIÓN AL SISTEMA GENERAL DE SEGURIDAD SOCIAL EN SALUD SEGÚN NORMATIVIDAD VIGENTE.";
-            MergedCells(Context2);
-            ContentLeft(Context2);
+            ExcelRange context2 = GetExcelRange(worksheet, 23, 2, 23, 24);
+            context2.Value = "AFILIAR A LA POBLACIÓN AL SISTEMA GENERAL DE SEGURIDAD SOCIAL EN SALUD SEGÚN NORMATIVIDAD VIGENTE.";
+            MergedCells(context2);
+            ContentLeft(context2);
 
-            ExcelRange Context3 = GetExcelRange(worksheet, 24, 2, 24, 24);
-            Context3.Value = "FACTURAR LA PRESTACIÓN DE LOS SERVICIOS DE SALUD SEGÚN NORMATIVIDAD Y CONTRATACIÓN";
-            MergedCells(Context3);
-            ContentLeft(Context3);
+            ExcelRange context3 = GetExcelRange(worksheet, 24, 2, 24, 24);
+            context3.Value = "FACTURAR LA PRESTACIÓN DE LOS SERVICIOS DE SALUD SEGÚN NORMATIVIDAD Y CONTRATACIÓN";
+            MergedCells(context3);
+            ContentLeft(context3);
 
-            ExcelRange Context4 = GetExcelRange(worksheet, 25, 2, 25, 24);
-            Context4.Value = "MANEJAR VALORES E INGRESOS RELACIONADOS CON LA OPERACIÓN DEL ESTABLECIMIENTO. (EQUIVALE A LA NORMA NTS 005 DEL MINCOMERCIO, INDUSTRIA Y TURISMO)";
-            MergedCells(Context4);
-            ContentLeft(Context4);
+            ExcelRange context4 = GetExcelRange(worksheet, 25, 2, 25, 24);
+            context4.Value = "MANEJAR VALORES E INGRESOS RELACIONADOS CON LA OPERACIÓN DEL ESTABLECIMIENTO. (EQUIVALE A LA NORMA NTS 005 DEL MINCOMERCIO, INDUSTRIA Y TURISMO)";
+            MergedCells(context4);
+            ContentLeft(context4);
 
-            ExcelRange Context5 = GetExcelRange(worksheet, 26, 2, 26, 24);
-            Context5.Value = "ORIENTAR AL USUARIO EN RELACIÓN CON SUS NECESIDADES Y EXPECTATIVAS DE ACUERDO CON POLÍTICAS INSTITUCIONALES Y NORMAS DE SALUD VIGENTES.";
-            MergedCells(Context5);
-            ContentLeft(Context5);
+            ExcelRange context5 = GetExcelRange(worksheet, 26, 2, 26, 24);
+            context5.Value = "ORIENTAR AL USUARIO EN RELACIÓN CON SUS NECESIDADES Y EXPECTATIVAS DE ACUERDO CON POLÍTICAS INSTITUCIONALES Y NORMAS DE SALUD VIGENTES.";
+            MergedCells(context5);
+            ContentLeft(context5);
 
-            ExcelRange Context6 = GetExcelRange(worksheet, 27, 2, 27, 24);
-            Context6.Value = "PROMOVER LA INTERACCION IDONEA CONSIGO MISMO, CON LOS DEMAS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.";
-            MergedCells(Context6);
-            ContentLeft(Context6);
+            ExcelRange context6 = GetExcelRange(worksheet, 27, 2, 27, 24);
+            context6.Value = "PROMOVER LA INTERACCION IDONEA CONSIGO MISMO, CON LOS DEMAS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.";
+            MergedCells(context6);
+            ContentLeft(context6);
 
-            ExcelRange Context7 = GetExcelRange(worksheet, 28, 2, 28, 24);
-            Context7.Value = "RESULTADOS DE APRENDIZAJE ETAPA PRACTICA";
-            ApplySignatureBorders(Context7);
-            MergedCells(Context7);
-            ContentLeft(Context7);
+            ExcelRange context7 = GetExcelRange(worksheet, 28, 2, 28, 24);
+            context7.Value = "RESULTADOS DE APRENDIZAJE ETAPA PRACTICA";
+            ApplySignatureBorders(context7);
+            MergedCells(context7);
+            ContentLeft(context7);
 
         }
 
-
-        [HttpPost]
-        public ActionResult Exportar()
+        private void ConstructionHeaderTable(ExcelWorksheet worksheet)
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (var package = new ExcelPackage())
+            ExcelRange HeaderBar = GetExcelRange(worksheet, 31, 1, 32, 24);
+            CellCenter(HeaderBar);
+            FontWeightBold(HeaderBar);
+
+            #region CellsMainTable
+
+            ExcelRange CellMT1 = GetExcelRange(worksheet, 31, 1, 32, 1);
+            CellMT1.Value = "No";
+            MergedCells(CellMT1);
+
+            ExcelRange CellMT2 = GetExcelRange(worksheet, 31, 2, 32, 2);
+            CellMT2.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
+            MergedCells(CellMT2);
+
+            ExcelRange CellMT3 = GetExcelRange(worksheet, 31, 3, 31, 4);
+            CellMT3.Value = "SISTEMA";
+            MergedCells(CellMT3);
+
+            ExcelRange CellMT4 = GetExcelRange(worksheet, 31, 5, 32, 5);
+            CellMT4.Value = "CALIFICACIÓN NUMERICA";
+            MergedCells(CellMT4);
+
+            ExcelRange CellMT5 = GetExcelRange(worksheet, 31, 6, 32, 6);
+            CellMT5.Value = "CALIFICACION LITERAL";
+            MergedCells(CellMT5);
+
+            ExcelRange CellMT6 = GetExcelRange(worksheet, 31, 7, 32, 7);
+            CellMT6.Value = "NIVEL";
+            MergedCells(CellMT6);
+
+            ExcelRange CellMT7 = GetExcelRange(worksheet, 31, 8, 32, 8);
+            CellMT7.Value = "No";
+            MergedCells(CellMT7);
+
+            ExcelRange CellMT8 = GetExcelRange(worksheet, 31, 9, 32, 10);
+            CellMT8.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
+            MergedCells(CellMT8);
+
+            ExcelRange CellMT9 = GetExcelRange(worksheet, 31, 11, 31, 12);
+            CellMT9.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
+            MergedCells(CellMT9);
+
+            ExcelRange CellMT10 = GetExcelRange(worksheet, 31, 13, 32, 13);
+            CellMT10.Value = "CALIFICACIÓN NUMERICA";
+            MergedCells(CellMT10);
+
+            ExcelRange CellMT11 = GetExcelRange(worksheet, 31, 14, 32, 14);
+            CellMT11.Value = "CALIFICACION LITERAL";
+            MergedCells(CellMT11);
+
+            ExcelRange CellMT12 = GetExcelRange(worksheet, 31, 15, 32, 15);
+            CellMT12.Value = "NIVEL";
+            MergedCells(CellMT12);
+
+            ExcelRange CellMT13 = GetExcelRange(worksheet, 31, 16, 32, 16);
+            CellMT13.Value = "No";
+            MergedCells(CellMT13);
+
+            ExcelRange CellMT14 = GetExcelRange(worksheet, 31, 17, 32, 19);
+            CellMT14.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
+            MergedCells(CellMT14);
+
+            ExcelRange CellMT15 = GetExcelRange(worksheet, 31, 20, 31, 21);
+            CellMT15.Value = "SISTEMA";
+            MergedCells(CellMT15);
+
+            ExcelRange CellMT16 = GetExcelRange(worksheet, 31, 22, 32, 22);
+            CellMT16.Value = "CALIFICACIÓN NUMERICA";
+            MergedCells(CellMT16);
+
+            ExcelRange CellMT17 = GetExcelRange(worksheet, 31, 23, 32, 23);
+            CellMT17.Value = "CALIFICACION LITERAL";
+            MergedCells(CellMT17);
+
+            ExcelRange CellMT18 = GetExcelRange(worksheet, 31, 24, 32, 24);
+            CellMT18.Value = "NIVEL";
+            MergedCells(CellMT18);
+
+            #endregion
+
+            #region SubCellsMainTable
+
+            var subCellMT1 = worksheet.Cells[32, 3];
+            subCellMT1.Value = "Créditos";
+
+            var subCellMT2 = worksheet.Cells[32, 4];
+            subCellMT2.Value = "Semestre";
+
+            var subCellMT3 = worksheet.Cells[32, 11];
+            subCellMT3.Value = "Créditos";
+
+            var subCellMT4 = worksheet.Cells[32, 12];
+            subCellMT4.Value = "Semestre";
+
+            var subCellMT5 = worksheet.Cells[32, 20];
+            subCellMT5.Value = "Créditos";
+
+            var subCellMT6 = worksheet.Cells[32, 21];
+            subCellMT6.Value = "Semestre";
+
+            #endregion
+
+        }
+
+        private void ContentTable(ExcelWorksheet worksheet)
+        {
+
+            // ESTA ES LA SECCION A MODIFICAR
+
+            ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 41, 24);
+            CellCenter(celdasMaterias);
+
+
+            var numbCeldasMaterias = worksheet.Cells[33, 1];
+            int initCell = 33;
+            for (int i = 1; i <= 9; i++)
             {
+                var firstCellColumn = worksheet.Cells[initCell + i - 1, 1];
+                firstCellColumn.Value = i;
+                CellCenter(firstCellColumn);
+            }
 
-                var fechaHoraActual = DateTime.Now;
-                
-                string formatoFecha = "yyyyMMdd_HHmmss";
+            #region ResultSubjects
 
-                #region infoDownloadDoc
-
-                // Crea el nombre de mi documento 
-                string nombreArchivo = "Datos_Docs_Est_" + fechaHoraActual.ToString(formatoFecha) + ".xlsx";
-                string nombreHoja = "docs_titulos_01" + fechaHoraActual;
-
-
-                // Crear Hoja xlsx
-
-                #endregion
-
-                #region Cellsizes
-                var worksheet = package.Workbook.Worksheets.Add("nombreHoja");
-
-                ApplyBackgroundColorToRange(worksheet, 1, 1, 72, 24, System.Drawing.Color.White);
-
-                int[] columnIndices = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
-
-                double[] columnWidths = { 5.89, 29.78, 10.78, 10.22, 14.56, 14.78, 14.89, 7.56, 12.56, 14.89,
-                                        9.56, 10.78, 14.33, 14.22, 14.22, 6.33, 9.89, 9.89, 7.22, 8.33,
-                                        13.56, 16.56, 14.89, 13.56,};
-
-                for (int i = 0; i < columnIndices.Length; i++)
-                {
-                    int columnIndex = columnIndices[i];
-                    double columnWidth = columnWidths[i];
-                    worksheet.Column(columnIndex).Width = columnWidth;
-                }
-
-                int[] rowIndices = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-                                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-                                    31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-                                    41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-                                    51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
-                                    61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72};
-
-                double[] rowHeights = {12.60, 13.20, 12.60, 12.60, 25.20, 12.60, 12.60, 25.20, 12.60, 38.40,
-                                        37.20, 12.60, 12.60, 21.00, 24.00, 15.60, 12.60, 33.60, 12.60, 25.20,
-                                        12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
-                                        51.00, 12.60, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20,
-                                        25.20, 12.60, 13.20, 12.60, 12.60, 12.60, 12.60, 13.20, 12.60, 12.60,
-                                        15.60, 51.60, 16.20, 39.00, 24.00, 12.60, 55.80, 18.60, 24.60, 19.20,
-                                        12.60, 12.60, 12.60, 12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60,
-                                        12.60, 12.60};
-
-                for (int i = 0; i < rowIndices.Length; i++)
-                {
-                    int rowIndex = rowIndices[i];
-                    double rowHeight = rowHeights[i];
-                    worksheet.Row(rowIndex).Height = rowHeight;
-                }
-
-                #endregion
-
-                #region DocumentContent
-
-                AddLogo(worksheet);
-                AddHeaderInfo(worksheet);
-
-                AddFormUserContent(worksheet);
-                AddSenaStructureInformation(worksheet);
-
-
-                // ----------------------- INSCRIPCION DE MATERIAS (Main Table)------------------------------ //
-
-                ExcelRange CellMT1 = GetExcelRange(worksheet, 31, 1, 32, 1); ;
-                CellMT1.Value = "No";
-                MergedCells(CellMT1);
-                CellCenter(CellMT1);
-                FontWeightBold(CellMT1);
-
-                ExcelRange CellMT2 = GetExcelRange(worksheet, 31, 2, 32, 2);
-                CellMT2.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
-                MergedCells(CellMT2);
-                CellCenter(CellMT2);
-                FontWeightBold(CellMT2);
-
-                ExcelRange CellMT3 = GetExcelRange(worksheet, 31, 3, 31, 4);
-                CellMT3.Value = "SISTEMA";
-                MergedCells(CellMT3);
-                CellCenter(CellMT3);
-                FontWeightBold(CellMT3);
-
-                    var subCellMT1 = worksheet.Cells[32, 3];
-                    subCellMT1.Value = "Créditos";
-                    MergedCells(subCellMT1);
-                    CellCenter(subCellMT1);
-                    FontWeightBold(subCellMT1);
-
-                    var subCellMT2 = worksheet.Cells[32, 4];
-                    subCellMT2.Value = "Semestre";
-                    MergedCells(subCellMT2);
-                    CellCenter(subCellMT2);
-                    FontWeightBold(subCellMT2);
-
-                ExcelRange CellMT4 = GetExcelRange(worksheet, 31, 5, 32, 5);
-                CellMT4.Value = "CALIFICACIÓN NUMERICA";
-                MergedCells(CellMT4);
-                CellCenter(CellMT4);
-                FontWeightBold(CellMT4);
-
-                ExcelRange CellMT5 = GetExcelRange(worksheet, 31, 6, 32, 6);
-                CellMT5.Value = "CALIFICACION LITERAL";
-                MergedCells(CellMT5);
-                CellCenter(CellMT5);
-                FontWeightBold(CellMT5);
-
-                ExcelRange CellMT6 = GetExcelRange(worksheet, 31, 7, 32, 7);
-                CellMT6.Value = "NIVEL";
-                MergedCells(CellMT6);
-                CellCenter(CellMT6);
-                FontWeightBold(CellMT6);
-
-                ExcelRange CellMT7 = GetExcelRange(worksheet, 31, 8, 32, 8);
-                CellMT7.Value = "No";
-                MergedCells(CellMT7);
-                CellCenter(CellMT7);
-                FontWeightBold(CellMT7);
-
-                ExcelRange CellMT8 = GetExcelRange(worksheet, 31, 9, 32, 10);
-                CellMT8.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
-                MergedCells(CellMT8);
-                CellCenter(CellMT8);
-                FontWeightBold(CellMT8);
-
-                ExcelRange CellMT9 = GetExcelRange(worksheet, 31, 11, 31, 12);
-                CellMT9.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
-                MergedCells(CellMT9);
-                CellCenter(CellMT9);
-                FontWeightBold(CellMT9);
-
-                    var subCellMT3 = worksheet.Cells[32, 11];
-                    MergedCells(subCellMT3);
-                    CellCenter(subCellMT3);
-                    FontWeightBold(subCellMT3);
-
-                    var subCellMT4 = worksheet.Cells[32, 12];
-                    subCellMT4.Value = "Semestre";
-                    MergedCells(subCellMT4);
-                    CellCenter(subCellMT4);
-                    FontWeightBold(subCellMT4);
-
-                ExcelRange CellMT10 = GetExcelRange(worksheet, 31, 13, 32, 13);
-                CellMT10.Value = "CALIFICACIÓN NUMERICA";
-                MergedCells(CellMT10);
-                CellCenter(CellMT10);
-                FontWeightBold(CellMT10);
-
-                ExcelRange CellMT11 = GetExcelRange(worksheet, 31, 14, 32, 14);
-                CellMT11.Value = "CALIFICACION LITERAL";
-                MergedCells(CellMT11);
-                CellCenter(CellMT11);
-                FontWeightBold(CellMT11);
-
-                ExcelRange CellMT12 = GetExcelRange(worksheet, 31, 15, 32, 15);
-                CellMT12.Value = "NIVEL";
-                MergedCells(CellMT12);
-                CellCenter(CellMT12);
-                FontWeightBold(CellMT12);
-
-                ExcelRange CellMT13 = GetExcelRange(worksheet, 31, 16, 32, 16);
-                CellMT13.Value = "No";
-                MergedCells(CellMT13);
-                CellCenter(CellMT13);
-                FontWeightBold(CellMT13);
-
-
-                ExcelRange CellMT14 = GetExcelRange(worksheet, 31, 17, 32, 19);
-                CellMT14.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
-                MergedCells(CellMT14);
-                CellCenter(CellMT14);
-                FontWeightBold(CellMT14);
-
-                ExcelRange CellMT15 = GetExcelRange(worksheet, 31, 20, 31, 21);
-                CellMT15.Value = "SISTEMA";
-                MergedCells(CellMT15);
-                CellCenter(CellMT15);
-                FontWeightBold(CellMT15);
-
-                    var subCellMT5 = worksheet.Cells[32, 20];
-                    subCellMT5.Value = "Créditos";
-                    MergedCells(subCellMT5);
-                    CellCenter(subCellMT5);
-                    FontWeightBold(subCellMT5);
-
-                    var subCellMT6 = worksheet.Cells[32, 21];
-                    subCellMT6.Value = "Semestre";
-                    MergedCells(subCellMT6);
-                    CellCenter(subCellMT6);
-                    FontWeightBold(subCellMT6);
-
-
-                ExcelRange CellMT16 = GetExcelRange(worksheet, 31, 22, 32, 22);
-                CellMT16.Value = "CALIFICACIÓN NUMERICA";
-                MergedCells(CellMT16);
-                CellCenter(CellMT16);
-                FontWeightBold(CellMT16);
-
-                ExcelRange CellMT17 = GetExcelRange(worksheet, 31, 23, 32, 23);
-                CellMT17.Value = "CALIFICACION LITERAL";
-                MergedCells(CellMT17);
-                CellCenter(CellMT17);
-                FontWeightBold(CellMT17);
-
-                ExcelRange CellMT18 = GetExcelRange(worksheet, 31, 24, 32, 24);
-                CellMT18.Value = "NIVEL";
-                MergedCells(CellMT18);
-                CellCenter(CellMT18);
-                FontWeightBold(CellMT18);
-
-                ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 41, 24);
-                CellCenter(celdasMaterias);
-
-
-                // Show and hide cells for add information
-                // .legth por numero de materias
-                var numbCeldasMaterias = worksheet.Cells[33, 1];
-                int initCell= 33;
-                for (int i = 1; i <= 9; i++)
-                {
-                    var firstCellColumn = worksheet.Cells[initCell + i - 1, 1];
-                    firstCellColumn.Value = i;
-                    CellCenter(firstCellColumn);
-                }
-
-                // ------------------------------  TOTALES MATERIAS ------------------------------------------ //
-
-                ExcelRange LabelTotals = GetExcelRange(worksheet, 42, 1, 42, 2);
-                LabelTotals.Value = "TOTALES";
-                MergedCells(LabelTotals);
-                CellCenter(LabelTotals);
-                FontWeightBold(LabelTotals);
-
-                var rangeToSum1 = worksheet.Cells["C33:C41"];
-                var result1 = worksheet.Cells["C42"];
-                var totalSubjects1 = worksheet.Cells[42, 3];
-
-                result1.Formula = $"SUM({rangeToSum1.Address})";
-                CellCenter(totalSubjects1);
-                FontWeightBold(totalSubjects1);
-
-                var rangeToSum2 = worksheet.Cells["K33:K41"];
-                var result2 = worksheet.Cells["K42"];
-                var totalSubjects2 = worksheet.Cells[42, 11];
-
-                result2.Formula = $"SUM({rangeToSum2.Address})";
-                CellCenter(totalSubjects2);
-                FontWeightBold(totalSubjects2);
-
-                var rangeToSum3 = worksheet.Cells["T33:T41"];
-                var result3 = worksheet.Cells["T42"];
-                var totalSubjects3 = worksheet.Cells[42, 20];
-
-                result3.Formula = $"SUM({rangeToSum3.Address})";
-                CellCenter(totalSubjects3);
-                FontWeightBold(totalSubjects3);
-
-
-                    ExcelRange LabelTotal1 = GetExcelRange(worksheet, 46, 1, 46, 7);
-                    LabelTotal1.Value = "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL TÉCNICO PROFESIONAL";
-                    MergedCells(LabelTotal1);
-                    CellRight(LabelTotal1); 
-
-                    ExcelRange LabelTotal2 = GetExcelRange(worksheet, 47, 1, 47, 7);
-                    LabelTotal2.Value = "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL TECNOLÓGICO ";
-                    MergedCells(LabelTotal2);
-                    CellRight(LabelTotal2);
-
-                    ExcelRange LabelTotal3 = GetExcelRange(worksheet, 48, 1, 48, 7);
-                    LabelTotal3.Value = "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL PROFESIONAL";
-                    MergedCells(LabelTotal3);
-                    CellRight(LabelTotal3);
-
-
-                ExcelRange LabelTotalMaterias = GetExcelRange(worksheet, 44, 8, 44, 10);
-                MergedCells(LabelTotalMaterias);
-                CellCenter(LabelTotalMaterias);
-                FontWeightBold(LabelTotalMaterias);
-
-                //var cellTotal1 = worksheet.Cells["C42"];
-                //var cellTotal2 = worksheet.Cells["K42"];
-                //var cellTotal3 = worksheet.Cells["T42"];
-
-                // Define la celda donde mostrarás el resultado de la suma
-                var sumCellTotals = worksheet.Cells["H44"];
-
-                // Aplica la fórmula de suma a la celda de resultado
-                sumCellTotals.Formula = $"SUM({totalSubjects1.Address},{totalSubjects2.Address},{totalSubjects3.Address})";
-
-
-                var LabelAprobado = worksheet.Cells[45, 8];
-                LabelAprobado.Value = "APRO";
-                CellCenter(LabelAprobado);
-                FontWeightBold(LabelAprobado);
-
-                var LabelPending = worksheet.Cells[45, 9];
-                LabelPending.Value = "PEN";
-                CellCenter(LabelPending);
-                FontWeightBold(LabelPending);
-
-                var LabelTotalCredits = worksheet.Cells[45, 10];
-                LabelTotalCredits.Value = "TOTAL CRED";
-                CellCenter(LabelTotalCredits);
-                FontWeightBold(LabelTotalCredits);
-
-                ExcelRange celdasMateriasTotales = GetExcelRange(worksheet, 46, 8, 48, 10);
-                CellCenter(celdasMateriasTotales);
-
-                // CREDITOS TECNICO PROFESIONAL
-                var TotalCreditosTecnico = worksheet.Cells["J46"];
-                var TotalAprobadoTecnico = worksheet.Cells["H46"];
-                var TotalPendienteTecnico = worksheet.Cells["I46"];
-                TotalPendienteTecnico.Formula = $"({TotalCreditosTecnico.Address}) - ({TotalAprobadoTecnico.Address})";
-
-                // TOTAL CREDITOS APROBADOS
-                var TotalCreditosTecnologico = worksheet.Cells["J47"];
-                var TotalAprobadoTecnologico = worksheet.Cells["H47"];
-                var TotalPendienteTecnologico = worksheet.Cells["I47"];
-                TotalPendienteTecnologico.Formula = $"({TotalCreditosTecnologico.Address}) - ({TotalAprobadoTecnologico.Address})";
-
-                // TOTAL CREDITOS PENDIENTES
-                var TotalCreditosProfesional = worksheet.Cells["J48"];
-                var TotalAprobadoProfesional = worksheet.Cells["H48"];
-                var TotalPendienteProfesional = worksheet.Cells["I48"];
-                TotalPendienteProfesional.Formula = $"({TotalCreditosProfesional.Address}) - ({TotalAprobadoProfesional.Address})";
-
-
-                // IMPORTANTE: CODIGO PROPENSO A SER MODIFICADO //
-                var cellsToSetZero = new List<ExcelRange>
+            ExcelRange LabelTotals = GetExcelRange(worksheet, 42, 1, 42, 2);
+            LabelTotals.Value = "TOTALES";
+            MergedCells(LabelTotals);
+            CellCenter(LabelTotals);
+            FontWeightBold(LabelTotals);
+
+            var rangeToSum1 = worksheet.Cells["C33:C41"];
+            var result1 = worksheet.Cells["C42"];
+            ExcelRange totalSubjects1 = GetTotalSubjects1(worksheet);
+
+            result1.Formula = $"SUM({rangeToSum1.Address})";
+            CellCenter(totalSubjects1);
+            FontWeightBold(totalSubjects1);
+
+            var rangeToSum2 = worksheet.Cells["K33:K41"];
+            var result2 = worksheet.Cells["K42"];
+            ExcelRange totalSubjects2 = GetTotalSubjects2(worksheet);
+
+            result2.Formula = $"SUM({rangeToSum2.Address})";
+            CellCenter(totalSubjects2);
+            FontWeightBold(totalSubjects2);
+
+            var rangeToSum3 = worksheet.Cells["T33:T41"];
+            var result3 = worksheet.Cells["T42"];
+            ExcelRange totalSubjects3 = GetTotalSubjects3(worksheet);
+
+            result3.Formula = $"SUM({rangeToSum3.Address})";
+            CellCenter(totalSubjects3);
+            FontWeightBold(totalSubjects3);
+
+            #endregion
+
+        }
+
+        private void RecognizedCredits(ExcelWorksheet worksheet)
+        {
+            // EVALUAR CRITERIOS DE LA CARRERA (1)TECNICO (2)TECNOLOGICO (3)PROFESIONAL
+            // IDENTIFICAR LOS CREDITOS QUE SE APRUEBAN, PENDIENTES Y EL TOTAL DE CREDITOS(POR LO CUAL SE DEPENDE DEL PUNTO ANTERIOR
+
+            ExcelRange totalSubjects1 = GetTotalSubjects1(worksheet);
+            ExcelRange totalSubjects2 = GetTotalSubjects2(worksheet);
+            ExcelRange totalSubjects3 = GetTotalSubjects3(worksheet);
+
+            ExcelRange cellLabelsRecCred = GetExcelRange(worksheet, 46, 1, 48, 7);
+            CellRight(cellLabelsRecCred);
+            FontWeightBold(cellLabelsRecCred);
+
+            ExcelRange CellLabelRc1 = GetExcelRange(worksheet, 46, 1, 46, 7);
+            MergedCells(CellLabelRc1);
+            CellLabelRc1.Value = "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL TÉCNICO PROFESIONAL";
+
+            ExcelRange CellLabelRc2 = GetExcelRange(worksheet, 47, 1, 47, 7);
+            MergedCells(CellLabelRc2);
+            CellLabelRc2.Value = "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL TECNOLÓGICO ";
+
+
+            ExcelRange CellLabelRc3 = GetExcelRange(worksheet, 48, 1, 48, 7);
+            MergedCells(CellLabelRc3);
+            CellLabelRc3.Value = "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL PROFESIONAL";
+
+            ExcelRange LabelTotalMaterias = GetExcelRange(worksheet, 44, 8, 44, 10);
+            MergedCells(LabelTotalMaterias);
+            CellCenter(LabelTotalMaterias);
+            FontWeightBold(LabelTotalMaterias);
+
+
+            var sumCellTotals = worksheet.Cells["H44"];
+            sumCellTotals.Formula = $"SUM({totalSubjects1.Address},{totalSubjects2.Address},{totalSubjects3.Address})";
+
+
+            var labelApproved = worksheet.Cells[45, 8];
+            labelApproved.Value = "APRO";
+            CellCenter(labelApproved);
+            FontWeightBold(labelApproved);
+
+            var labelPending = worksheet.Cells[45, 9];
+            labelPending.Value = "PEN";
+            CellCenter(labelPending);
+            FontWeightBold(labelPending);
+
+            var labelTotalCredits = worksheet.Cells[45, 10];
+            labelTotalCredits.Value = "TOTAL CRED";
+            CellCenter(labelTotalCredits);
+            FontWeightBold(labelTotalCredits);
+
+            ExcelRange celdasMateriasTotales = GetExcelRange(worksheet, 46, 8, 48, 10);
+            CellCenter(celdasMateriasTotales);
+
+            // IMPORTANTE: CODIGO PROPENSO A SER MODIFICADO //
+
+            var cellsToSetZero = new List<ExcelRange>
                 {
                     worksheet.Cells["H46"],
                     worksheet.Cells["J46"],
@@ -786,158 +784,196 @@ namespace PruebaExcel01.Controllers
                     worksheet.Cells["J48"]
                 };
 
-                // Asigna el valor cero a todas las celdas usando un bucle
-                foreach (var cell in cellsToSetZero)
-                {
-                    cell.Value = 0;
-                }
-
-
-                // --------------------- PARRAF "ACLARACIONES" --------------------------- //
-
-                // Unir celdas horizontalmente y verticalmente
-                ExcelRange labelTitle2 = worksheet.Cells[50, 1, 50, 2];
-                labelTitle2.Value = "Aclaraciones";
-                FontWeightBold(labelTitle2);
-                MergedCells(labelTitle2);
-                ContentLeft(labelTitle2);
-
-                ExcelRange ContextA = worksheet.Cells[51, 1, 51, 24];
-                ContextA.Value = "Los créditos académicos faltantes para cumplir a cabalidad con la oferta académica del nivel técnico profesional y/o tecnológico y/o  profesional deben ser cursados y aprobados conforme las reglamentaciones institucionales vigentes.";
-                MergedCells(ContextA);
-                ContentLeft(ContextA);
-
-                ExcelRange ContextB = worksheet.Cells[52, 1, 52, 24];
-                ContextB.Value = "La Escuela de Ciencias Administrativas de la Corporación Unificada Nacional -CUN, reconoce las asignaturas del programa de  Administración de Servicios de Salud   del nivel técnico ( 1 - 3  semestre) para que dar continuidad a su proceso de formación académica a partir de las asignaturas de nivel tecnológico correspondientes a (  4 - 5  semestre) Y profesional correspondientes a ( 6 - 9  semestre)";
-                MergedCells(ContextB);
-                ContentLeft(ContextB);
-
-                ExcelRange ContextC = worksheet.Cells[53, 1, 53, 24];
-                ContextC.Value = "La prueba TyT del ciclo técnico es homologable en la institución. El estudiante deberá presentar la prueba saber TyT para el ciclo tecnológico y Saber PRO para el ciclo profesional.";
-                MergedCells(ContextC);
-                ContentLeft(ContextC);
-
-                ExcelRange ContextD = worksheet.Cells[54, 1, 54, 24];
-                ContextD.Value = "Teniendo en cuenta que el plan de estudios vigente del programa  Administración de Servicios de Salud   no incluye los respectivos niveles de inglés requeridos para obtener las diferentes tituluaciones, el estudiante deberá garantizar lo pertinente al momento de radicar su solilctud de grado, para ello se cuenta con la oferta del centro de Idiomas de la intitución.";
-                MergedCells(ContextD);
-                ContentLeft(ContextD);
-
-                ExcelRange labelTitle3 = worksheet.Cells[56, 1, 56, 2];
-                labelTitle3.Value = "Manifestación expresa del estudiante";
-                FontWeightBold(labelTitle3);
-                MergedCells(labelTitle3);
-                ContentLeft(labelTitle3);
-
-                ExcelRange finalParraf = worksheet.Cells[57, 1, 57, 24];
-                finalParraf.Value = "Con el presente documento manifiesto expresamente y sin que medie ninguna clase de vicio o limitación a mi consentimiento, mi plena conformidad con las asignaturas y/o créditos reconocidos u homologados para mi ingreso al nivel técnico profesional y/o tecnológico y/o profesional del programa   Administración de Servicios de Salud    de la Corporación Unificada Nacional de Educación Superior CUN. Las competencias que considere me hagan falta, del ciclo técnico, las podré realizar voluntariamente a través de tutorías en cada área transversal o del programa, talleres nivelatorios y/o participando como asistente a clases sin que estos generen nota alguna y solicitando previamente el ingreso a la clase o tutoría.";
-                MergedCells(finalParraf);
-                ContentLeft(finalParraf);
-
-                var labelTitle4 = worksheet.Cells[63, 1];
-                labelTitle4.Value = "En Constancia de lo anterior firman:";
-                FontWeightBold(labelTitle3);
-                MergedCells(labelTitle3);
-                ContentLeft(labelTitle3);
-
-                // -------------------------------------------------------------------------- //
-
-                // ----------------------------- SIGNATURE INFO ----------------------------- //
-
-                string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
-                int widthSignatureInPixels = 230;
-                int heightSignatureInPixels = 70;
-
-                var pictureSignature = worksheet.Drawings.AddPicture("Firma", new FileInfo(imagePathSignature));
-
-                pictureSignature.SetPosition(66, -80, 1, -30);
-                pictureSignature.SetSize(widthSignatureInPixels, heightSignatureInPixels);
-                pictureSignature.Locked = true;
-
-                ExcelRange cellSignatureLiderPrograma = worksheet.Cells[66, 1, 66, 2];
-                ApplySignatureBorders(cellSignatureLiderPrograma);
-
-                ExcelRange labelSignature1 = worksheet.Cells[67, 1, 67, 3];
-                labelSignature1.Value = "Líder de Programa";
-                MergedCells(labelSignature1);
-                ContentLeft(labelSignature1);
-
-                ExcelRange labelSignature2 = worksheet.Cells[68, 1, 68, 3];
-                labelSignature2.Value = "Nombre: SAMPLE NAME";  // Convertir y generar valor dinámico
-                MergedCells(labelSignature2);
-                ContentLeft(labelSignature2);
-
-                var parrafSquare = worksheet.Cells[66, 7];
-                parrafSquare.Value = "finalParraf";
-                ContentCenter(parrafSquare);
-                MergedCells(parrafSquare);
-
-                // Asignar un valor dinámico para la firma electrónica, como en formatos anteriores
-
-                ExcelRange cellSignatureStudent = worksheet.Cells[66, 9, 66, 12];
-                ApplySignatureBorders(cellSignatureStudent);
-
-                ExcelRange labelSignature3 = worksheet.Cells[67, 9, 67, 12];
-                labelSignature3.Value = "Estudiante: "; // Convertir y generar valor dinámico
-                MergedCells(labelSignature3);
-                ContentLeft(labelSignature3);
-
-                ExcelRange labelSignature4 = worksheet.Cells[68, 9, 68, 12];
-                labelSignature4.Value = "Nombre: ";  // Convertir y generar valor dinámico
-                MergedCells(labelSignature4);
-                ContentLeft(labelSignature4);
-
-                ExcelRange labelSignature5 = worksheet.Cells[69, 9, 69, 12];
-                labelSignature5.Value = "Doc de Identidad: "; // Convertir y generar valor dinámico
-                MergedCells(labelSignature5);
-                ContentLeft(labelSignature5);
-
-
-                // ------------------------------ FOOTER -----------------------------------//
-                ExcelRange tableFooter = worksheet.Cells[71, 1, 72, 15];
-                CellLeft(tableFooter);
-
-                ExcelRange CellFooter1 = worksheet.Cells[71, 1, 71, 4];
-                CellFooter1.Value = "ELABORÓ: "; // Convertir y generar valor dinámico
-                //CellLeft(CellFooter1);
-                MergedCells(CellFooter1);
-
-                ExcelRange CellFooter2 = worksheet.Cells[72, 1, 72, 4];
-                CellFooter2.Value = "FECHA: "; // Convertir y generar valor dinámico
-                //CellLeft(CellFooter2);
-                MergedCells(CellFooter2);
-
-                ExcelRange CellFooter3 = worksheet.Cells[71, 5, 71, 10];
-                CellFooter3.Value = "REVISÓ: "; // Convertir y generar valor dinámico
-                //CellLeft(CellFooter3);
-                MergedCells(CellFooter3);
-
-                ExcelRange CellFooter4 = worksheet.Cells[72, 5, 72, 10];
-                CellFooter4.Value = "FECHA:"; // Convertir y generar valor dinámico
-                //CellLeft(CellFooter4);
-                MergedCells(CellFooter4);
-
-                ExcelRange CellFooter5 = worksheet.Cells[71, 11, 71, 15];
-                CellFooter5.Value = "APROBÓ:"; // Convertir y generar valor dinámico
-                //CellLeft(CellFooter5);
-                MergedCells(CellFooter5);
-
-                ExcelRange CellFooter6 = worksheet.Cells[72, 11, 72, 15];
-                CellFooter6.Value = "FECHA:"; // Convertir y generar valor dinámico
-                //ApplyBorders(CellFooter6);
-                MergedCells(CellFooter6);
-
-                #endregion
-                // ------------------------------ END FOOTER --------------------------------//
-
-
-                var filePath = @"C:\Users\Jhonattan_Casallas\Downloads\" + nombreArchivo;
-                package.SaveAs(new System.IO.FileInfo(filePath));
-
-
-
-
-                return File(filePath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nombreArchivo);
+            foreach (var cell in cellsToSetZero)
+            {
+                cell.Value = 0;
             }
+
+            // FORMULAS TO DETERMINE CREDITS
+
+            // CREDITOS TECNICO PROFESIONAL (1)
+            var totalTechnicalCredits = worksheet.Cells["J46"];
+            var totalTechnicalApproved = worksheet.Cells["H46"];
+            var totalTechnicalPending = worksheet.Cells["I46"];
+            totalTechnicalPending.Formula = $"({totalTechnicalCredits.Address}) - ({totalTechnicalApproved.Address})";
+
+            // TOTAL CREDITOS APROBADOS (2)
+            var totalTechnologistCredits = worksheet.Cells["J47"];
+            var totalTechnologistApproved = worksheet.Cells["H47"];
+            var totalTechnologistPending = worksheet.Cells["I47"];
+            totalTechnologistPending.Formula = $"({totalTechnologistCredits.Address}) - ({totalTechnologistApproved.Address})";
+
+            // TOTAL CREDITOS PENDIENTES (3)
+            var totalProfessionalCredits = worksheet.Cells["J48"];
+            var totalProfessionalApproved = worksheet.Cells["H48"];
+            var totalProfessionalPending = worksheet.Cells["I48"];
+            totalProfessionalPending.Formula = $"({totalProfessionalCredits.Address}) - ({totalProfessionalApproved.Address})";
+
+        }
+
+        private void ConditionLabels(ExcelWorksheet worksheet)
+        {
+            ExcelRange conditionText = worksheet.Cells[50, 1, 54, 24];
+            ContentLeft(conditionText);
+
+            ExcelRange labelTitle2 = worksheet.Cells[50, 1, 50, 2];
+            labelTitle2.Value = "Aclaraciones";
+            FontWeightBold(labelTitle2);
+            MergedCells(labelTitle2);
+
+            ExcelRange contextA = worksheet.Cells[51, 1, 51, 24];
+            contextA.Value = "Los créditos académicos faltantes para cumplir a cabalidad con la oferta académica del nivel técnico profesional y/o tecnológico y/o  profesional deben ser cursados y aprobados conforme las reglamentaciones institucionales vigentes.";
+            MergedCells(contextA);
+
+            ExcelRange contextB = worksheet.Cells[52, 1, 52, 24];
+            contextB.Value = "La Escuela de Ciencias Administrativas de la Corporación Unificada Nacional -CUN, reconoce las asignaturas del programa de  Administración de Servicios de Salud   del nivel técnico ( 1 - 3  semestre) para que dar continuidad a su proceso de formación académica a partir de las asignaturas de nivel tecnológico correspondientes a (  4 - 5  semestre) Y profesional correspondientes a ( 6 - 9  semestre)";
+            MergedCells(contextB);
+
+            ExcelRange contextC = worksheet.Cells[53, 1, 53, 24];
+            contextC.Value = "La prueba TyT del ciclo técnico es homologable en la institución. El estudiante deberá presentar la prueba saber TyT para el ciclo tecnológico y Saber PRO para el ciclo profesional.";
+            MergedCells(contextC);
+
+            ExcelRange contextD = worksheet.Cells[54, 1, 54, 24];
+            contextD.Value = "Teniendo en cuenta que el plan de estudios vigente del programa  Administración de Servicios de Salud   no incluye los respectivos niveles de inglés requeridos para obtener las diferentes tituluaciones, el estudiante deberá garantizar lo pertinente al momento de radicar su solilctud de grado, para ello se cuenta con la oferta del centro de Idiomas de la intitución.";
+            MergedCells(contextD);
+
+        }
+
+        private void StudentStatement(ExcelWorksheet worksheet)
+        {
+            ExcelRange studentStatementArea = worksheet.Cells[56, 1, 57, 24];
+            ContentLeft(studentStatementArea);
+
+            ExcelRange labelTitle3 = worksheet.Cells[56, 1, 56, 2];
+            labelTitle3.Value = "Manifestación expresa del estudiante";
+            FontWeightBold(labelTitle3);
+            MergedCells(labelTitle3);
+
+            ExcelRange contextE = worksheet.Cells[57, 1, 57, 24];
+            contextE.Value = "Con el presente documento manifiesto expresamente y sin que medie ninguna clase de vicio o limitación a mi consentimiento, mi plena conformidad con las asignaturas y/o créditos reconocidos u homologados para mi ingreso al nivel técnico profesional y/o tecnológico y/o profesional del programa   Administración de Servicios de Salud    de la Corporación Unificada Nacional de Educación Superior CUN. Las competencias que considere me hagan falta, del ciclo técnico, las podré realizar voluntariamente a través de tutorías en cada área transversal o del programa, talleres nivelatorios y/o participando como asistente a clases sin que estos generen nota alguna y solicitando previamente el ingreso a la clase o tutoría.";
+            MergedCells(contextE);
+
+        }
+
+        private void ProgramManagerSignature(ExcelWorksheet worksheet)
+        {
+            // Por asignar una biblioteca de imagenes de firmas de jefes de programa
+            // Valor quemado
+            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
+            int widthSignatureInPixels = 230;
+            int heightSignatureInPixels = 70;
+
+            var pictureSignature = worksheet.Drawings.AddPicture("Firma", new FileInfo(imagePathSignature));
+
+            pictureSignature.SetPosition(66, -80, 1, -30);
+            pictureSignature.SetSize(widthSignatureInPixels, heightSignatureInPixels);
+            pictureSignature.Locked = true;
+
+        }
+
+        private void StudentSignature(ExcelWorksheet worksheet)
+        {
+            // Valor quemado, por evaluar la opcion de firma generada por parte del estudiante
+            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
+            int widthSignatureInPixels = 230;
+            int heightSignatureInPixels = 70;
+
+            var pictureSignature = worksheet.Drawings.AddPicture("FirmaStu", new FileInfo(imagePathSignature));
+
+            pictureSignature.SetPosition(66, -80, 9, -30);
+            pictureSignature.SetSize(widthSignatureInPixels, heightSignatureInPixels);
+            pictureSignature.Locked = true;
+
+        }
+
+
+        private void ContractArea(ExcelWorksheet worksheet)
+        {
+            var parrafSquare = worksheet.Cells[66, 7];
+            parrafSquare.Value = "finalParraf";
+            ContentCenter(parrafSquare);
+            MergedCells(parrafSquare);
+
+            ExcelRange studentStatementArea = worksheet.Cells[63, 1, 70, 24];
+            ContentLeft(studentStatementArea);
+
+
+            ExcelRange labelTitle4 = worksheet.Cells[63, 1, 63, 2];
+            labelTitle4.Value = "En Constancia de lo anterior firman:";
+            FontWeightBold(labelTitle4);
+            MergedCells(labelTitle4);
+
+            var labelPending = worksheet.Cells[45, 9];
+
+            ExcelRange cellSignatureProgramManager = worksheet.Cells[66, 1, 66, 3];
+            MergedCells(cellSignatureProgramManager);
+            ApplySignatureBorders(cellSignatureProgramManager);
+            ProgramManagerSignature(worksheet);
+
+            ExcelRange labelSignature1 = worksheet.Cells[67, 1, 67, 3];
+            labelSignature1.Value = "Líder de Programa";
+            MergedCells(labelSignature1);
+
+            ExcelRange labelSignature2 = worksheet.Cells[68, 1, 68, 3];
+            labelSignature2.Value = "Nombre: SAMPLE NAME";  // Convertir y generar valor dinámico
+            MergedCells(labelSignature2);
+
+            ExcelRange cellSignatureStudent = worksheet.Cells[66, 9, 66, 12];
+            MergedCells(cellSignatureStudent);
+            ApplySignatureBorders(cellSignatureStudent);
+            StudentSignature(worksheet);
+
+            ExcelRange labelSignature3 = worksheet.Cells[67, 9, 67, 12];
+            labelSignature3.Value = "Estudiante: "; // Convertir y generar valor dinámico
+            MergedCells(labelSignature3);
+
+            ExcelRange labelSignature4 = worksheet.Cells[68, 9, 68, 12];
+            labelSignature4.Value = "Nombre: ";  // Convertir y generar valor dinámico
+            MergedCells(labelSignature4);
+            ContentLeft(labelSignature4);
+
+            ExcelRange labelSignature5 = worksheet.Cells[69, 9, 69, 12];
+            labelSignature5.Value = "Doc de Identidad: "; // Convertir y generar valor dinámico
+            MergedCells(labelSignature5);
+            ContentLeft(labelSignature5);
+
+        }
+
+        private void ApplyCellsFooter(ExcelWorksheet worksheet)
+        {
+            ExcelRange tableFooter = worksheet.Cells[71, 1, 72, 15];
+            CellLeft(tableFooter);
+
+            ExcelRange CellFooter1 = worksheet.Cells[71, 1, 71, 4];
+            CellFooter1.Value = "ELABORÓ: "; // Convertir y generar valor dinámico
+            MergedCells(CellFooter1);
+            //CellLeft(CellFooter1);
+
+
+            ExcelRange CellFooter2 = worksheet.Cells[72, 1, 72, 4];
+            CellFooter2.Value = "FECHA: "; // Convertir y generar valor dinámico
+            MergedCells(CellFooter2);
+            //CellLeft(CellFooter2);
+
+            ExcelRange CellFooter3 = worksheet.Cells[71, 5, 71, 10];
+            CellFooter3.Value = "REVISÓ: "; // Convertir y generar valor dinámico
+            MergedCells(CellFooter3);
+            //CellLeft(CellFooter3);
+
+            ExcelRange CellFooter4 = worksheet.Cells[72, 5, 72, 10];
+            CellFooter4.Value = "FECHA:"; // Convertir y generar valor dinámico
+            MergedCells(CellFooter4);
+            //CellLeft(CellFooter4);
+
+            ExcelRange CellFooter5 = worksheet.Cells[71, 11, 71, 15];
+            CellFooter5.Value = "APROBÓ:"; // Convertir y generar valor dinámico
+            MergedCells(CellFooter5);
+            //CellLeft(CellFooter5);
+
+            ExcelRange CellFooter6 = worksheet.Cells[72, 11, 72, 15];
+            CellFooter6.Value = "FECHA:"; // Convertir y generar valor dinámico
+            MergedCells(CellFooter6);
+            //ApplyBorders(CellFooter6);
         }
     }
 }
