@@ -7,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 
 namespace PruebaExcel01.Controllers
 {
@@ -34,7 +35,6 @@ namespace PruebaExcel01.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
 
         public ActionResult ExportToExcel()
         {
@@ -64,7 +64,7 @@ namespace PruebaExcel01.Controllers
                 #endregion
 
                 #region Cellsizes
-                var worksheet = package.Workbook.Worksheets.Add("nombreHoja");
+                var worksheet = package.Workbook.Worksheets.Add("SummaryDocs");
 
                 ApplyBackgroundColorToRange(worksheet, 1, 1, 72, 24, System.Drawing.Color.White);
 
@@ -118,6 +118,7 @@ namespace PruebaExcel01.Controllers
                 AddSenaStructureInformation(worksheet);
                 ConstructionHeaderTable(worksheet);
                 ContentTable(worksheet);
+                //InsertInformation();
 
                 RecognizedCredits(worksheet);
                 ConditionLabels(worksheet);
@@ -135,6 +136,7 @@ namespace PruebaExcel01.Controllers
 
             }
         }
+
 
 
 
@@ -664,23 +666,33 @@ namespace PruebaExcel01.Controllers
 
         }
 
+
+
+
         private void ContentTable(ExcelWorksheet worksheet)
         {
-
-            // ESTA ES LA SECCION A MODIFICAR
 
             ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 41, 24);
             CellCenter(celdasMaterias);
 
+            SubjectGenerator subjectGenerator = new SubjectGenerator();
+            AsignaturasME[] subjects = subjectGenerator.GenerateSubjects();
 
-            var numbCeldasMaterias = worksheet.Cells[33, 1];
-            int initCell = 33;
-            for (int i = 1; i <= 9; i++)
+            int initRow = 33;
+
+            for (int i = 0; i < subjects.Length; i++)
             {
-                var firstCellColumn = worksheet.Cells[initCell + i - 1, 1];
-                firstCellColumn.Value = i;
-                CellCenter(firstCellColumn);
+                int rowNumber = initRow + i;
+
+                worksheet.Cells[rowNumber, 1].Value = subjects[i].Numero;
+                worksheet.Cells[rowNumber, 2].Value = subjects[i].Asignatura;
+                worksheet.Cells[rowNumber, 3].Value = subjects[i].Creditos;
+                worksheet.Cells[rowNumber, 4].Value = subjects[i].Semestre;
+                worksheet.Cells[rowNumber, 5].Value = subjects[i].CalificacionNumerica;
+                worksheet.Cells[rowNumber, 6].Value = subjects[i].CalificacionLiteral;
+                worksheet.Cells[rowNumber, 7].Value = subjects[i].Nivel;
             }
+
 
             #region ResultSubjects
 

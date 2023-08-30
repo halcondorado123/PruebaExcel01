@@ -1,4 +1,5 @@
 using OfficeOpenXml;
+using PruebaExcel01.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
