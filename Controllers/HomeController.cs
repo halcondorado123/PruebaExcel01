@@ -11,6 +11,8 @@ using System.Reflection.PortableExecutable;
 
 namespace PruebaExcel01.Controllers
 {
+
+    // Implementar bloqueo de la hoja de Excel para evitar que la hoja se modifique, alterando la información del estudiante
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -118,7 +120,6 @@ namespace PruebaExcel01.Controllers
                 AddSenaStructureInformation(worksheet);
                 ConstructionHeaderTable(worksheet);
                 ContentTable(worksheet);
-                //InsertInformation();
 
                 RecognizedCredits(worksheet);
                 ConditionLabels(worksheet);
@@ -679,10 +680,12 @@ namespace PruebaExcel01.Controllers
             AsignaturasME[] subjects = subjectGenerator.GenerateSubjects();
 
             int initRow = 33;
+            int materiasPerColumn = 9;
 
             for (int i = 0; i < subjects.Length; i++)
             {
-                int rowNumber = initRow + i;
+                int rowNumber = initRow + (i % materiasPerColumn);
+                int columnNumber = (i / materiasPerColumn) * 7 + 1; // 7 columnas en total
 
                 worksheet.Cells[rowNumber, 1].Value = subjects[i].Numero;
                 worksheet.Cells[rowNumber, 2].Value = subjects[i].Asignatura;
