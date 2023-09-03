@@ -9,6 +9,10 @@ using System.Drawing;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Xml.Linq;
+using System.Security.Cryptography.Xml;
+using System.Collections.Generic;
+using System.Data;
+using System.Reflection.Emit;
 
 namespace PruebaExcel01.Controllers
 {
@@ -113,6 +117,8 @@ namespace PruebaExcel01.Controllers
                 #endregion
 
                 #region DocumentContent
+
+                List<AsignaturasME> subjects = new List<AsignaturasME>();
 
                 AddLogo(worksheet);
                 AddHeaderInfo(worksheet);
@@ -678,135 +684,190 @@ namespace PruebaExcel01.Controllers
         }
 
 
-        public void InsertSubject(ExcelWorksheet worksheet, int row, int column, int i)
-        {
-            SubjectGenerator subjectGenerator = new SubjectGenerator();
-            AsignaturasME[] subjects = subjectGenerator.GenerateSubjects();
+        //public void InsertSubjectColumn2(ExcelWorksheet worksheet, int row, int column, int i, List<AsignaturasME> listSubjects)
+        //{
+        //    SubjectGenerator subjectGenerator = new SubjectGenerator();
+        //    AsignaturasME[] subjects = subjectGenerator.GenerateSubjects(listSubjects);
+        //    MergedCellsHorizontally(worksheet, 33, 41, 9, 10);
 
-            worksheet.Cells[row, column].Value = subjects[i].Numero;
-            worksheet.Cells[row, column + 1].Value = subjects[i].Asignatura;
-            worksheet.Cells[row, column + 2].Value = subjects[i].Creditos;
-            worksheet.Cells[row, column + 3].Value = subjects[i].Semestre;
-            worksheet.Cells[row, column + 4].Value = subjects[i].CalificacionNumerica;
-            worksheet.Cells[row, column + 5].Value = subjects[i].CalificacionLiteral;
-            worksheet.Cells[row, column + 6].Value = subjects[i].Nivel;
-        }
+        //    worksheet.Cells[row, column].Value = subjects[i].Numero;
 
-        public void InsertSubjectColumn2(ExcelWorksheet worksheet, int row, int column, int i)
-        {
-            SubjectGenerator subjectGenerator = new SubjectGenerator();
-            AsignaturasME[] subjects = subjectGenerator.GenerateSubjects();
-            MergedCellsHorizontally(worksheet, 33, 41, 9, 10);
+        //    //int asignaturaIndex = 9; // Variable para rastrear el índice de la asignatura
 
-            worksheet.Cells[row, column].Value = subjects[i].Numero;
+        //    // Itera a través de las filas fusionadas y establece el valor de la asignatura en cada una de ellas
+        //    for (int rowIndex = 33; rowIndex <= 41; rowIndex++)
+        //    {
+        //        int asignaturaIndex = (rowIndex - 24) % 26; ; // Calcula el índice relativo a la fila actual
+        //        asignaturaIndex %= subjects.Length;  // Asegura que el índice no supere el número de elementos en subjects
 
-            //int asignaturaIndex = 9; // Variable para rastrear el índice de la asignatura
+        //        worksheet.Cells[rowIndex, 9].Value = subjects[asignaturaIndex].Asignatura;
+        //        worksheet.Cells[rowIndex, 10].Value = subjects[asignaturaIndex].Asignatura;
 
-            // Itera a través de las filas fusionadas y establece el valor de la asignatura en cada una de ellas
-            for (int rowIndex = 33; rowIndex <= 41; rowIndex++)
-            {
-                int asignaturaIndex = (rowIndex - 24) % 26; ; // Calcula el índice relativo a la fila actual
-                asignaturaIndex %= subjects.Length;  // Asegura que el índice no supere el número de elementos en subjects
+        //        // Aumenta el índice de la asignatura para la próxima fila
+        //        asignaturaIndex++;
+        //    }
 
-                worksheet.Cells[rowIndex, 9].Value = subjects[asignaturaIndex].Asignatura;
-                worksheet.Cells[rowIndex, 10].Value = subjects[asignaturaIndex].Asignatura;
-
-                // Aumenta el índice de la asignatura para la próxima fila
-                asignaturaIndex++;
-            }
-
-            worksheet.Cells[row, column + 3].Value = subjects[i].Creditos;
-            worksheet.Cells[row, column + 4].Value = subjects[i].Semestre;
-            worksheet.Cells[row, column + 5].Value = subjects[i].CalificacionNumerica;
-            worksheet.Cells[row, column + 6].Value = subjects[i].CalificacionLiteral;
-            worksheet.Cells[row, column + 7].Value = subjects[i].Nivel;
-        }
+        //    worksheet.Cells[row, column + 3].Value = subjects[i].Creditos;
+        //    worksheet.Cells[row, column + 4].Value = subjects[i].Semestre;
+        //    worksheet.Cells[row, column + 5].Value = subjects[i].CalificacionNumerica;
+        //    worksheet.Cells[row, column + 6].Value = subjects[i].CalificacionLiteral;
+        //    worksheet.Cells[row, column + 7].Value = subjects[i].Nivel;
+        //}
 
 
-        public void InsertSubjectColumn3(ExcelWorksheet worksheet, int row, int column, int i)
-        {
-            SubjectGenerator subjectGenerator = new SubjectGenerator();
-            AsignaturasME[] subjects = subjectGenerator.GenerateSubjects();
-            MergedCellsHorizontally(worksheet, 33, 41, 17, 19);
+        //public void InsertSubjectColumn3(ExcelWorksheet worksheet, int row, int column, int i, List<AsignaturasME> listSubjects)
+        //{
+        //    SubjectGenerator subjectGenerator = new SubjectGenerator();
+        //    AsignaturasME[] subjects = subjectGenerator.GenerateSubjects(listSubjects);
+        //    MergedCellsHorizontally(worksheet, 33, 41, 17, 19);
 
 
-            //int asignaturaIndex = 18; // Variable para rastrear el índice de la asignatura
+        //    //int asignaturaIndex = 18; // Variable para rastrear el índice de la asignatura
 
 
-            // Itera a través de las filas fusionadas y establece el valor de la asignatura en cada una de ellas
-            for (int rowIndex = 33; rowIndex <= 41; rowIndex++)
-            {
-                int asignaturaIndex = rowIndex - 15; // Calcula el índice relativo a la fila actual
-                asignaturaIndex %= subjects.Length;  // Asegura que el índice no supere el número de elementos en subjects
+        //    // Itera a través de las filas fusionadas y establece el valor de la asignatura en cada una de ellas
+        //    for (int rowIndex = 33; rowIndex <= 41; rowIndex++)
+        //    {
+        //        int asignaturaIndex = rowIndex - 15; // Calcula el índice relativo a la fila actual
+        //        asignaturaIndex %= subjects.Length;  // Asegura que el índice no supere el número de elementos en subjects
 
-                if (asignaturaIndex < subjects.Length)
-                {
-                    worksheet.Cells[row, 16].Value = subjects[i].Numero;
-                    worksheet.Cells[rowIndex, 17].Value = subjects[asignaturaIndex].Asignatura;
-                    worksheet.Cells[rowIndex, 18].Value = subjects[asignaturaIndex].Asignatura;
-                    worksheet.Cells[rowIndex, 19].Value = subjects[asignaturaIndex].Asignatura;
+        //        if (asignaturaIndex < subjects.Length)
+        //        {
+        //            worksheet.Cells[row, 16].Value = subjects[i].Numero;
+        //            worksheet.Cells[rowIndex, 17].Value = subjects[asignaturaIndex].Asignatura;
+        //            worksheet.Cells[rowIndex, 18].Value = subjects[asignaturaIndex].Asignatura;
+        //            worksheet.Cells[rowIndex, 19].Value = subjects[asignaturaIndex].Asignatura;
 
-                    // Aumenta el índice de la asignatura para la próxima fila
-                    asignaturaIndex++;
-                }
-            }
+        //            // Aumenta el índice de la asignatura para la próxima fila
+        //            asignaturaIndex++;
+        //        }
+        //    }
 
-            worksheet.Cells[row, column + 5].Value = subjects[i].Creditos;
-            worksheet.Cells[row, column + 6].Value = subjects[i].Semestre;
-            worksheet.Cells[row, column + 7].Value = subjects[i].CalificacionNumerica;
-            worksheet.Cells[row, column + 8].Value = subjects[i].CalificacionLiteral;
-            worksheet.Cells[row, column + 9].Value = subjects[i].Nivel;
-        }
+        //    worksheet.Cells[row, column + 5].Value = subjects[i].Creditos;
+        //    worksheet.Cells[row, column + 6].Value = subjects[i].Semestre;
+        //    worksheet.Cells[row, column + 7].Value = subjects[i].CalificacionNumerica;
+        //    worksheet.Cells[row, column + 8].Value = subjects[i].CalificacionLiteral;
+        //    worksheet.Cells[row, column + 9].Value = subjects[i].Nivel;
+        //}
 
 
         private void ContentTable(ExcelWorksheet worksheet)
         {
+            AsignaturasME asignaturasME = new AsignaturasME();
+            List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
+
+            int row = 33;
+            int column = 1;
+            int subjectsPerColumn = 9; // Cambiar de columna después de 9 elementos
+            bool ignoreMergedCells = false; // Variable para ignorar celdas fusionadas en la fila 32
+
             MergedCellsHorizontally(worksheet, 33, 41, 9, 10);
             MergedCellsHorizontally(worksheet, 33, 41, 17, 19);
+
+            int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
+
+            // Llena el archivo de Excel con los datos
+            foreach (var subject in subjects)
+            {
+                if (subjectCount >= subjectsPerColumn)
+                {
+                    // Cambiar de columna después de 9 elementos (cuenta 8 y 9 como una sola celda)
+                    row = 33;
+                    column += 7; // Cambia a la siguiente columna
+
+                    // Si la columna actual es la 15 o 16, aumenta el desplazamiento en 2
+                    if (column == 9 || column == 10)
+                    {
+                        column += 2;
+                    }
+
+                    subjectCount = 0; // Reiniciar el contador
+                }
+
+                if (row == 32 && column == 12)
+                {
+                    // Mueve el valor que debería estar en la columna 12 a la columna 13
+                    worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+                }
+                else if (row == 32 && column == 16)
+                {
+                    // Mueve el valor que debería estar en la columna 16 a la columna 17
+                    worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+                }
+                else
+                {
+                    // Considerar celdas fusionadas en otras filas
+                    worksheet.Cells[row, column].Value = subject.Numero[0];
+                }
+
+                worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
+                worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
+                worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
+                worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
+                worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
+                worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
+
+                if (row == 33 && worksheet.Cells[row, column, row + 1, column].Merge && !ignoreMergedCells)
+                {
+                    row += 3; // Si las celdas 17 a 19 están fusionadas y no estamos en la fila 32, avanzar tres filas
+                }
+                else
+                {
+                    row++; // Si no están fusionadas o estamos en la fila 32, avanzar una fila
+                }
+
+                subjectCount++;
+
+                // Verificar si estamos en las columnas 9 y 10 y marcar la fusión si es necesario
+                if (column == 9 || column == 10)
+                {
+                    ignoreMergedCells = true; // Ignorar la fusión en las columnas 9 y 10
+                }
+            }
+
+
 
             ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 41, 24);
             CellCenter(celdasMaterias);
 
-            SubjectGenerator subjectGenerator = new SubjectGenerator();
-            AsignaturasME[] subjects = subjectGenerator.GenerateSubjects();
+            //    SubjectGenerator subjectGenerator = new SubjectGenerator();
+            //    AsignaturasME[] subjects = subjectGenerator.GenerateSubjects(listSubjects);
 
-            int initRow = 33;
-            int materiasPerColumn = 9;
+            //    int initRow = 33;
+            //    int materiasPerColumn = 9;
+
+            //    try
+            //    {
+            //        for (int i = 0; i < subjects.Length; i++)
+            //        {
+            //            int rowNumber = initRow + (i % materiasPerColumn);
+
+            //            if (materiasPerColumn == 8)
+            //            {
+            //                int columnNumber = (i / materiasPerColumn) * 7 + 1;
+
+            //                if (i <= 8)
+            //                {
+            //                    subjects[i].InsertSubject(worksheet, rowNumber, columnNumber); // Llama a InsertSubject en el objeto AsignaturasME
+            //                }
+            //                else if (i >= 9 && i < 18)
+            //                {
+            //                    subjects[i].InsertSubjectColumn2(worksheet, rowNumber, columnNumber);
+            //                }
+            //                else if (i >= 18 && i < 27)
+            //                {
+            //                    subjects[i].InsertSubjectColumn3(worksheet, rowNumber, columnNumber);
+            //                }
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        ex.Message.ToString();
+            //    }
 
 
-            for (int i = 0; i < subjects.Length; i++)
-            {
 
-                int rowNumber = initRow + (i % materiasPerColumn);
-                //int columnIndex = (i / materiasPerColumn);  // Comenzando desde la columna 1 en la columna 8
-
-                        //int columnIndex1 = 1;  // Comenzando desde la columna 1 en la columna 8
-                        //int columnIndex2 = 8;  // Comenzando desde la columna 1 en la columna 8
-                        //int columnIndex3 = 15;  // Comenzando desde la columna 1 en la columna 8
-
-
-                if (materiasPerColumn == 9)
-                {
-                    int columnNumber = (i / materiasPerColumn) * 7 + 1; // Calcular la columna dinámicamente
-
-                    if (i <= 8)
-                    {
-                        InsertSubject(worksheet, rowNumber, columnNumber, i); // Aquí pasamos el índice i
-                    }
-
-                    else if (i >= 9 && i < 18)
-                    {
-                        InsertSubjectColumn2(worksheet, rowNumber, columnNumber, i); // Aquí pasamos el índice i
-                        
-                    }
-
-                    else if (i >= 18 && i < 27)
-                    {
-                        InsertSubjectColumn3(worksheet, rowNumber, columnNumber, i); // Aquí pasamos el índice i
-
-                    }
-                }
-            }
 
             //HASTA ACA SE BORRA
 
