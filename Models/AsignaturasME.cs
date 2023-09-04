@@ -315,6 +315,51 @@ namespace PruebaExcel01.Models
                 CalificacionNumerica = new double?[] { 4.5 },
                 CalificacionLiteral = new string[] { "CUATRO CINCO" },
                 Nivel = new string[] { "Técnico Profesional" }
+            },
+
+
+            new AsignaturasME
+            {
+                Numero = new int?[] { 27 },
+                Asignatura = new string[] { "MATERIA EXTRA 1" },
+                Creditos = new int?[] { 4 },
+                Semestre = new int?[] { 4 },
+                CalificacionNumerica = new double?[] { 4.5 },
+                CalificacionLiteral = new string[] { "CUATRO CINCO" },
+                Nivel = new string[] { "Técnico Profesional" }
+            },
+
+            new AsignaturasME
+            {
+                Numero = new int?[] { 28 },
+                Asignatura = new string[] { "MATERIA EXTRA 2" },
+                Creditos = new int?[] { 3 },
+                Semestre = new int?[] { 4 },
+                CalificacionNumerica = new double?[] { 4.5 },
+                CalificacionLiteral = new string[] { "CUATRO CINCO" },
+                Nivel = new string[] { "Técnico Profesional" }
+            },
+
+            new AsignaturasME
+            {
+                Numero = new int?[] { 29 },
+                Asignatura = new string[] { "MATERIA EXTRA 3" },
+                Creditos = new int?[] { 3 },
+                Semestre = new int?[] { 4 },
+                CalificacionNumerica = new double?[] { 4.5 },
+                CalificacionLiteral = new string[] { "CUATRO CINCO" },
+                Nivel = new string[] { "Técnico Profesional" }
+            },
+
+           new AsignaturasME
+            {
+                Numero = new int?[] { 30 },
+                Asignatura = new string[] { "MATERIA EXTRA 4" },
+                Creditos = new int?[] { 2 },
+                Semestre = new int?[] { 4 },
+                CalificacionNumerica = new double?[] { 4.5 },
+                CalificacionLiteral = new string[] { "CUATRO CINCO" },
+                Nivel = new string[] { "Técnico Profesional" }
             }
 
         };
