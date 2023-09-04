@@ -79,9 +79,9 @@ namespace PruebaExcel01.Controllers
                                        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                                        21, 22, 23, 24};
 
-                double[] columnWidths = { 5.89, 29.78, 10.78, 10.22, 14.56, 14.78, 14.89, 7.56, 12.56, 14.89,
-                                        9.56, 10.78, 14.33, 14.22, 14.22, 6.33, 9.89, 9.89, 7.22, 8.33,
-                                        13.56, 16.56, 14.89, 13.56,};
+                double[] columnWidths = { 11.00, 35.00, 10.00, 10.00, 15.00, 15.00, 14.89, 11.00, 35.00, 14.89,
+                                        10.00, 10.00, 15.00, 14.22, 11.00, 35.00, 9.89, 9.89, 15.00, 10.00,
+                                        10.00, 16.56, 14.89, 13.56,};
 
                 for (int i = 0; i < columnIndices.Length; i++)
                 {
@@ -217,6 +217,12 @@ namespace PruebaExcel01.Controllers
             range.Merge = merge;
         }
 
+        public static void WrapText(ExcelRange range)
+        {
+            range.Style.WrapText = true;
+        }
+
+
         // Aplicar bordes + Centrado Texto
         public static void CellCenter(ExcelRange range, ExcelBorderStyle borderStyle = ExcelBorderStyle.Thin)
         {
@@ -252,12 +258,12 @@ namespace PruebaExcel01.Controllers
 
         private ExcelRange GetTotalSubjects2(ExcelWorksheet worksheet)
         {
-            return worksheet.Cells[42, 11];
+            return worksheet.Cells[42, 10];
         }
 
         private ExcelRange GetTotalSubjects3(ExcelWorksheet worksheet)
         {
-            return worksheet.Cells[42, 20];
+            return worksheet.Cells[42, 17];
         }
         #endregion
 
@@ -310,14 +316,14 @@ namespace PruebaExcel01.Controllers
         private void AddFormUserContent(ExcelWorksheet worksheet)
         {
             #region FirstDivision
-
+        
             ExcelRange labelFormA = GetExcelRange(worksheet, 5, 8, 5, 10);
             labelFormA.Value = "INTERNA";
             MergedCells(labelFormA);
             FontWeightBold(labelFormA);
             ContentCenter(labelFormA);
 
-            ExcelRange txtbox1 = GetExcelRange(worksheet, 5, 11, 5, 12);
+            var txtbox1 = worksheet.Cells[5, 11];
             // TARGET //
             MergedCells(txtbox1);
             ApplyBorders(txtbox1);
@@ -329,13 +335,11 @@ namespace PruebaExcel01.Controllers
             FontWeightBold(labelFormB);
             ContentCenter(labelFormB);
 
-            ExcelRange txtbox2 = GetExcelRange(worksheet, 5, 16, 5, 17);
+            var txtbox2 = worksheet.Cells[5, 16];
             // TARGET //               
             MergedCells(txtbox2);
             ApplyBorders(txtbox2);
-            #endregion      
 
-            #region SecondDivision
             ExcelRange labelFormC = GetExcelRange(worksheet, 5, 20, 5, 22);
             labelFormC.Value = "PERIODO ACADÉMICO";
             MergedCells(labelFormC);
@@ -345,6 +349,12 @@ namespace PruebaExcel01.Controllers
             var txtbox3 = worksheet.Cells[5, 23];
             // TARGET //               
             ApplyBorders(txtbox3);
+
+
+            #endregion
+
+            #region SecondDivision
+
 
             var labelFormD = worksheet.Cells[8, 7];
             labelFormD.Value = "MODALIDAD:";
@@ -579,8 +589,9 @@ namespace PruebaExcel01.Controllers
 
         private void ConstructionHeaderTable(ExcelWorksheet worksheet)
         {
-            ExcelRange HeaderBar = GetExcelRange(worksheet, 31, 1, 32, 24);
+            ExcelRange HeaderBar = GetExcelRange(worksheet, 31, 1, 32, 21);
             CellCenter(HeaderBar);
+            WrapText(HeaderBar);
             FontWeightBold(HeaderBar);
 
             #region CellsMainTable
@@ -605,7 +616,7 @@ namespace PruebaExcel01.Controllers
             CellMT5.Value = "CALIFICACION LITERAL";
             MergedCells(CellMT5);
 
-            ExcelRange CellMT6 = GetExcelRange(worksheet, 31, 7, 32, 7);
+            ExcelRange CellMT6 = GetExcelRange(worksheet, 31, 7, 32, 7);    // OK
             CellMT6.Value = "NIVEL";
             MergedCells(CellMT6);
 
@@ -613,47 +624,47 @@ namespace PruebaExcel01.Controllers
             CellMT7.Value = "No";
             MergedCells(CellMT7);
 
-            ExcelRange CellMT8 = GetExcelRange(worksheet, 31, 9, 32, 10);
+            ExcelRange CellMT8 = GetExcelRange(worksheet, 31, 9, 32, 9);
             CellMT8.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
             MergedCells(CellMT8);
 
-            ExcelRange CellMT9 = GetExcelRange(worksheet, 31, 11, 31, 12);
-            CellMT9.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
+            ExcelRange CellMT9 = GetExcelRange(worksheet, 31, 10, 31, 11);
+            CellMT9.Value = "SISTEMA";
             MergedCells(CellMT9);
 
-            ExcelRange CellMT10 = GetExcelRange(worksheet, 31, 13, 32, 13);
+            ExcelRange CellMT10 = GetExcelRange(worksheet, 31, 12, 32, 12);
             CellMT10.Value = "CALIFICACIÓN NUMERICA";
             MergedCells(CellMT10);
 
-            ExcelRange CellMT11 = GetExcelRange(worksheet, 31, 14, 32, 14);
+            ExcelRange CellMT11 = GetExcelRange(worksheet, 31, 13, 32, 13);
             CellMT11.Value = "CALIFICACION LITERAL";
             MergedCells(CellMT11);
 
-            ExcelRange CellMT12 = GetExcelRange(worksheet, 31, 15, 32, 15);
+            ExcelRange CellMT12 = GetExcelRange(worksheet, 31, 14, 32, 14);     // OK
             CellMT12.Value = "NIVEL";
             MergedCells(CellMT12);
 
-            ExcelRange CellMT13 = GetExcelRange(worksheet, 31, 16, 32, 16);
+            ExcelRange CellMT13 = GetExcelRange(worksheet, 31, 15, 32, 15);
             CellMT13.Value = "No";
             MergedCells(CellMT13);
 
-            ExcelRange CellMT14 = GetExcelRange(worksheet, 31, 17, 32, 19);
+            ExcelRange CellMT14 = GetExcelRange(worksheet, 31, 16, 32, 16);
             CellMT14.Value = "ASIGNATURA Y/O CRÉDITO HOMOLOGADO";
             MergedCells(CellMT14);
 
-            ExcelRange CellMT15 = GetExcelRange(worksheet, 31, 20, 31, 21);
+            ExcelRange CellMT15 = GetExcelRange(worksheet, 31, 17, 31, 18);
             CellMT15.Value = "SISTEMA";
             MergedCells(CellMT15);
 
-            ExcelRange CellMT16 = GetExcelRange(worksheet, 31, 22, 32, 22);
+            ExcelRange CellMT16 = GetExcelRange(worksheet, 31, 19, 32, 19);
             CellMT16.Value = "CALIFICACIÓN NUMERICA";
             MergedCells(CellMT16);
 
-            ExcelRange CellMT17 = GetExcelRange(worksheet, 31, 23, 32, 23);
+            ExcelRange CellMT17 = GetExcelRange(worksheet, 31, 20, 32, 20);
             CellMT17.Value = "CALIFICACION LITERAL";
             MergedCells(CellMT17);
 
-            ExcelRange CellMT18 = GetExcelRange(worksheet, 31, 24, 32, 24);
+            ExcelRange CellMT18 = GetExcelRange(worksheet, 31, 21, 32, 21);
             CellMT18.Value = "NIVEL";
             MergedCells(CellMT18);
 
@@ -667,88 +678,21 @@ namespace PruebaExcel01.Controllers
             var subCellMT2 = worksheet.Cells[32, 4];
             subCellMT2.Value = "Semestre";
 
-            var subCellMT3 = worksheet.Cells[32, 11];
+            var subCellMT3 = worksheet.Cells[32, 10];
             subCellMT3.Value = "Créditos";
 
-            var subCellMT4 = worksheet.Cells[32, 12];
+            var subCellMT4 = worksheet.Cells[32, 11];
             subCellMT4.Value = "Semestre";
 
-            var subCellMT5 = worksheet.Cells[32, 20];
+            var subCellMT5 = worksheet.Cells[32, 17];
             subCellMT5.Value = "Créditos";
 
-            var subCellMT6 = worksheet.Cells[32, 21];
+            var subCellMT6 = worksheet.Cells[32, 18];
             subCellMT6.Value = "Semestre";
 
             #endregion
 
         }
-
-
-        //public void InsertSubjectColumn2(ExcelWorksheet worksheet, int row, int column, int i, List<AsignaturasME> listSubjects)
-        //{
-        //    SubjectGenerator subjectGenerator = new SubjectGenerator();
-        //    AsignaturasME[] subjects = subjectGenerator.GenerateSubjects(listSubjects);
-        //    MergedCellsHorizontally(worksheet, 33, 41, 9, 10);
-
-        //    worksheet.Cells[row, column].Value = subjects[i].Numero;
-
-        //    //int asignaturaIndex = 9; // Variable para rastrear el índice de la asignatura
-
-        //    // Itera a través de las filas fusionadas y establece el valor de la asignatura en cada una de ellas
-        //    for (int rowIndex = 33; rowIndex <= 41; rowIndex++)
-        //    {
-        //        int asignaturaIndex = (rowIndex - 24) % 26; ; // Calcula el índice relativo a la fila actual
-        //        asignaturaIndex %= subjects.Length;  // Asegura que el índice no supere el número de elementos en subjects
-
-        //        worksheet.Cells[rowIndex, 9].Value = subjects[asignaturaIndex].Asignatura;
-        //        worksheet.Cells[rowIndex, 10].Value = subjects[asignaturaIndex].Asignatura;
-
-        //        // Aumenta el índice de la asignatura para la próxima fila
-        //        asignaturaIndex++;
-        //    }
-
-        //    worksheet.Cells[row, column + 3].Value = subjects[i].Creditos;
-        //    worksheet.Cells[row, column + 4].Value = subjects[i].Semestre;
-        //    worksheet.Cells[row, column + 5].Value = subjects[i].CalificacionNumerica;
-        //    worksheet.Cells[row, column + 6].Value = subjects[i].CalificacionLiteral;
-        //    worksheet.Cells[row, column + 7].Value = subjects[i].Nivel;
-        //}
-
-
-        //public void InsertSubjectColumn3(ExcelWorksheet worksheet, int row, int column, int i, List<AsignaturasME> listSubjects)
-        //{
-        //    SubjectGenerator subjectGenerator = new SubjectGenerator();
-        //    AsignaturasME[] subjects = subjectGenerator.GenerateSubjects(listSubjects);
-        //    MergedCellsHorizontally(worksheet, 33, 41, 17, 19);
-
-
-        //    //int asignaturaIndex = 18; // Variable para rastrear el índice de la asignatura
-
-
-        //    // Itera a través de las filas fusionadas y establece el valor de la asignatura en cada una de ellas
-        //    for (int rowIndex = 33; rowIndex <= 41; rowIndex++)
-        //    {
-        //        int asignaturaIndex = rowIndex - 15; // Calcula el índice relativo a la fila actual
-        //        asignaturaIndex %= subjects.Length;  // Asegura que el índice no supere el número de elementos en subjects
-
-        //        if (asignaturaIndex < subjects.Length)
-        //        {
-        //            worksheet.Cells[row, 16].Value = subjects[i].Numero;
-        //            worksheet.Cells[rowIndex, 17].Value = subjects[asignaturaIndex].Asignatura;
-        //            worksheet.Cells[rowIndex, 18].Value = subjects[asignaturaIndex].Asignatura;
-        //            worksheet.Cells[rowIndex, 19].Value = subjects[asignaturaIndex].Asignatura;
-
-        //            // Aumenta el índice de la asignatura para la próxima fila
-        //            asignaturaIndex++;
-        //        }
-        //    }
-
-        //    worksheet.Cells[row, column + 5].Value = subjects[i].Creditos;
-        //    worksheet.Cells[row, column + 6].Value = subjects[i].Semestre;
-        //    worksheet.Cells[row, column + 7].Value = subjects[i].CalificacionNumerica;
-        //    worksheet.Cells[row, column + 8].Value = subjects[i].CalificacionLiteral;
-        //    worksheet.Cells[row, column + 9].Value = subjects[i].Nivel;
-        //}
 
 
         private void ContentTable(ExcelWorksheet worksheet)
@@ -759,11 +703,6 @@ namespace PruebaExcel01.Controllers
             int row = 33;
             int column = 1;
             int subjectsPerColumn = 9; // Cambiar de columna después de 9 elementos
-            bool ignoreMergedCells = false; // Variable para ignorar celdas fusionadas en la fila 32
-
-            MergedCellsHorizontally(worksheet, 33, 41, 9, 10);
-            MergedCellsHorizontally(worksheet, 33, 41, 17, 19);
-
             int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
 
             // Llena el archivo de Excel con los datos
@@ -774,12 +713,6 @@ namespace PruebaExcel01.Controllers
                     // Cambiar de columna después de 9 elementos (cuenta 8 y 9 como una sola celda)
                     row = 33;
                     column += 7; // Cambia a la siguiente columna
-
-                    // Si la columna actual es la 15 o 16, aumenta el desplazamiento en 2
-                    if (column == 9 || column == 10)
-                    {
-                        column += 2;
-                    }
 
                     subjectCount = 0; // Reiniciar el contador
                 }
@@ -796,7 +729,6 @@ namespace PruebaExcel01.Controllers
                 }
                 else
                 {
-                    // Considerar celdas fusionadas en otras filas
                     worksheet.Cells[row, column].Value = subject.Numero[0];
                 }
 
@@ -807,27 +739,12 @@ namespace PruebaExcel01.Controllers
                 worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
                 worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
 
-                if (row == 33 && worksheet.Cells[row, column, row + 1, column].Merge && !ignoreMergedCells)
-                {
-                    row += 3; // Si las celdas 17 a 19 están fusionadas y no estamos en la fila 32, avanzar tres filas
-                }
-                else
-                {
-                    row++; // Si no están fusionadas o estamos en la fila 32, avanzar una fila
-                }
+                row++; // Avanzar una fila
 
                 subjectCount++;
-
-                // Verificar si estamos en las columnas 9 y 10 y marcar la fusión si es necesario
-                if (column == 9 || column == 10)
-                {
-                    ignoreMergedCells = true; // Ignorar la fusión en las columnas 9 y 10
-                }
             }
-
-
-
-            ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 41, 24);
+        
+            ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 41, 21);
             CellCenter(celdasMaterias);
 
             //    SubjectGenerator subjectGenerator = new SubjectGenerator();
@@ -884,24 +801,24 @@ namespace PruebaExcel01.Controllers
             ExcelRange totalSubjects1 = GetTotalSubjects1(worksheet);
 
             result1.Formula = $"SUM({rangeToSum1.Address})";
-            CellCenter(totalSubjects1);
-            FontWeightBold(totalSubjects1);
+            CellCenter(result1);
+            FontWeightBold(result1);
 
-            var rangeToSum2 = worksheet.Cells["K33:K41"];
-            var result2 = worksheet.Cells["K42"];
+            var rangeToSum2 = worksheet.Cells["J33:J41"];
+            var result2 = worksheet.Cells["J42"];
             ExcelRange totalSubjects2 = GetTotalSubjects2(worksheet);
 
             result2.Formula = $"SUM({rangeToSum2.Address})";
-            CellCenter(totalSubjects2);
-            FontWeightBold(totalSubjects2);
+            CellCenter(result2);
+            FontWeightBold(result2);
 
-            var rangeToSum3 = worksheet.Cells["T33:T41"];
-            var result3 = worksheet.Cells["T42"];
+            var rangeToSum3 = worksheet.Cells["Q33:Q41"];
+            var result3 = worksheet.Cells["Q42"];
             ExcelRange totalSubjects3 = GetTotalSubjects3(worksheet);
 
             result3.Formula = $"SUM({rangeToSum3.Address})";
-            CellCenter(totalSubjects3);
-            FontWeightBold(totalSubjects3);
+            CellCenter(result3);
+            FontWeightBold(result3);
 
             #endregion
 
