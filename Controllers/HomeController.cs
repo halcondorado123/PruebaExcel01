@@ -129,11 +129,11 @@ namespace PruebaExcel01.Controllers
                 ConstructionHeaderTable(worksheet);
                 ContentTable(worksheet);
 
-                RecognizedCredits(worksheet);
-                ConditionLabels(worksheet);
-                StudentStatement(worksheet);
-                ContractArea(worksheet);
-                ApplyCellsFooter(worksheet);
+                //RecognizedCredits(worksheet);
+                //ConditionLabels(worksheet);
+                //StudentStatement(worksheet);
+                //ContractArea(worksheet);
+                //ApplyCellsFooter(worksheet);
 
                 #endregion
 
@@ -145,8 +145,6 @@ namespace PruebaExcel01.Controllers
 
             }
         }
-
-
 
 
         // Propiedades generales del texto
@@ -729,7 +727,7 @@ namespace PruebaExcel01.Controllers
 
             int row = 33;
             int column = 1;
-            int subjectsPerColumn = 15; // Cambiar de columna después de 9 elementos
+            int subjectsPerColumn = 34; // Cambiar de columna después de 30 elementos
             int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
 
             // Llena el archivo de Excel con los datos
@@ -737,10 +735,9 @@ namespace PruebaExcel01.Controllers
             {
                 if (subjectCount >= subjectsPerColumn)
                 {
-                    // Cambiar de columna después de 9 elementos (cuenta 8 y 9 como una sola celda)
-                    row = 33;
+                    // Cambiar de columna después de 30 elementos
                     column += 7; // Cambia a la siguiente columna
-
+                    row = 33; // Reinicia la fila
                     subjectCount = 0; // Reiniciar el contador
                 }
 
@@ -770,47 +767,12 @@ namespace PruebaExcel01.Controllers
 
                 subjectCount++;
             }
-        
-            ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 47, 21);
+
+            ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 66, 21);        // 100 Subjects
             CellCenter(celdasMaterias);
 
-            //    SubjectGenerator subjectGenerator = new SubjectGenerator();
-            //    AsignaturasME[] subjects = subjectGenerator.GenerateSubjects(listSubjects);
 
-            //    int initRow = 33;
-            //    int materiasPerColumn = 9;
-
-            //    try
-            //    {
-            //        for (int i = 0; i < subjects.Length; i++)
-            //        {
-            //            int rowNumber = initRow + (i % materiasPerColumn);
-
-            //            if (materiasPerColumn == 8)
-            //            {
-            //                int columnNumber = (i / materiasPerColumn) * 7 + 1;
-
-            //                if (i <= 8)
-            //                {
-            //                    subjects[i].InsertSubject(worksheet, rowNumber, columnNumber); // Llama a InsertSubject en el objeto AsignaturasME
-            //                }
-            //                else if (i >= 9 && i < 18)
-            //                {
-            //                    subjects[i].InsertSubjectColumn2(worksheet, rowNumber, columnNumber);
-            //                }
-            //                else if (i >= 18 && i < 27)
-            //                {
-            //                    subjects[i].InsertSubjectColumn3(worksheet, rowNumber, columnNumber);
-            //                }
-            //            }
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        ex.Message.ToString();
-            //    }
-
-
+            // ------------------------------------------- MODIFICAR DE AQUI A ABAJO ------------------------------------- //
 
 
             //HASTA ACA SE BORRA
@@ -995,8 +957,8 @@ namespace PruebaExcel01.Controllers
             WrapText(contextE);
         }
 
-        
-            //var labelPending = worksheet.Cells[45, 9];
+
+        //var labelPending = worksheet.Cells[45, 9];
 
         private void ContractArea(ExcelWorksheet worksheet)
         {
@@ -1035,10 +997,10 @@ namespace PruebaExcel01.Controllers
             StudentSignature(worksheet);
 
             var labelSignature3 = worksheet.Cells[74, 8]; // OK 
-            labelSignature3.Value = "Estudiante: "; 
+            labelSignature3.Value = "Estudiante: ";
 
             var labelSignature4 = worksheet.Cells[75, 8]; // OK 
-            labelSignature4.Value = "Nombre: "; 
+            labelSignature4.Value = "Nombre: ";
             var nameStudent = worksheet.Cells[75, 9];
             FontWeightBold(nameStudent);
             // TARGET
@@ -1062,13 +1024,13 @@ namespace PruebaExcel01.Controllers
             var cellFooter2 = worksheet.Cells[79, 1];
             cellFooter2.Value = "FECHA: "; // Convertir y generar valor dinámico
 
-                ExcelRange cellSpaceFooter1 = worksheet.Cells[78, 2, 78, 4];
-                MergedCells(cellSpaceFooter1);
-                // TARGET
+            ExcelRange cellSpaceFooter1 = worksheet.Cells[78, 2, 78, 4];
+            MergedCells(cellSpaceFooter1);
+            // TARGET
 
-                ExcelRange cellSpaceFooter2 = worksheet.Cells[79, 2, 79, 4];
-                MergedCells(cellSpaceFooter2);
-                // TARGET
+            ExcelRange cellSpaceFooter2 = worksheet.Cells[79, 2, 79, 4];
+            MergedCells(cellSpaceFooter2);
+            // TARGET
 
             var cellFooter3 = worksheet.Cells[78, 5];
             cellFooter3.Value = "ELABORÓ: "; // Convertir y generar valor dinámico
@@ -1076,13 +1038,13 @@ namespace PruebaExcel01.Controllers
             var cellFooter4 = worksheet.Cells[79, 5];
             cellFooter4.Value = "FECHA: "; // Convertir y generar valor dinámico
 
-                ExcelRange cellSpaceFooter3 = worksheet.Cells[78, 6, 78, 9];
-                MergedCells(cellSpaceFooter3);
-                // TARGET
+            ExcelRange cellSpaceFooter3 = worksheet.Cells[78, 6, 78, 9];
+            MergedCells(cellSpaceFooter3);
+            // TARGET
 
-                ExcelRange cellSpaceFooter4 = worksheet.Cells[79, 6, 79, 9];
-                MergedCells(cellSpaceFooter4);
-                // TARGET
+            ExcelRange cellSpaceFooter4 = worksheet.Cells[79, 6, 79, 9];
+            MergedCells(cellSpaceFooter4);
+            // TARGET
 
             var cellFooter5 = worksheet.Cells[78, 10];
             cellFooter5.Value = "ELABORÓ: "; // Convertir y generar valor dinámico
@@ -1090,13 +1052,17 @@ namespace PruebaExcel01.Controllers
             var cellFooter6 = worksheet.Cells[79, 10];
             cellFooter6.Value = "FECHA: "; // Convertir y generar valor dinámico
 
-                ExcelRange cellSpaceFooter5 = worksheet.Cells[78, 11, 78, 14];
-                MergedCells(cellSpaceFooter5);
-                // TARGET
+            ExcelRange cellSpaceFooter5 = worksheet.Cells[78, 11, 78, 14];
+            MergedCells(cellSpaceFooter5);
+            // TARGET
 
-                ExcelRange cellSpaceFooter6 = worksheet.Cells[79, 11, 79, 14];
-                MergedCells(cellSpaceFooter6);
-                // TARGET
+            ExcelRange cellSpaceFooter6 = worksheet.Cells[79, 11, 79, 14];
+            MergedCells(cellSpaceFooter6);
+            // TARGET
         }
+
+
+
+
     }
 }
