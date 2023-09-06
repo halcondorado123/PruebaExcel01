@@ -1023,6 +1023,17 @@ namespace PruebaExcel01.Models
                 CalificacionLiteral = new string[] { "CUATRO CINCO" },
                 Nivel = new string[] { "Técnico Profesional" }
             },
+
+            new AsignaturasME
+            {
+                Numero = new int?[] { 91 },
+                Asignatura = new string[] { "QUIMICA AEROESPACIAL tRIGONOMETRICA IV" },
+                Creditos = new int?[] { 8 },
+                Semestre = new int?[] { 7 },
+                CalificacionNumerica = new double?[] { 4.5 },
+                CalificacionLiteral = new string[] { "CUATRO CINCO" },
+                Nivel = new string[] { "Técnico Profesional" }
+            }
         };
 
 

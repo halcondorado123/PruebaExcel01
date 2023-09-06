@@ -32,27 +32,22 @@ namespace PruebaExcel01.Controllers
                     subjectCount = 0; // Reiniciar el contador
                 }
 
-                if (row == 32 && column == 12)
-                {
-                    // Mueve el valor que debería estar en la columna 12 a la columna 13
-                    worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-                }
-                else if (row == 32 && column == 16)
-                {
-                    // Mueve el valor que debería estar en la columna 16 a la columna 17
-                    worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-                }
-                else
-                {
-                    worksheet.Cells[row, column].Value = subject.Numero[0];
-                }
+                //if (row == 32 && column == 12)
+                //{
+                //    // Mueve el valor que debería estar en la columna 12 a la columna 13
+                //    worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+                //}
+                //else if (row == 32 && column == 16)
+                //{
+                //    // Mueve el valor que debería estar en la columna 16 a la columna 17
+                //    worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+                //}
+                //else
+                //{
 
-                worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
-                worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
-                worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
-                worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
-                worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
-                worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
+                //}
+
+
 
                 row++; // Avanzar una fila
 

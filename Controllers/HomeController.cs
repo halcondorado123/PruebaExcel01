@@ -144,8 +144,8 @@ namespace PruebaExcel01.Controllers
 
                 #endregion
 
-
-                var filePath = @"C:\Users\Usuario\Downloads\" + nombreArchivo;
+                //var filePath = @"C:\Users\Usuario\Downloads\" + nombreArchivo;
+                var filePath = @"C:\Users\Jhonattan_Casallas\Downloads\" + nombreArchivo;
                 package.SaveAs(new System.IO.FileInfo(filePath));
 
                 return File(filePath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nombreArchivo);
@@ -273,6 +273,26 @@ namespace PruebaExcel01.Controllers
         }
         #endregion
 
+        private void AssignSubjectsToWorksheet(ExcelWorksheet worksheet, int row, int column, AsignaturasME subject)
+        {
+            worksheet.Cells[row, column].Value = subject.Numero[0];
+            worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
+            worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
+            worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
+            worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
+            worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
+            worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
+        }
+
+
+
+
+
+
+
+
+
+
 
         // Seleccion de celdas por rango
         public static ExcelRange GetExcelRange(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn)
@@ -284,7 +304,8 @@ namespace PruebaExcel01.Controllers
         #region ImagesDocument
         private void AddLogo(ExcelWorksheet worksheet)
         {
-            string imagePathLogo = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\log1.png";
+            //string imagePathLogo = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\log1.png";
+            string imagePathLogo = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\log1.png";
             int widthLogoInPixels = 300;
             int heightLogoInPixels = 110;
 
@@ -299,7 +320,8 @@ namespace PruebaExcel01.Controllers
         {
             // Por asignar una biblioteca de imagenes de firmas de jefes de programa
             // Valor quemado
-            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
+            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
+            //string imagePathSignature = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\lennon_signature.jpg";
             int widthSignatureInPixels = 230;
             int heightSignatureInPixels = 70;
 
@@ -314,7 +336,8 @@ namespace PruebaExcel01.Controllers
         private void StudentSignature(ExcelWorksheet worksheet)
         {
             // Valor quemado, por evaluar la opcion de firma generada por parte del estudiante
-            string imagePathSignature = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
+            //string imagePathSignature = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
+            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
             int widthSignatureInPixels = 230;
             int heightSignatureInPixels = 70;
 
@@ -727,205 +750,68 @@ namespace PruebaExcel01.Controllers
         }
 
 
-        private void ContentTable(ExcelWorksheet worksheet)
-        {
-
-            // AJUSTE DE ASIGNATURAS POR 102 CELDAS (MAXIMUM) ----------------------------------------- //
-            //AsignaturasME asignaturasME = new AsignaturasME();
-            //List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
-
-            //int row = 33;
-            //int column = 1;
-            //int subjectsPerColumn = 34; // Cambiar de columna después de 30 elementos
-            //int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
-
-            //// Llena el archivo de Excel con los datos
-            //foreach (var subject in subjects)
-            //{
-            //    if (subjectCount >= subjectsPerColumn)
-            //    {
-            //        // Cambiar de columna después de 30 elementos
-            //        column += 7; // Cambia a la siguiente columna
-            //        row = 33; // Reinicia la fila
-            //        subjectCount = 0; // Reiniciar el contador
-            //    }
-
-            //    if (row == 32 && column == 12)
-            //    {
-            //        // Mueve el valor que debería estar en la columna 12 a la columna 13
-            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-            //    }
-            //    else if (row == 32 && column == 16)
-            //    {
-            //        // Mueve el valor que debería estar en la columna 16 a la columna 17
-            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-            //    }
-            //    else
-            //    {
-            //        worksheet.Cells[row, column].Value = subject.Numero[0];
-            //    }
-
-            //    worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
-            //    worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
-            //    worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
-            //    worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
-            //    worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
-            //    worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
-
-            //    row++; // Avanzar una fila
-
-            //    subjectCount++;
-            //}
-
-            //ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 66, 21);        // 100 Subjects
-            //CellCenter(celdasMaterias);
-
-
-
-            // AJUSTE DE ASIGNATURAS POR 75 CELDAS (BIG) ----------------------------------------- //
-            //AsignaturasME asignaturasME = new AsignaturasME();
-            //List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
-
-            //int row = 33;
-            //int column = 1;
-            //int subjectsPerColumn = 25; // Cambiar de columna después de 30 elementos
-            //int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
-
-            //// Llena el archivo de Excel con los datos
-            //foreach (var subject in subjects)
-            //{
-            //    if (subjectCount >= subjectsPerColumn)
-            //    {
-            //        // Cambiar de columna después de 30 elementos
-            //        column += 7; // Cambia a la siguiente columna
-            //        row = 33; // Reinicia la fila
-            //        subjectCount = 0; // Reiniciar el contador
-            //    }
-
-            //    if (row == 32 && column == 12)
-            //    {
-            //        // Mueve el valor que debería estar en la columna 12 a la columna 13
-            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-            //    }
-            //    else if (row == 32 && column == 16)
-            //    {
-            //        // Mueve el valor que debería estar en la columna 16 a la columna 17
-            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-            //    }
-            //    else
-            //    {
-            //        worksheet.Cells[row, column].Value = subject.Numero[0];
-            //    }
-
-            //    worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
-            //    worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
-            //    worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
-            //    worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
-            //    worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
-            //    worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
-
-            //    row++; // Avanzar una fila
-
-            //    subjectCount++;
-            //}
-
-            // AJUSTE DE ASIGNATURAS POR 54 CELDAS (MEDIUM) ----------------------------------------- //
-            //AsignaturasME asignaturasME = new AsignaturasME();
-            //List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
-
-            //int row = 33;
-            //int column = 1;
-            //int subjectsPerColumn = 18; // Cambiar de columna después de 30 elementos
-            //int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
-
-            //// Llena el archivo de Excel con los datos
-            //foreach (var subject in subjects)
-            //{
-            //    if (subjectCount >= subjectsPerColumn)
-            //    {
-            //        // Cambiar de columna después de 30 elementos
-            //        column += 7; // Cambia a la siguiente columna
-            //        row = 33; // Reinicia la fila
-            //        subjectCount = 0; // Reiniciar el contador
-            //    }
-
-            //    if (row == 32 && column == 12)
-            //    {
-            //        // Mueve el valor que debería estar en la columna 12 a la columna 13
-            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-            //    }
-            //    else if (row == 32 && column == 16)
-            //    {
-            //        // Mueve el valor que debería estar en la columna 16 a la columna 17
-            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-            //    }
-            //    else
-            //    {
-            //        worksheet.Cells[row, column].Value = subject.Numero[0];
-            //    }
-
-            //    worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
-            //    worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
-            //    worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
-            //    worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
-            //    worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
-            //    worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
-
-            //    row++; // Avanzar una fila
-
-            //    subjectCount++;
-            //}
-
-            // AJUSTE DE ASIGNATURAS POR 30 CELDAS (TINY) ----------------------------------------- //
-            AsignaturasME asignaturasME = new AsignaturasME();
-            List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
-
-            int row = 33;
-            int column = 1;
-            int subjectsPerColumn = 10; // Cambiar de columna después de 30 elementos
-            int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
-
-            // Llena el archivo de Excel con los datos
-            foreach (var subject in subjects)
+            // Obtener la lista de asignaturas
+            private void ContentTable(ExcelWorksheet worksheet)
             {
-                if (subjectCount >= subjectsPerColumn)
+
+                List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
+                int row = 33;
+                int column = 1;
+                int subjectCount = 0;
+                int totalSubjects = subjects.Count;
+                int SubjectsPerColumn = 10;
+
+
+                if (totalSubjects <= 30)
                 {
-                    // Cambiar de columna después de 30 elementos
-                    column += 7; // Cambia a la siguiente columna
-                    row = 33; // Reinicia la fila
-                    subjectCount = 0; // Reiniciar el contador
+                    SubjectsPerColumn = 10; // Cambiar el límite si hay menos de 50 arreglos
+                }
+                else if (totalSubjects > 30 && totalSubjects <= 50)
+                {
+                    SubjectsPerColumn = 16; // Cambiar el límite si hay entre 51 y 100 arreglos
                 }
 
-                if (row == 32 && column == 12)
+                else if (totalSubjects > 50 && totalSubjects <= 70)
                 {
-                    // Mueve el valor que debería estar en la columna 12 a la columna 13
-                    worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-                }
-                else if (row == 32 && column == 16)
-                {
-                    // Mueve el valor que debería estar en la columna 16 a la columna 17
-                    worksheet.Cells[row, column + 1].Value = subject.Numero[0];
-                }
-                else
-                {
-                    worksheet.Cells[row, column].Value = subject.Numero[0];
+                    SubjectsPerColumn = 24; // Cambiar el límite si hay entre 51 y 100 arreglos
                 }
 
-                worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
-                worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
-                worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
-                worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
-                worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
-                worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
+                else if (totalSubjects > 70 && totalSubjects <= 90)
+                {
+                    SubjectsPerColumn = 30; // Cambiar el límite si hay entre 51 y 100 arreglos
+                }
 
-                row++; // Avanzar una fila
+                else if (totalSubjects > 90 && totalSubjects <= 110)
+                {
+                    SubjectsPerColumn = 40; // Cambiar el límite si hay entre 51 y 100 arreglos
+                }
 
-                subjectCount++;
-            }
+            else if (totalSubjects > 0 && totalSubjects <= 60)
+                {
+                    SubjectsPerColumn = 14; // Cambiar el límite si hay entre 51 y 100 arreglos
+                }
+
+
+            foreach (var subject in subjects)
+                {
+                    if (subjectCount >= SubjectsPerColumn)
+                    {
+                        column += 7;
+                        row = 33;
+                        subjectCount = 0;
+                    }
+
+                    AssignSubjectsToWorksheet(worksheet, row, column, subject);
+
+                    row++;
+                    subjectCount++;
+                }
 
 
 
-            ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 66, 21);        // 100 Subjects
+
+
+                ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 66, 21);        // 100 Subjects
             CellCenter(celdasMaterias);
 
 
@@ -969,7 +855,7 @@ namespace PruebaExcel01.Controllers
 
             #endregion
 
-        }
+            }
 
         private void RecognizedCredits(ExcelWorksheet worksheet)
         {
