@@ -97,18 +97,25 @@ namespace PruebaExcel01.Controllers
                                     41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
                                     51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
                                     61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
-                                    71, 72, 73, 74, 75, 76, 77, 78, 79, 80};
+                                    71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
+                                    81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+                                    91, 92, 93, 94, 95, 96, 97, 98, 99, 100,
+                                    101, 102, 103, 104, 105, 106, 107, 108, 109, 110
+                };
 
                 double[] rowHeights = {12.60, 13.20, 12.60, 12.60, 25.20, 12.60, 12.60, 25.20, 12.60, 38.40,
                                         37.20, 12.60, 12.60, 21.00, 24.00, 15.60, 12.60, 33.60, 12.60, 25.20,
                                         12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
-                                        51.00, 12.60, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20,
-                                        25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 25.20, 12.60, 12.60,
-                                        15.60, 15.60, 16.20, 16.20, 16.20, 12.60, 55.80, 18.60, 24.60, 19.20,
-                                        12.60, 12.60, 12.60, 12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60,
+                                        51.00, 12.60, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
+                                        26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
+                                        26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
+                                        26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 12.60, 12.60, 12.60, 12.60,
+                                        12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
+                                        12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
+                                        12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
                                         12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60};
 
-                for (int i = 0; i < rowIndices.Length; i++)
+            for (int i = 0; i < rowIndices.Length; i++)
                 {
                     int rowIndex = rowIndices[i];
                     double rowHeight = rowHeights[i];
@@ -138,7 +145,7 @@ namespace PruebaExcel01.Controllers
                 #endregion
 
 
-                var filePath = @"C:\Users\Jhonattan_Casallas\Downloads\" + nombreArchivo;
+                var filePath = @"C:\Users\Usuario\Downloads\" + nombreArchivo;
                 package.SaveAs(new System.IO.FileInfo(filePath));
 
                 return File(filePath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nombreArchivo);
@@ -277,7 +284,7 @@ namespace PruebaExcel01.Controllers
         #region ImagesDocument
         private void AddLogo(ExcelWorksheet worksheet)
         {
-            string imagePathLogo = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\log1.png";
+            string imagePathLogo = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\log1.png";
             int widthLogoInPixels = 300;
             int heightLogoInPixels = 110;
 
@@ -307,7 +314,7 @@ namespace PruebaExcel01.Controllers
         private void StudentSignature(ExcelWorksheet worksheet)
         {
             // Valor quemado, por evaluar la opcion de firma generada por parte del estudiante
-            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
+            string imagePathSignature = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
             int widthSignatureInPixels = 230;
             int heightSignatureInPixels = 70;
 
@@ -722,12 +729,160 @@ namespace PruebaExcel01.Controllers
 
         private void ContentTable(ExcelWorksheet worksheet)
         {
+
+            // AJUSTE DE ASIGNATURAS POR 102 CELDAS (MAXIMUM) ----------------------------------------- //
+            //AsignaturasME asignaturasME = new AsignaturasME();
+            //List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
+
+            //int row = 33;
+            //int column = 1;
+            //int subjectsPerColumn = 34; // Cambiar de columna después de 30 elementos
+            //int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
+
+            //// Llena el archivo de Excel con los datos
+            //foreach (var subject in subjects)
+            //{
+            //    if (subjectCount >= subjectsPerColumn)
+            //    {
+            //        // Cambiar de columna después de 30 elementos
+            //        column += 7; // Cambia a la siguiente columna
+            //        row = 33; // Reinicia la fila
+            //        subjectCount = 0; // Reiniciar el contador
+            //    }
+
+            //    if (row == 32 && column == 12)
+            //    {
+            //        // Mueve el valor que debería estar en la columna 12 a la columna 13
+            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+            //    }
+            //    else if (row == 32 && column == 16)
+            //    {
+            //        // Mueve el valor que debería estar en la columna 16 a la columna 17
+            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+            //    }
+            //    else
+            //    {
+            //        worksheet.Cells[row, column].Value = subject.Numero[0];
+            //    }
+
+            //    worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
+            //    worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
+            //    worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
+            //    worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
+            //    worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
+            //    worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
+
+            //    row++; // Avanzar una fila
+
+            //    subjectCount++;
+            //}
+
+            //ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 66, 21);        // 100 Subjects
+            //CellCenter(celdasMaterias);
+
+
+
+            // AJUSTE DE ASIGNATURAS POR 75 CELDAS (BIG) ----------------------------------------- //
+            //AsignaturasME asignaturasME = new AsignaturasME();
+            //List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
+
+            //int row = 33;
+            //int column = 1;
+            //int subjectsPerColumn = 25; // Cambiar de columna después de 30 elementos
+            //int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
+
+            //// Llena el archivo de Excel con los datos
+            //foreach (var subject in subjects)
+            //{
+            //    if (subjectCount >= subjectsPerColumn)
+            //    {
+            //        // Cambiar de columna después de 30 elementos
+            //        column += 7; // Cambia a la siguiente columna
+            //        row = 33; // Reinicia la fila
+            //        subjectCount = 0; // Reiniciar el contador
+            //    }
+
+            //    if (row == 32 && column == 12)
+            //    {
+            //        // Mueve el valor que debería estar en la columna 12 a la columna 13
+            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+            //    }
+            //    else if (row == 32 && column == 16)
+            //    {
+            //        // Mueve el valor que debería estar en la columna 16 a la columna 17
+            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+            //    }
+            //    else
+            //    {
+            //        worksheet.Cells[row, column].Value = subject.Numero[0];
+            //    }
+
+            //    worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
+            //    worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
+            //    worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
+            //    worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
+            //    worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
+            //    worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
+
+            //    row++; // Avanzar una fila
+
+            //    subjectCount++;
+            //}
+
+            // AJUSTE DE ASIGNATURAS POR 54 CELDAS (MEDIUM) ----------------------------------------- //
+            //AsignaturasME asignaturasME = new AsignaturasME();
+            //List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
+
+            //int row = 33;
+            //int column = 1;
+            //int subjectsPerColumn = 18; // Cambiar de columna después de 30 elementos
+            //int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
+
+            //// Llena el archivo de Excel con los datos
+            //foreach (var subject in subjects)
+            //{
+            //    if (subjectCount >= subjectsPerColumn)
+            //    {
+            //        // Cambiar de columna después de 30 elementos
+            //        column += 7; // Cambia a la siguiente columna
+            //        row = 33; // Reinicia la fila
+            //        subjectCount = 0; // Reiniciar el contador
+            //    }
+
+            //    if (row == 32 && column == 12)
+            //    {
+            //        // Mueve el valor que debería estar en la columna 12 a la columna 13
+            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+            //    }
+            //    else if (row == 32 && column == 16)
+            //    {
+            //        // Mueve el valor que debería estar en la columna 16 a la columna 17
+            //        worksheet.Cells[row, column + 1].Value = subject.Numero[0];
+            //    }
+            //    else
+            //    {
+            //        worksheet.Cells[row, column].Value = subject.Numero[0];
+            //    }
+
+            //    worksheet.Cells[row, column + 1].Value = subject.Asignatura[0];
+            //    worksheet.Cells[row, column + 2].Value = subject.Creditos[0];
+            //    worksheet.Cells[row, column + 3].Value = subject.Semestre[0];
+            //    worksheet.Cells[row, column + 4].Value = subject.CalificacionNumerica[0];
+            //    worksheet.Cells[row, column + 5].Value = subject.CalificacionLiteral[0];
+            //    worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
+
+            //    row++; // Avanzar una fila
+
+            //    subjectCount++;
+            //}
+
+            // AJUSTE DE ASIGNATURAS POR 30 CELDAS (TINY) ----------------------------------------- //
             AsignaturasME asignaturasME = new AsignaturasME();
             List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
 
             int row = 33;
             int column = 1;
-            int subjectsPerColumn = 34; // Cambiar de columna después de 30 elementos
+            int subjectsPerColumn = 10; // Cambiar de columna después de 30 elementos
             int subjectCount = 0; // Contador para llevar el seguimiento de los elementos en una columna
 
             // Llena el archivo de Excel con los datos
@@ -768,41 +923,44 @@ namespace PruebaExcel01.Controllers
                 subjectCount++;
             }
 
+
+
             ExcelRange celdasMaterias = GetExcelRange(worksheet, 33, 1, 66, 21);        // 100 Subjects
             CellCenter(celdasMaterias);
 
 
+
+
+
             // ------------------------------------------- MODIFICAR DE AQUI A ABAJO ------------------------------------- //
 
-
-            //HASTA ACA SE BORRA
-
             #region ResultSubjects
+            // RANGO DE 34 CELDAS POR 3 COLUMNAS 
 
-            ExcelRange LabelTotals = GetExcelRange(worksheet, 48, 1, 48, 2);
+            ExcelRange LabelTotals = GetExcelRange(worksheet, 67, 1, 67, 2);
             LabelTotals.Value = "TOTALES";
             MergedCells(LabelTotals);
             CellCenter(LabelTotals);
             FontWeightBold(LabelTotals);
 
-            var rangeToSum1 = worksheet.Cells["C33:C47"];
-            var result1 = worksheet.Cells["C48"];
+            var rangeToSum1 = worksheet.Cells["C33:C66"];
+            var result1 = worksheet.Cells["C67"];
             ExcelRange totalSubjects1 = GetTotalSubjects1(worksheet);
 
             result1.Formula = $"SUM({rangeToSum1.Address})";
             CellCenter(result1);
             FontWeightBold(result1);
 
-            var rangeToSum2 = worksheet.Cells["J33:J47"];
-            var result2 = worksheet.Cells["J48"];
+            var rangeToSum2 = worksheet.Cells["J33:J66"];
+            var result2 = worksheet.Cells["J67"];
             ExcelRange totalSubjects2 = GetTotalSubjects2(worksheet);
 
             result2.Formula = $"SUM({rangeToSum2.Address})";
             CellCenter(result2);
             FontWeightBold(result2);
 
-            var rangeToSum3 = worksheet.Cells["Q33:Q47"];
-            var result3 = worksheet.Cells["Q48"];
+            var rangeToSum3 = worksheet.Cells["Q33:Q66"];
+            var result3 = worksheet.Cells["Q67"];
             ExcelRange totalSubjects3 = GetTotalSubjects3(worksheet);
 
             result3.Formula = $"SUM({rangeToSum3.Address})";
@@ -842,6 +1000,21 @@ namespace PruebaExcel01.Controllers
             MergedCells(LabelTotalMaterias);
             CellCenter(LabelTotalMaterias);
             FontWeightBold(LabelTotalMaterias);
+
+            // ¡OJO! Esta funcion puede llegar a simplificar el texto, merged y otras funciones del codigo
+
+            //// Función para configurar y mezclar celdas
+            //void ConfigureAndMergeCell(ExcelWorksheet worksheet, int startRow, int startCol, int endRow, int endCol, string value)
+            //{
+            //    ExcelRange cell = GetExcelRange(worksheet, startRow, startCol, endRow, endCol);
+            //    MergedCells(cell);
+            //    cell.Value = value;
+            //}
+
+            //// Llamadas a la función para configurar las celdas
+            //ConfigureAndMergeCell(worksheet, 53, 1, 53, 4, "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL TÉCNICO PROFESIONAL");
+            //ConfigureAndMergeCell(worksheet, 54, 1, 54, 4, "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL TECNOLÓGICO");
+            //ConfigureAndMergeCell(worksheet, 55, 1, 55, 4, "TOTAL CRÉDITOS RECONOCIDOS PARA EL NIVEL PROFESIONAL");
 
 
             var sumCellTotals = worksheet.Cells["E51"];
