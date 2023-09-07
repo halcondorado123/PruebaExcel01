@@ -318,722 +318,722 @@ namespace PruebaExcel01.Models
             },
 
 
-            new AsignaturasME
-            {
-                Numero = new int?[] { 27 },
-                Asignatura = new string[] { "MATERIA EXTRA 1" },
-                Creditos = new int?[] { 4 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 28 },
-                Asignatura = new string[] { "MATERIA EXTRA 2" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 29 },
-                Asignatura = new string[] { "MATERIA EXTRA 3" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-           new AsignaturasME
-            {
-                Numero = new int?[] { 30 },
-                Asignatura = new string[] { "MATERIA EXTRA 4" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-                {
-                    Numero = new int?[]{ 31 },
-                    Asignatura = new string[] {"LÓGICA Y PENSAMIENTO MATEMÁTICO"},
-                    Creditos = new int?[] { 2 },
-                    Semestre = new int?[] { 1 },
-                    CalificacionNumerica = new double?[] { 4.5 },
-                    CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                    Nivel = new string[] { "Técnico Profesional" }
-                },
-
-                new AsignaturasME
-                {
-                    Numero = new int?[] { 32 },
-                    Asignatura = new string[] { "PROYECTO DE VIDA" },
-                    Creditos =  new int?[] { 2 },
-                    Semestre = new int?[] { 1 },
-                    CalificacionNumerica = new double?[] { 4.5 },
-                    CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                    Nivel = new string[] { "Técnico Profesional" }
-                },
-
-                new AsignaturasME
-                {
-                    Numero = new int?[] { 33 },
-                    Asignatura = new string[] { "INFORMATICA Y CONVERGENCIA TECNOLÓGICA" },
-                    Creditos = new int?[] { 2 },
-                    Semestre = new int?[] { 1 },
-                    CalificacionNumerica = new double?[] { 4.5 },
-                    CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                    Nivel = new string[] { "Técnico Profesional" }
-                },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 34 },
-                Asignatura = new string[] { "TERMINOLOGÍA DE LA SEGURIDAD SOCIAL" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 35 },
-                Asignatura = new string[] { "HABILIDADES COMUNICATIVAS" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 36 },
-                Asignatura = new string[] { "FUNDAMENTOS DE ADMINISTRACIÓN" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 37 },
-                Asignatura = new string[] { "ATENCIÓN AL USUARIO" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 38 },
-                Asignatura = new string[] { "CONTABILIDAD BÁSICA" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 39 },
-                Asignatura = new string[] { "EXPLORAR PARA INVESTIGAR" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 40 },
-                Asignatura = new string[] { "MATEMATICA 1" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 41 },
-                Asignatura = new string[] { "CONTABILIDAD DE ENTIDADES DE SALUD" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 42 },
-                Asignatura = new string[] { "ADMINISTRACIÓN PÚBLICA DE SERVICIOS DE SALUD" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 43 },
-                Asignatura = new string[] { "SISTEMAS DE INFORMACIÓN EN SALUD" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 44 },
-                Asignatura = new string[] { "FUNDAMENTOS DE ECONOMIA" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 45 },
-                Asignatura = new string[] { "ELECTIVA DE FORMACION INTEGRAL I" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 46 },
-                Asignatura = new string[] { "MERCADEO EN EMPRESAS DE SALUD" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 47 },
-                Asignatura = new string[] { "SALUD Y SEGURIDAD SOCIAL" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 48 },
-                Asignatura = new string[] { "ESTADISTICA I" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 49 },
-                Asignatura = new string[] { "ANÁLISIS DE LA SALUD" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 50 },
-                Asignatura = new string[] { "LEGISLACIÓN LABORAL" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 51 },
-                Asignatura = new string[] { "OPCIÓN DE GRADO TÉCNICO" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 52 },
-                Asignatura = new string[] { "PRÁCTICA TÉCNICO PROFESIONAL" },
-                Creditos = new int?[] { 1 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 53 },
-                Asignatura = new string[] { "ELECTIVA DE PROFUNDIZACIÓN 1" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 54 },
-                Asignatura = new string[] { "GESTIÓN DE LA PRODUCCIÓN DE SERVICIOS DE SALUD" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 55 },
-                Asignatura = new string[] { "GESTIÓN DE SUMINISTROS EN SALUD (OPCIÓN PROP)" },
-                Creditos = new int?[] { 0 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 56 },
-                Asignatura = new string[] { "CÁTEDRA DE PENSAMIENTO CUNISTA I" },
-                Creditos = new int?[] { 1 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 57 },
-                Asignatura = new string[] { "MATERIA EXTRA 1" },
-                Creditos = new int?[] { 4 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 58 },
-                Asignatura = new string[] { "MATERIA EXTRA 2" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 59 },
-                Asignatura = new string[] { "MATERIA EXTRA 3" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-           new AsignaturasME
-            {
-                Numero = new int?[] { 60 },
-                Asignatura = new string[] { "MATERIA EXTRA 4" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-                {
-                    Numero = new int?[]{ 61 },
-                    Asignatura = new string[] {"LÓGICA Y PENSAMIENTO MATEMÁTICO"},
-                    Creditos = new int?[] { 2 },
-                    Semestre = new int?[] { 1 },
-                    CalificacionNumerica = new double?[] { 4.5 },
-                    CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                    Nivel = new string[] { "Técnico Profesional" }
-                },
-
-                new AsignaturasME
-                {
-                    Numero = new int?[] { 62 },
-                    Asignatura = new string[] { "PROYECTO DE VIDA" },
-                    Creditos =  new int?[] { 2 },
-                    Semestre = new int?[] { 1 },
-                    CalificacionNumerica = new double?[] { 4.5 },
-                    CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                    Nivel = new string[] { "Técnico Profesional" }
-                },
-
-                new AsignaturasME
-                {
-                    Numero = new int?[] { 63 },
-                    Asignatura = new string[] { "INFORMATICA Y CONVERGENCIA TECNOLÓGICA" },
-                    Creditos = new int?[] { 2 },
-                    Semestre = new int?[] { 1 },
-                    CalificacionNumerica = new double?[] { 4.5 },
-                    CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                    Nivel = new string[] { "Técnico Profesional" }
-                },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 64 },
-                Asignatura = new string[] { "TERMINOLOGÍA DE LA SEGURIDAD SOCIAL" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 65 },
-                Asignatura = new string[] { "HABILIDADES COMUNICATIVAS" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 66 },
-                Asignatura = new string[] { "FUNDAMENTOS DE ADMINISTRACIÓN" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 67 },
-                Asignatura = new string[] { "ATENCIÓN AL USUARIO" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 68 },
-                Asignatura = new string[] { "CONTABILIDAD BÁSICA" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 1 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 69 },
-                Asignatura = new string[] { "EXPLORAR PARA INVESTIGAR" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 70 },
-                Asignatura = new string[] { "MATEMATICA 1" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 71 },
-                Asignatura = new string[] { "CONTABILIDAD DE ENTIDADES DE SALUD" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 72 },
-                Asignatura = new string[] { "ADMINISTRACIÓN PÚBLICA DE SERVICIOS DE SALUD" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 73 },
-                Asignatura = new string[] { "SISTEMAS DE INFORMACIÓN EN SALUD" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 74 },
-                Asignatura = new string[] { "FUNDAMENTOS DE ECONOMIA" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 75 },
-                Asignatura = new string[] { "ELECTIVA DE FORMACION INTEGRAL I" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 76 },
-                Asignatura = new string[] { "MERCADEO EN EMPRESAS DE SALUD" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 2 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 77 },
-                Asignatura = new string[] { "SALUD Y SEGURIDAD SOCIAL" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 78 },
-                Asignatura = new string[] { "ESTADISTICA I" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 79 },
-                Asignatura = new string[] { "ANÁLISIS DE LA SALUD" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 80 },
-                Asignatura = new string[] { "LEGISLACIÓN LABORAL" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 81 },
-                Asignatura = new string[] { "OPCIÓN DE GRADO TÉCNICO" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 82 },
-                Asignatura = new string[] { "PRÁCTICA TÉCNICO PROFESIONAL" },
-                Creditos = new int?[] { 1 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 83 },
-                Asignatura = new string[] { "ELECTIVA DE PROFUNDIZACIÓN 1" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 84 },
-                Asignatura = new string[] { "GESTIÓN DE LA PRODUCCIÓN DE SERVICIOS DE SALUD" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 85 },
-                Asignatura = new string[] { "GESTIÓN DE SUMINISTROS EN SALUD (OPCIÓN PROP)" },
-                Creditos = new int?[] { 0 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 86 },
-                Asignatura = new string[] { "CÁTEDRA DE PENSAMIENTO CUNISTA I" },
-                Creditos = new int?[] { 1 },
-                Semestre = new int?[] { 3 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 87 },
-                Asignatura = new string[] { "MATERIA EXTRA 1" },
-                Creditos = new int?[] { 4 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 88 },
-                Asignatura = new string[] { "MATERIA EXTRA 2" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 89 },
-                Asignatura = new string[] { "MATERIA EXTRA 3" },
-                Creditos = new int?[] { 3 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-           new AsignaturasME
-            {
-                Numero = new int?[] { 90 },
-                Asignatura = new string[] { "MATERIA EXTRA 4" },
-                Creditos = new int?[] { 2 },
-                Semestre = new int?[] { 4 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            },
-
-            new AsignaturasME
-            {
-                Numero = new int?[] { 91 },
-                Asignatura = new string[] { "QUIMICA AEROESPACIAL tRIGONOMETRICA IV" },
-                Creditos = new int?[] { 8 },
-                Semestre = new int?[] { 7 },
-                CalificacionNumerica = new double?[] { 4.5 },
-                CalificacionLiteral = new string[] { "CUATRO CINCO" },
-                Nivel = new string[] { "Técnico Profesional" }
-            }
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 27 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 1" },
+           //     Creditos = new int?[] { 4 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 28 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 2" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 29 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 3" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           //new AsignaturasME
+           // {
+           //     Numero = new int?[] { 30 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 4" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           //     {
+           //         Numero = new int?[]{ 31 },
+           //         Asignatura = new string[] {"LÓGICA Y PENSAMIENTO MATEMÁTICO"},
+           //         Creditos = new int?[] { 2 },
+           //         Semestre = new int?[] { 1 },
+           //         CalificacionNumerica = new double?[] { 4.5 },
+           //         CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //         Nivel = new string[] { "Técnico Profesional" }
+           //     },
+
+           //     new AsignaturasME
+           //     {
+           //         Numero = new int?[] { 32 },
+           //         Asignatura = new string[] { "PROYECTO DE VIDA" },
+           //         Creditos =  new int?[] { 2 },
+           //         Semestre = new int?[] { 1 },
+           //         CalificacionNumerica = new double?[] { 4.5 },
+           //         CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //         Nivel = new string[] { "Técnico Profesional" }
+           //     },
+
+           //     new AsignaturasME
+           //     {
+           //         Numero = new int?[] { 33 },
+           //         Asignatura = new string[] { "INFORMATICA Y CONVERGENCIA TECNOLÓGICA" },
+           //         Creditos = new int?[] { 2 },
+           //         Semestre = new int?[] { 1 },
+           //         CalificacionNumerica = new double?[] { 4.5 },
+           //         CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //         Nivel = new string[] { "Técnico Profesional" }
+           //     },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 34 },
+           //     Asignatura = new string[] { "TERMINOLOGÍA DE LA SEGURIDAD SOCIAL" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 35 },
+           //     Asignatura = new string[] { "HABILIDADES COMUNICATIVAS" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 36 },
+           //     Asignatura = new string[] { "FUNDAMENTOS DE ADMINISTRACIÓN" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 37 },
+           //     Asignatura = new string[] { "ATENCIÓN AL USUARIO" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 38 },
+           //     Asignatura = new string[] { "CONTABILIDAD BÁSICA" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 39 },
+           //     Asignatura = new string[] { "EXPLORAR PARA INVESTIGAR" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 40 },
+           //     Asignatura = new string[] { "MATEMATICA 1" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 41 },
+           //     Asignatura = new string[] { "CONTABILIDAD DE ENTIDADES DE SALUD" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 42 },
+           //     Asignatura = new string[] { "ADMINISTRACIÓN PÚBLICA DE SERVICIOS DE SALUD" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 43 },
+           //     Asignatura = new string[] { "SISTEMAS DE INFORMACIÓN EN SALUD" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 44 },
+           //     Asignatura = new string[] { "FUNDAMENTOS DE ECONOMIA" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 45 },
+           //     Asignatura = new string[] { "ELECTIVA DE FORMACION INTEGRAL I" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 46 },
+           //     Asignatura = new string[] { "MERCADEO EN EMPRESAS DE SALUD" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 47 },
+           //     Asignatura = new string[] { "SALUD Y SEGURIDAD SOCIAL" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 48 },
+           //     Asignatura = new string[] { "ESTADISTICA I" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 49 },
+           //     Asignatura = new string[] { "ANÁLISIS DE LA SALUD" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 50 },
+           //     Asignatura = new string[] { "LEGISLACIÓN LABORAL" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 51 },
+           //     Asignatura = new string[] { "OPCIÓN DE GRADO TÉCNICO" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 52 },
+           //     Asignatura = new string[] { "PRÁCTICA TÉCNICO PROFESIONAL" },
+           //     Creditos = new int?[] { 1 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 53 },
+           //     Asignatura = new string[] { "ELECTIVA DE PROFUNDIZACIÓN 1" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 54 },
+           //     Asignatura = new string[] { "GESTIÓN DE LA PRODUCCIÓN DE SERVICIOS DE SALUD" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 55 },
+           //     Asignatura = new string[] { "GESTIÓN DE SUMINISTROS EN SALUD (OPCIÓN PROP)" },
+           //     Creditos = new int?[] { 0 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 56 },
+           //     Asignatura = new string[] { "CÁTEDRA DE PENSAMIENTO CUNISTA I" },
+           //     Creditos = new int?[] { 1 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 57 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 1" },
+           //     Creditos = new int?[] { 4 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 58 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 2" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 59 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 3" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           //new AsignaturasME
+           // {
+           //     Numero = new int?[] { 60 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 4" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           //     {
+           //         Numero = new int?[]{ 61 },
+           //         Asignatura = new string[] {"LÓGICA Y PENSAMIENTO MATEMÁTICO"},
+           //         Creditos = new int?[] { 2 },
+           //         Semestre = new int?[] { 1 },
+           //         CalificacionNumerica = new double?[] { 4.5 },
+           //         CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //         Nivel = new string[] { "Técnico Profesional" }
+           //     },
+
+           //     new AsignaturasME
+           //     {
+           //         Numero = new int?[] { 62 },
+           //         Asignatura = new string[] { "PROYECTO DE VIDA" },
+           //         Creditos =  new int?[] { 2 },
+           //         Semestre = new int?[] { 1 },
+           //         CalificacionNumerica = new double?[] { 4.5 },
+           //         CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //         Nivel = new string[] { "Técnico Profesional" }
+           //     },
+
+           //     new AsignaturasME
+           //     {
+           //         Numero = new int?[] { 63 },
+           //         Asignatura = new string[] { "INFORMATICA Y CONVERGENCIA TECNOLÓGICA" },
+           //         Creditos = new int?[] { 2 },
+           //         Semestre = new int?[] { 1 },
+           //         CalificacionNumerica = new double?[] { 4.5 },
+           //         CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //         Nivel = new string[] { "Técnico Profesional" }
+           //     },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 64 },
+           //     Asignatura = new string[] { "TERMINOLOGÍA DE LA SEGURIDAD SOCIAL" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 65 },
+           //     Asignatura = new string[] { "HABILIDADES COMUNICATIVAS" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 66 },
+           //     Asignatura = new string[] { "FUNDAMENTOS DE ADMINISTRACIÓN" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 67 },
+           //     Asignatura = new string[] { "ATENCIÓN AL USUARIO" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 68 },
+           //     Asignatura = new string[] { "CONTABILIDAD BÁSICA" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 1 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 69 },
+           //     Asignatura = new string[] { "EXPLORAR PARA INVESTIGAR" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 70 },
+           //     Asignatura = new string[] { "MATEMATICA 1" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 71 },
+           //     Asignatura = new string[] { "CONTABILIDAD DE ENTIDADES DE SALUD" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 72 },
+           //     Asignatura = new string[] { "ADMINISTRACIÓN PÚBLICA DE SERVICIOS DE SALUD" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 73 },
+           //     Asignatura = new string[] { "SISTEMAS DE INFORMACIÓN EN SALUD" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 74 },
+           //     Asignatura = new string[] { "FUNDAMENTOS DE ECONOMIA" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 75 },
+           //     Asignatura = new string[] { "ELECTIVA DE FORMACION INTEGRAL I" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 76 },
+           //     Asignatura = new string[] { "MERCADEO EN EMPRESAS DE SALUD" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 2 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 77 },
+           //     Asignatura = new string[] { "SALUD Y SEGURIDAD SOCIAL" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 78 },
+           //     Asignatura = new string[] { "ESTADISTICA I" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 79 },
+           //     Asignatura = new string[] { "ANÁLISIS DE LA SALUD" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 80 },
+           //     Asignatura = new string[] { "LEGISLACIÓN LABORAL" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 81 },
+           //     Asignatura = new string[] { "OPCIÓN DE GRADO TÉCNICO" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 82 },
+           //     Asignatura = new string[] { "PRÁCTICA TÉCNICO PROFESIONAL" },
+           //     Creditos = new int?[] { 1 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 83 },
+           //     Asignatura = new string[] { "ELECTIVA DE PROFUNDIZACIÓN 1" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 84 },
+           //     Asignatura = new string[] { "GESTIÓN DE LA PRODUCCIÓN DE SERVICIOS DE SALUD" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 85 },
+           //     Asignatura = new string[] { "GESTIÓN DE SUMINISTROS EN SALUD (OPCIÓN PROP)" },
+           //     Creditos = new int?[] { 0 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 86 },
+           //     Asignatura = new string[] { "CÁTEDRA DE PENSAMIENTO CUNISTA I" },
+           //     Creditos = new int?[] { 1 },
+           //     Semestre = new int?[] { 3 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 87 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 1" },
+           //     Creditos = new int?[] { 4 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 88 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 2" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 89 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 3" },
+           //     Creditos = new int?[] { 3 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           //new AsignaturasME
+           // {
+           //     Numero = new int?[] { 90 },
+           //     Asignatura = new string[] { "MATERIA EXTRA 4" },
+           //     Creditos = new int?[] { 2 },
+           //     Semestre = new int?[] { 4 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // },
+
+           // new AsignaturasME
+           // {
+           //     Numero = new int?[] { 91 },
+           //     Asignatura = new string[] { "QUIMICA AEROESPACIAL tRIGONOMETRICA IV" },
+           //     Creditos = new int?[] { 8 },
+           //     Semestre = new int?[] { 7 },
+           //     CalificacionNumerica = new double?[] { 4.5 },
+           //     CalificacionLiteral = new string[] { "CUATRO CINCO" },
+           //     Nivel = new string[] { "Técnico Profesional" }
+           // }
         };
 
 
