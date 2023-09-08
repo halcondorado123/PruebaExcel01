@@ -13,6 +13,8 @@ using System.Security.Cryptography.Xml;
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection.Emit;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Linq;
 
 namespace PruebaExcel01.Controllers
 {
@@ -62,6 +64,8 @@ namespace PruebaExcel01.Controllers
                 #region infoDownloadDoc
 
                 // Crea el nombre de mi documento 
+                // Si llegaste hasta el final, modificar la manera en la que se va a llamar el documento: acta_[numeroCedula]
+
                 string nombreArchivo = "Datos_Docs_Est_" + fechaHoraActual.ToString(formatoFecha) + ".xlsx";
                 string nombreHoja = "docs_titulos_01" + fechaHoraActual;
 
@@ -73,7 +77,7 @@ namespace PruebaExcel01.Controllers
                 #region Cellsizes
                 var worksheet = package.Workbook.Worksheets.Add("SummaryDocs");
 
-                ApplyBackgroundColorToRange(worksheet, 1, 1, 72, 24, System.Drawing.Color.White);
+                ApplyBackgroundColorToRange(worksheet, 1, 1, 200, 200, System.Drawing.Color.White);
 
                 int[] columnIndices = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                                        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
@@ -145,8 +149,8 @@ namespace PruebaExcel01.Controllers
                 #endregion
 
 
-                //var filePath = @"C:\Users\Jhonattan_Casallas\Downloads\" + nombreArchivo;
-                var filePath = @"C:\Users\Usuario\Downloads\" + nombreArchivo;
+                var filePath = @"C:\Users\Jhonattan_Casallas\Downloads\" + nombreArchivo;
+                //var filePath = @"C:\Users\Usuario\Downloads\" + nombreArchivo;
                 package.SaveAs(new System.IO.FileInfo(filePath));
 
                 return File(filePath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nombreArchivo);
@@ -282,16 +286,6 @@ namespace PruebaExcel01.Controllers
             worksheet.Cells[row, column + 6].Value = subject.Nivel[0];
         }
 
-
-
-
-
-
-
-
-
-
-
         // Seleccion de celdas por rango
         public static ExcelRange GetExcelRange(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn)
         {
@@ -302,9 +296,8 @@ namespace PruebaExcel01.Controllers
         #region ImagesDocument
         private void AddLogo(ExcelWorksheet worksheet)
         {
+            string imagePathLogo = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\log1.png";
             //string imagePathLogo = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\log1.png";
-            //string imagePathLogo = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\log1.png";
-            string imagePathLogo = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\log1.png";
             int widthLogoInPixels = 300;
             int heightLogoInPixels = 110;
 
@@ -319,8 +312,8 @@ namespace PruebaExcel01.Controllers
         {
             // Por asignar una biblioteca de imagenes de firmas de jefes de programa
             // Valor quemado
-            //string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
-            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
+            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
+            //string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
             int widthSignatureInPixels = 230;
             int heightSignatureInPixels = 70;
 
@@ -335,8 +328,8 @@ namespace PruebaExcel01.Controllers
         private void StudentSignature(ExcelWorksheet worksheet)
         {
             // Valor quemado, por evaluar la opcion de firma generada por parte del estudiante
-            //string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
-            string imagePathSignature = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
+            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
+            //string imagePathSignature = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
             int widthSignatureInPixels = 230;
             int heightSignatureInPixels = 70;
 
@@ -748,51 +741,93 @@ namespace PruebaExcel01.Controllers
 
         }
 
-        public class Calculator
+        //public class Calculator
+        //{
+        //    public ExcelRange GetTotalSubjects(ExcelWorksheet worksheet, int startRow, int startColumn)
+        //    {
+        //        int endRow = startRow;
+        //        int endColumn = startColumn + 2; // Se asume un rango de tres celdas
+
+        //        return worksheet.Cells[startRow, startColumn, endRow, endColumn];
+        //    }
+
+        //private ExcelRange GetTotalSubjects2(ExcelWorksheet worksheet, int row, int column)
+        //{
+        //    return worksheet.Cells[column, row];
+        //}
+
+        //private ExcelRange GetTotalSubjects3(ExcelWorksheet worksheet, int row, int column)
+        //{
+        //    return worksheet.Cells[column, row];
+        //}
+
+        //public static void ProcessScenario(ExcelWorksheet worksheet, int startRow, int endRow, int startColumn,
+        //                            int endColumn, string label, string sumRange, string sumResult)
+        //{
+        //        ExcelRange celdasMaterias = GetExcelRange(worksheet, startRow, startColumn, endRow, endColumn);
+        //        CellCenter(celdasMaterias);
+
+        //        ExcelRange LabelTotals = GetExcelRange(worksheet, endRow + 1, startColumn, endRow + 1, startColumn + 1);
+        //        LabelTotals.Value = label;
+        //        MergedCells(LabelTotals);
+        //        CellCenter(LabelTotals);
+        //        FontWeightBold(LabelTotals);
+
+        //        var rangeToSum = worksheet.Cells[sumRange];
+        //        var result = worksheet.Cells[sumResult];
+        //        result.Formula = $"SUM({rangeToSum.Address})";
+        //        CellCenter(result);
+        //        FontWeightBold(result);
+        //}
+
+        public static void ProcessScenario(ExcelWorksheet worksheet, int startRow, int endRow, int startColumn,
+                                           int endColumn, string label, string sumRange, string sumResult)
         {
-            public ExcelRange GetTotalSubjects(ExcelWorksheet worksheet, int startRow, int startColumn)
-            {
-                int endRow = startRow;
-                int endColumn = startColumn + 2; // Se asume un rango de tres celdas
+            ExcelRange celdasMaterias = GetExcelRange(worksheet, startRow, startColumn, endRow, endColumn);
+            CellCenter(celdasMaterias);
 
-                return worksheet.Cells[startRow, startColumn, endRow, endColumn];
-            }
+            ExcelRange LabelTotals = GetExcelRange(worksheet, endRow + 1, startColumn, endRow + 1, startColumn + 1);
+            LabelTotals.Value = label;
+            MergedCells(LabelTotals);
+            CellCenter(LabelTotals);
+            FontWeightBold(LabelTotals);
 
-            //private ExcelRange GetTotalSubjects2(ExcelWorksheet worksheet, int row, int column)
-            //{
-            //    return worksheet.Cells[column, row];
-            //}
-
-            //private ExcelRange GetTotalSubjects3(ExcelWorksheet worksheet, int row, int column)
-            //{
-            //    return worksheet.Cells[column, row];
-            //}
-
-            // DEJAR ESTO EN OTRO CONTROLLER --------------> Esta formula esta OK
-            public static void ProcessScenario(ExcelWorksheet worksheet, int startRow, int endRow, int startColumn,
-                                        int endColumn, string label, string sumRange, string sumResult, 
-                                        int row, int column)
-            {
-                var cellA1 = worksheet.Cells[row, column];
-                var cellB1 = worksheet.Cells[row, column];
-                var cellC1 = worksheet.Cells[row, column];
-
-                ExcelRange celdasMaterias = GetExcelRange(worksheet, startRow, startColumn, endRow, endColumn);
-                CellCenter(celdasMaterias);
-
-                ExcelRange LabelTotals = GetExcelRange(worksheet, endRow + 1, startColumn, endRow + 1, startColumn + 1);
-                LabelTotals.Value = label;
-                MergedCells(LabelTotals);
-                CellCenter(LabelTotals);
-                FontWeightBold(LabelTotals);
-
-                var rangeToSum = worksheet.Cells[sumRange];
-                var result = worksheet.Cells[sumResult];
-                result.Formula = $"SUM({rangeToSum.Address},{cellA1.Address},{cellB1.Address},{cellC1.Address})";
-                CellCenter(result);
-                FontWeightBold(result);
-            }
+            var rangeToSum = worksheet.Cells[sumRange];
+            var result = worksheet.Cells[sumResult];
+            result.Formula = $"SUM({rangeToSum.Address})";
+            CellCenter(result);
+            FontWeightBold(result);
         }
+
+        public static void CellTotalSum(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn)
+        {
+            ExcelRange cellTotalSubject = GetExcelRange(worksheet, startRow, startColumn, endRow, endColumn);
+            MergedCells(cellTotalSubject);
+            FontWeightBold(cellTotalSubject);
+            CellCenter(cellTotalSubject);
+
+        }
+
+        public static void TotalSumColumns(ExcelWorksheet worksheet, int startRow, int endRow, int startColumn,
+                                   int endColumn, string sumRange, string sumResult)
+        {
+            //ExcelRange cellTotalSubject = GetExcelRange(worksheet, 46, 5, 46, 7);
+            //MergedCells(cellTotalSubject);
+            //FontWeightBold(cellTotalSubject);
+            //CellCenter(cellTotalSubject);
+
+            ExcelRange celdasMaterias = GetExcelRange(worksheet, startRow, startColumn, endRow, endColumn);
+            var rangeToSum = worksheet.Cells[sumRange];
+            var result = worksheet.Cells[sumResult];
+            result.Formula = $"SUM({rangeToSum.Address})";
+            ContentCenter(result);
+            FontWeightBold(result);
+        }
+
+
+
+
+
 
         public static void AddSingleParraf(ExcelWorksheet worksheet, int startRow, int endRow, int startColumn, int endColumn, string[] labels)
         {
@@ -843,6 +878,41 @@ namespace PruebaExcel01.Controllers
             }
         }
 
+
+
+
+        //public static void SumarColumnas(ExcelWorksheet worksheet, int row1, int column1, int row2, int column2,
+        //                                int row3, int column3, int rowResult, int columnResult)
+        //{
+        //    int valor1 = Convert.ToInt32(worksheet.Cells[6, 1].Value);
+        //    int valor2 = Convert.ToInt32(worksheet.Cells[6, 2].Value);
+        //    int valor3 = Convert.ToInt32(worksheet.Cells[6, 3].Value);
+
+        //    int resultado = valor1 + valor2 + valor3;
+
+        //    // Obtener la celda de resultado
+        //    ExcelRange resultCellSum = worksheet.Cells[6, 4];
+
+        //    // Asignar el resultado a la celda de resultado
+        //    resultCellSum.Value = resultado; int row3, int column3
+        //}
+
+        //public static void SumarColumnas(ExcelWorksheet worksheet,  int row1, int column1, int row2, int column2)
+        //{
+
+        //    ExcelRange range = worksheet.Cells[$"A{row1}:C{row2}"];
+
+        //    int valor1 = Convert.ToInt32(range[row1, column1].Value);
+        //    int valor2 = Convert.ToInt32(range[row2, column2].Value);
+        //    //int valor3 = Convert.ToInt32(range[row3, 3].Value);
+
+        //    int resultado = valor1 + valor2;
+
+        //    worksheet.Cells["A8"].Value = resultado;
+        //}
+
+
+
         // Obtener la lista de asignaturas
         private void ContentTable(ExcelWorksheet worksheet)
             {
@@ -870,48 +940,51 @@ namespace PruebaExcel01.Controllers
 
                 if (totalSubjects <= 30)
                 {
-                    SubjectsPerColumn = 10; // Size OK
-                    ExcelRange cellsTiny = GetExcelRange(worksheet, 33, 1, 42, 21);
-                    CellCenter(cellsTiny);
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "C33:C42", "C43", row, column);
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "J33:J42", "J43", row, column);
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "Q33:Q42", "Q43", row, column);
+                SubjectsPerColumn = 10;
+                ExcelRange cellsTiny = GetExcelRange(worksheet, 33, 1, 42, 21);
+                CellCenter(cellsTiny);
+                ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "C33:C42", "C43");
+                ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "J33:J42", "J43");
+                ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "Q33:Q42", "Q43");
+                CellTotalSum(worksheet, 46, 5, 46, 7);
+                TotalSumColumns(worksheet, 43, 43, 3, 15, "C43:Q43", "E46");
 
 
 
-                    AddTitleDocument(worksheet, 47, 1, 47, 4, condition);
-                    AddSingleParraf(worksheet, 48, 50, 1, 4, labels);
-               
-                    AddTitleDocument(worksheet, 52, 1, 52, 4, impCondition);
-                    AddParagraph(worksheet, 53, 56, 1, 21, conditionLabels);
-                    AddParagraph(worksheet, 59, 61, 1, 21, importantCondition);
+                AddSingleParraf(worksheet, 48, 50, 1, 4, labels);
+                AddTitleDocument(worksheet, 52, 1, 52, 4, condition);
+                AddParagraph(worksheet, 53, 56, 1, 21, conditionLabels);
 
-                    AddTitleDocument(worksheet, 64, 1, 64, 4, constancy);
+                AddTitleDocument(worksheet, 58, 1, 58, 4, impCondition);
+                AddParagraph(worksheet, 59, 61, 1, 21, importantCondition);
 
-                    AddSingleParrafSignature(worksheet, 69, 1, programManagerInfo);
-                    AddSingleParrafSignature(worksheet, 69, 10, programStudentInfo);
+                AddTitleDocument(worksheet, 64, 1, 64, 4, constancy);
+
+                AddSingleParrafSignature(worksheet, 69, 1, programManagerInfo);
+                AddSingleParrafSignature(worksheet, 69, 10, programStudentInfo);
 
             }
-                else if (totalSubjects > 30 && totalSubjects <= 50)
-                {
-                    SubjectsPerColumn = 16; // Cambiar el límite si hay entre 51 y 100 arreglos
-                    ExcelRange cellsMedium = GetExcelRange(worksheet, 33, 1, 42, 21);
-                    CellCenter(cellsMedium);
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "C33:C42", "C43");
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "J33:J42", "J43");
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "Q33:Q42", "Q43");
+            else if (totalSubjects > 30 && totalSubjects <= 50)
+            {
+                SubjectsPerColumn = 16;
+                ExcelRange cellsMedium = GetExcelRange(worksheet, 33, 1, 48, 21);
+                CellCenter(cellsMedium);
+                ProcessScenario(worksheet, 33, 48, 1, 2, "TOTALES", "C33:C48", "C49");
+                ProcessScenario(worksheet, 33, 48, 1, 2, "TOTALES", "J33:J48", "J49");
+                ProcessScenario(worksheet, 33, 48, 1, 2, "TOTALES", "Q33:Q48", "Q49");
 
-                    //AddTitleDocument(worksheet, 47, 1, 47, 4, condition);
-                    //AddSingleParraf(worksheet, 48, 50, 1, 4, labels);
 
-                    //AddTitleDocument(worksheet, 52, 1, 52, 4, impCondition);
-                    //AddParagraph(worksheet, 53, 56, 1, 21, conditionLabels);
-                    //AddParagraph(worksheet, 59, 61, 1, 21, importantCondition);
+                AddSingleParraf(worksheet, 53, 55, 1, 4, labels);
+                AddTitleDocument(worksheet, 57, 1, 57, 4, condition);
+                AddParagraph(worksheet, 58, 61, 1, 21, conditionLabels);
 
-                    //AddTitleDocument(worksheet, 64, 1, 64, 4, constancy);
+                AddTitleDocument(worksheet, 63, 1, 63, 4, impCondition);
+                AddParagraph(worksheet, 64, 66, 1, 21, importantCondition);
 
-                    //AddSingleParrafSignature(worksheet, 69, 1, programManagerInfo);
-                    //AddSingleParrafSignature(worksheet, 69, 10, programStudentInfo);
+                AddTitleDocument(worksheet, 69, 1, 69, 4, constancy);
+
+                AddSingleParrafSignature(worksheet, 74, 1, programManagerInfo);
+                AddSingleParrafSignature(worksheet, 74, 10, programStudentInfo);
 
             }
         
@@ -920,43 +993,46 @@ namespace PruebaExcel01.Controllers
                 {
                     SubjectsPerColumn = 24; // Cambiar el límite si hay entre 51 y 100 arreglos
 
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "C33:C42", "C43");
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "J33:J42", "J43");
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "Q33:Q42", "Q43");
+                ExcelRange cellsBig = GetExcelRange(worksheet, 33, 1, 56, 21);
+                CellCenter(cellsBig);
+                ProcessScenario(worksheet, 33, 56, 1, 2, "TOTALES", "C33:C56", "C57");
+                ProcessScenario(worksheet, 33, 56, 1, 2, "TOTALES", "J33:J56", "J57");
+                ProcessScenario(worksheet, 33, 56, 1, 2, "TOTALES", "Q33:Q56", "Q57");
 
-                    //AddTitleDocument(worksheet, 47, 1, 47, 4, condition);
-                    //AddSingleParraf(worksheet, 48, 50, 1, 4, labels);
+                AddSingleParraf(worksheet, 62, 64, 1, 4, labels);
+                AddTitleDocument(worksheet, 66, 1, 66, 4, condition);
+                AddParagraph(worksheet, 67, 70, 1, 21, conditionLabels);
 
-                    //AddTitleDocument(worksheet, 52, 1, 52, 4, impCondition);
-                    //AddParagraph(worksheet, 53, 56, 1, 21, conditionLabels);
-                    //AddParagraph(worksheet, 59, 61, 1, 21, importantCondition);
+                AddTitleDocument(worksheet, 72, 1, 72, 4, impCondition);
+                AddParagraph(worksheet, 73, 75, 1, 21, importantCondition);
 
-                    //AddTitleDocument(worksheet, 64, 1, 64, 4, constancy);
+                AddTitleDocument(worksheet, 78, 1, 78, 4, constancy);
 
-                    //AddSingleParrafSignature(worksheet, 69, 1, programManagerInfo);
-                    //AddSingleParrafSignature(worksheet, 69, 10, programStudentInfo);
-
+                AddSingleParrafSignature(worksheet, 83, 1, programManagerInfo);
+                AddSingleParrafSignature(worksheet, 83, 10, programStudentInfo);
             }
 
             else if (totalSubjects > 70 && totalSubjects <= 90)
                 {
                     SubjectsPerColumn = 30; // Cambiar el límite si hay entre 51 y 100 arreglos
 
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "C33:C42", "C43");
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "J33:J42", "J43");
-                    //ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "Q33:Q42", "Q43");
+                    ExcelRange cellsExtraBig = GetExcelRange(worksheet, 33, 1, 62, 21);
+                    CellCenter(cellsExtraBig);
+                    ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "C33:C62", "C63");
+                    ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "J33:J62", "J63");
+                    ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "Q33:Q62", "Q63");
 
-                    //AddTitleDocument(worksheet, 47, 1, 47, 4, condition);
-                    //AddSingleParraf(worksheet, 48, 50, 1, 4, labels);
+                    AddSingleParraf(worksheet, 68, 70, 1, 4, labels);
+                    AddTitleDocument(worksheet, 72, 1, 72, 4, condition);
+                    AddParagraph(worksheet, 73, 76, 1, 21, conditionLabels);
 
-                    //AddTitleDocument(worksheet, 52, 1, 52, 4, impCondition);
-                    //AddParagraph(worksheet, 53, 56, 1, 21, conditionLabels);
-                    //AddParagraph(worksheet, 59, 61, 1, 21, importantCondition);
+                    AddTitleDocument(worksheet, 78, 1, 78, 4, impCondition);
+                    AddParagraph(worksheet, 79, 81, 1, 21, importantCondition);
 
-                    //AddTitleDocument(worksheet, 64, 1, 64, 4, constancy);
+                    AddTitleDocument(worksheet, 84, 1, 84, 4, constancy);
 
-                    //AddSingleParrafSignature(worksheet, 69, 1, programManagerInfo);
-                    //AddSingleParrafSignature(worksheet, 69, 10, programStudentInfo);
+                    AddSingleParrafSignature(worksheet, 89, 1, programManagerInfo);
+                    AddSingleParrafSignature(worksheet, 89, 10, programStudentInfo);
 
             }
 
@@ -965,16 +1041,24 @@ namespace PruebaExcel01.Controllers
                 SubjectsPerColumn = 40; // Size OK
                 ExcelRange cellsMaximum = GetExcelRange(worksheet, 33, 1, 72, 21);
                 CellCenter(cellsMaximum);
-                //ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "C33:C72", "C73");
-                //ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "J33:J72", "J73");
-                //ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "Q33:Q72", "Q73");
+                ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "C33:C72", "C73");
+                ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "J33:J72", "J73");
+                ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "Q33:Q72", "Q73");
+                TotalSumColumns(worksheet, 73, 73, 3, 15, "C73:Q73", "E76");
+                CellTotalSum(worksheet, 76, 5, 76, 7);
 
                 AddSingleParraf(worksheet, 78, 80, 1, 4, labels);
+                AddTitleDocument(worksheet, 82, 1, 82, 4, condition);
+                AddParagraph(worksheet, 83, 86, 1, 21, conditionLabels);
 
+                AddTitleDocument(worksheet, 88, 1, 88, 4, impCondition);
+                AddParagraph(worksheet, 89, 91, 1, 21, importantCondition);
 
+                AddTitleDocument(worksheet, 94, 1, 94, 4, constancy);
 
-
-                }
+                AddSingleParrafSignature(worksheet, 99, 1, programManagerInfo);
+                AddSingleParrafSignature(worksheet, 99, 10, programStudentInfo);
+            }
 
             else if (totalSubjects > 0 && totalSubjects <= 60)
                 {
@@ -1009,12 +1093,9 @@ namespace PruebaExcel01.Controllers
 
 
 
-        private void RecognizedCredits(ExcelWorksheet worksheet, int cellA, int cellB, int cellC)
+        private void RecognizedCredits(ExcelWorksheet worksheet, int row, int column, int cellA, int cellB, int cellC)
         {
-
-
-
-            //var totalSubjects = new ExcelRange[] { totalSubjects1, totalSubjects2, totalSubjects3 };
+             //var totalSubjects = new ExcelRange[] { totalSubjects1, totalSubjects2, totalSubjects3 };
             //GenerateSumCell(worksheet, 51, 5, totalSubjects);
 
 
