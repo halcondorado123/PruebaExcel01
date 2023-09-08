@@ -9,7 +9,27 @@ namespace PruebaExcel01.Models
         public string TitleImportantCondition() { return "Manifestación expresa del estudiante"; }
         public string TextInConstancy() { return "En Constancia de lo anterior firman:"; }
 
+        public string[] HeaderTableCells()
+        {
+            return new string[]
+            {
+            "No",
+            "ASIGNATURA Y/O CRÉDITO HOMOLOGADO",
+            "SISTEMA",
+            "CALIFICACIÓN NUMERICA",
+            "CALIFICACION LITERAL",
+            "NIVEL",
+            };
+        }
 
+        public string[] HeaderTableSubCells()
+        {
+            return new string[]
+            {
+                "Créditos",
+                "Semestre",
+            };
+        }
 
         public string[] GetLabelsTotalCredits()
         {
