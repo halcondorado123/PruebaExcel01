@@ -83,7 +83,7 @@ namespace PruebaExcel01.Controllers
                                        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                                        21, 22, 23, 24};
 
-                double[] columnWidths = { 13.00, 35.00, 10.00, 10.00, 15.00, 15.00, 14.89, 11.00, 35.00, 16.89,
+                double[] columnWidths = { 17.00, 35.00, 10.00, 10.00, 15.00, 15.00, 14.89, 11.00, 35.00, 16.89,
                                         13.00, 15.00, 15.00, 14.22, 11.00, 35.00, 14.00, 14.00, 15.00, 15.00,
                                         18.00, 16.56, 14.89, 13.56,};
 
@@ -114,12 +114,12 @@ namespace PruebaExcel01.Controllers
                                         26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
                                         26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
                                         26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
-                                        26.00, 26.00, 26.00, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
-                                        12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
-                                        12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60,
-                                        12.60, 12.60, 93.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60, 12.60};
+                                        26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
+                                        26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
+                                        26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00,
+                                        26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00, 26.00};
 
-            for (int i = 0; i < rowIndices.Length; i++)
+                for (int i = 0; i < rowIndices.Length; i++)
                 {
                     int rowIndex = rowIndices[i];
                     double rowHeight = rowHeights[i];
@@ -140,11 +140,6 @@ namespace PruebaExcel01.Controllers
                 ConstructionHeaderTable(worksheet);
                 ContentTable(worksheet);
 
-                //RecognizedCredits(worksheet);
-                //ConditionLabels(worksheet);
-                //StudentStatement(worksheet);
-                //ContractArea(worksheet);
-                //ApplyCellsFooter(worksheet);
 
                 #endregion
 
@@ -308,38 +303,46 @@ namespace PruebaExcel01.Controllers
             pictureLogo.Locked = true;
         }
 
-        private void ProgramManagerSignature(ExcelWorksheet worksheet)
+        private void SignaMark(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn)
+        { 
+            ExcelRange signatureMark = GetExcelRange(worksheet, startRow, startColumn, endRow, endColumn);
+            ApplySignatureBorders(signatureMark);
+            MergedCells(signatureMark);
+        }   
+
+        private void ProgramManagerSignature(ExcelWorksheet worksheet, int row, int column)
         {
-            // Por asignar una biblioteca de imagenes de firmas de jefes de programa
-            // Valor quemado
             string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
-            //string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcel\\PruebaExcel_Version02\\Img_sample\\lennon_signature.jpg";
             int widthSignatureInPixels = 230;
             int heightSignatureInPixels = 70;
 
+            // Agregar imagen
             var pictureSignature = worksheet.Drawings.AddPicture("Firma", new FileInfo(imagePathSignature));
 
-            pictureSignature.SetPosition(73, -80, 1, -30);
+            // Establecer tamaño
             pictureSignature.SetSize(widthSignatureInPixels, heightSignatureInPixels);
-            pictureSignature.Locked = true;
 
+            pictureSignature.SetPosition(row, column);
+
+            // Bloquear la imagen si es necesario
+            pictureSignature.Locked = true;
         }
 
-        private void StudentSignature(ExcelWorksheet worksheet)
-        {
-            // Valor quemado, por evaluar la opcion de firma generada por parte del estudiante
-            string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
-            //string imagePathSignature = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
-            int widthSignatureInPixels = 230;
-            int heightSignatureInPixels = 70;
+        //private void StudentSignature(ExcelWorksheet worksheet)
+        //{
+        //    // Valor quemado, por evaluar la opcion de firma generada por parte del estudiante
+        //    string imagePathSignature = "C:\\Users\\Jhonattan_Casallas\\Desktop\\EnsayoExcelTecnologo\\PruebaExcel_Version02\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
+        //    //string imagePathSignature = "C:\\Users\\Usuario\\Desktop\\PruebaExcel01\\Img_sample\\2560px-Freddie_Mercury_signature.svg.png";
+        //    int widthSignatureInPixels = 230;
+        //    int heightSignatureInPixels = 70;
 
-            var pictureSignature = worksheet.Drawings.AddPicture("FirmaStu", new FileInfo(imagePathSignature));
+        //    var pictureSignature = worksheet.Drawings.AddPicture("FirmaStu", new FileInfo(imagePathSignature));
 
-            pictureSignature.SetPosition(73, -80, 8, -30);
-            pictureSignature.SetSize(widthSignatureInPixels, heightSignatureInPixels);
-            pictureSignature.Locked = true;
+        //    pictureSignature.SetPosition(73, -80, 8, -30);
+        //    pictureSignature.SetSize(widthSignatureInPixels, heightSignatureInPixels);
+        //    pictureSignature.Locked = true;
 
-        }
+        //}
 
         #endregion
 
@@ -741,45 +744,6 @@ namespace PruebaExcel01.Controllers
 
         }
 
-        //public class Calculator
-        //{
-        //    public ExcelRange GetTotalSubjects(ExcelWorksheet worksheet, int startRow, int startColumn)
-        //    {
-        //        int endRow = startRow;
-        //        int endColumn = startColumn + 2; // Se asume un rango de tres celdas
-
-        //        return worksheet.Cells[startRow, startColumn, endRow, endColumn];
-        //    }
-
-        //private ExcelRange GetTotalSubjects2(ExcelWorksheet worksheet, int row, int column)
-        //{
-        //    return worksheet.Cells[column, row];
-        //}
-
-        //private ExcelRange GetTotalSubjects3(ExcelWorksheet worksheet, int row, int column)
-        //{
-        //    return worksheet.Cells[column, row];
-        //}
-
-        //public static void ProcessScenario(ExcelWorksheet worksheet, int startRow, int endRow, int startColumn,
-        //                            int endColumn, string label, string sumRange, string sumResult)
-        //{
-        //        ExcelRange celdasMaterias = GetExcelRange(worksheet, startRow, startColumn, endRow, endColumn);
-        //        CellCenter(celdasMaterias);
-
-        //        ExcelRange LabelTotals = GetExcelRange(worksheet, endRow + 1, startColumn, endRow + 1, startColumn + 1);
-        //        LabelTotals.Value = label;
-        //        MergedCells(LabelTotals);
-        //        CellCenter(LabelTotals);
-        //        FontWeightBold(LabelTotals);
-
-        //        var rangeToSum = worksheet.Cells[sumRange];
-        //        var result = worksheet.Cells[sumResult];
-        //        result.Formula = $"SUM({rangeToSum.Address})";
-        //        CellCenter(result);
-        //        FontWeightBold(result);
-        //}
-
         public static void ProcessScenario(ExcelWorksheet worksheet, int startRow, int endRow, int startColumn,
                                            int endColumn, string label, string sumRange, string sumResult)
         {
@@ -811,11 +775,6 @@ namespace PruebaExcel01.Controllers
         public static void TotalSumColumns(ExcelWorksheet worksheet, int startRow, int endRow, int startColumn,
                                    int endColumn, string sumRange, string sumResult)
         {
-            //ExcelRange cellTotalSubject = GetExcelRange(worksheet, 46, 5, 46, 7);
-            //MergedCells(cellTotalSubject);
-            //FontWeightBold(cellTotalSubject);
-            //CellCenter(cellTotalSubject);
-
             ExcelRange celdasMaterias = GetExcelRange(worksheet, startRow, startColumn, endRow, endColumn);
             var rangeToSum = worksheet.Cells[sumRange];
             var result = worksheet.Cells[sumResult];
@@ -878,78 +837,44 @@ namespace PruebaExcel01.Controllers
             }
         }
 
-
-
-
-        //public static void SumarColumnas(ExcelWorksheet worksheet, int row1, int column1, int row2, int column2,
-        //                                int row3, int column3, int rowResult, int columnResult)
-        //{
-        //    int valor1 = Convert.ToInt32(worksheet.Cells[6, 1].Value);
-        //    int valor2 = Convert.ToInt32(worksheet.Cells[6, 2].Value);
-        //    int valor3 = Convert.ToInt32(worksheet.Cells[6, 3].Value);
-
-        //    int resultado = valor1 + valor2 + valor3;
-
-        //    // Obtener la celda de resultado
-        //    ExcelRange resultCellSum = worksheet.Cells[6, 4];
-
-        //    // Asignar el resultado a la celda de resultado
-        //    resultCellSum.Value = resultado; int row3, int column3
-        //}
-
-        //public static void SumarColumnas(ExcelWorksheet worksheet,  int row1, int column1, int row2, int column2)
-        //{
-
-        //    ExcelRange range = worksheet.Cells[$"A{row1}:C{row2}"];
-
-        //    int valor1 = Convert.ToInt32(range[row1, column1].Value);
-        //    int valor2 = Convert.ToInt32(range[row2, column2].Value);
-        //    //int valor3 = Convert.ToInt32(range[row3, 3].Value);
-
-        //    int resultado = valor1 + valor2;
-
-        //    worksheet.Cells["A8"].Value = resultado;
-        //}
-
-
-
         // Obtener la lista de asignaturas
         private void ContentTable(ExcelWorksheet worksheet)
-            {
+        {
 
-            ContentText labelProvider = new ContentText(); 
+            List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
+            ContentText labelProvider = new ContentText();
             string[] labels = labelProvider.GetLabelsTotalCredits();
-            List<string> conditionLabels = labelProvider.ConditionLabels();
-            List<string> importantCondition = labelProvider.ImportantConditionLabels();
             string[] programManagerInfo = labelProvider.AddProgramManagerInfo();
-            string[] programStudentInfo = labelProvider.AddProgramStudentInfo();
-
+            //string[] programStudentInfo = labelProvider.AddProgramStudentInfo();
             string condition = labelProvider.TitleCondition();
             string impCondition = labelProvider.TitleImportantCondition();
             string constancy = labelProvider.TextInConstancy();
-
-            List<AsignaturasME> subjects = GetSubjects.SubjectGenerator();
-                int row = 33;
-                int column = 1;
-                int subjectCount = 0;
-                int totalSubjects = subjects.Count;
-                int SubjectsPerColumn = 10;
-
-          
+            List<string> conditionLabels = labelProvider.ConditionLabels();
+            List<string> importantCondition = labelProvider.ImportantConditionLabels();
 
 
-                if (totalSubjects <= 30)
-                {
+            int row = 33;
+            int column = 1;
+            int subjectCount = 0;
+            int totalSubjects = subjects.Count;
+            int SubjectsPerColumn = 10;
+
+
+
+            if (totalSubjects <= 30)
+            {
                 SubjectsPerColumn = 10;
                 ExcelRange cellsTiny = GetExcelRange(worksheet, 33, 1, 42, 21);
                 CellCenter(cellsTiny);
                 ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "C33:C42", "C43");
                 ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "J33:J42", "J43");
                 ProcessScenario(worksheet, 33, 42, 1, 2, "TOTALES", "Q33:Q42", "Q43");
-                CellTotalSum(worksheet, 46, 5, 46, 7);
                 TotalSumColumns(worksheet, 43, 43, 3, 15, "C43:Q43", "E46");
 
-
+                BorderTable(worksheet, 47, 5, 50, 7);
+                TotalCreditsLabels(worksheet, 47, 5, 47, 6, 47, 7);
+                CellTotalSum(worksheet, 46, 5, 46, 7);
+                ZeroDefault(worksheet, 48, 5, 50, 7);
 
                 AddSingleParraf(worksheet, 48, 50, 1, 4, labels);
                 AddTitleDocument(worksheet, 52, 1, 52, 4, condition);
@@ -960,9 +885,10 @@ namespace PruebaExcel01.Controllers
 
                 AddTitleDocument(worksheet, 64, 1, 64, 4, constancy);
 
+                SignaMark(worksheet, 68, 1, 68, 2);
+                ProgramManagerSignature(worksheet, 96 + 1800, 1);
                 AddSingleParrafSignature(worksheet, 69, 1, programManagerInfo);
-                AddSingleParrafSignature(worksheet, 69, 10, programStudentInfo);
-
+                //AddSingleParrafSignature(worksheet, 69, 10, programStudentInfo);
             }
             else if (totalSubjects > 30 && totalSubjects <= 50)
             {
@@ -972,7 +898,12 @@ namespace PruebaExcel01.Controllers
                 ProcessScenario(worksheet, 33, 48, 1, 2, "TOTALES", "C33:C48", "C49");
                 ProcessScenario(worksheet, 33, 48, 1, 2, "TOTALES", "J33:J48", "J49");
                 ProcessScenario(worksheet, 33, 48, 1, 2, "TOTALES", "Q33:Q48", "Q49");
+                TotalSumColumns(worksheet, 73, 73, 3, 15, "C49:Q49", "E51");
 
+                BorderTable(worksheet, 52, 5, 55, 7);
+                TotalCreditsLabels(worksheet, 52, 5, 52, 6, 52, 7);
+                CellTotalSum(worksheet, 51, 5, 51, 7);
+                ZeroDefault(worksheet, 53, 5, 55, 7);
 
                 AddSingleParraf(worksheet, 53, 55, 1, 4, labels);
                 AddTitleDocument(worksheet, 57, 1, 57, 4, condition);
@@ -983,21 +914,27 @@ namespace PruebaExcel01.Controllers
 
                 AddTitleDocument(worksheet, 69, 1, 69, 4, constancy);
 
+                SignaMark(worksheet, 73, 1, 73, 2);
+                ProgramManagerSignature(worksheet, 96 + 1950, 1);
                 AddSingleParrafSignature(worksheet, 74, 1, programManagerInfo);
-                AddSingleParrafSignature(worksheet, 74, 10, programStudentInfo);
+                //AddSingleParrafSignature(worksheet, 74, 10, programStudentInfo);
 
             }
-        
-
-                else if (totalSubjects > 50 && totalSubjects <= 70)
-                {
-                    SubjectsPerColumn = 24; // Cambiar el límite si hay entre 51 y 100 arreglos
+            else if (totalSubjects > 50 && totalSubjects <= 70)
+            {
+                SubjectsPerColumn = 24;
 
                 ExcelRange cellsBig = GetExcelRange(worksheet, 33, 1, 56, 21);
                 CellCenter(cellsBig);
                 ProcessScenario(worksheet, 33, 56, 1, 2, "TOTALES", "C33:C56", "C57");
                 ProcessScenario(worksheet, 33, 56, 1, 2, "TOTALES", "J33:J56", "J57");
                 ProcessScenario(worksheet, 33, 56, 1, 2, "TOTALES", "Q33:Q56", "Q57");
+                TotalSumColumns(worksheet, 57, 57, 3, 15, "C57:Q57", "E60");
+
+                BorderTable(worksheet, 61, 5, 64, 7);
+                TotalCreditsLabels(worksheet, 61, 5, 61, 6, 61, 7);
+                CellTotalSum(worksheet, 60, 5, 60, 7);
+                ZeroDefault(worksheet, 62, 5, 64, 7);
 
                 AddSingleParraf(worksheet, 62, 64, 1, 4, labels);
                 AddTitleDocument(worksheet, 66, 1, 66, 4, condition);
@@ -1008,44 +945,56 @@ namespace PruebaExcel01.Controllers
 
                 AddTitleDocument(worksheet, 78, 1, 78, 4, constancy);
 
+                SignaMark(worksheet, 82, 1, 82, 2);
+                ProgramManagerSignature(worksheet, 96 + 2270, 1);
                 AddSingleParrafSignature(worksheet, 83, 1, programManagerInfo);
-                AddSingleParrafSignature(worksheet, 83, 10, programStudentInfo);
+                //AddSingleParrafSignature(worksheet, 83, 10, programStudentInfo);
             }
-
             else if (totalSubjects > 70 && totalSubjects <= 90)
-                {
-                    SubjectsPerColumn = 30; // Cambiar el límite si hay entre 51 y 100 arreglos
+            {
+                SubjectsPerColumn = 30; // Cambiar el límite si hay entre 51 y 100 arreglos
 
-                    ExcelRange cellsExtraBig = GetExcelRange(worksheet, 33, 1, 62, 21);
-                    CellCenter(cellsExtraBig);
-                    ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "C33:C62", "C63");
-                    ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "J33:J62", "J63");
-                    ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "Q33:Q62", "Q63");
+                ExcelRange cellsExtraBig = GetExcelRange(worksheet, 33, 1, 62, 21);
+                CellCenter(cellsExtraBig);
+                ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "C33:C62", "C63");
+                ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "J33:J62", "J63");
+                ProcessScenario(worksheet, 33, 62, 1, 2, "TOTALES", "Q33:Q62", "Q63");
+                TotalSumColumns(worksheet, 63, 63, 3, 15, "C63:Q63", "E66");
 
-                    AddSingleParraf(worksheet, 68, 70, 1, 4, labels);
-                    AddTitleDocument(worksheet, 72, 1, 72, 4, condition);
-                    AddParagraph(worksheet, 73, 76, 1, 21, conditionLabels);
+                BorderTable(worksheet, 67, 5, 70, 7);
+                TotalCreditsLabels(worksheet, 67, 5, 67, 6, 67, 7);
+                CellTotalSum(worksheet, 66, 5, 66, 7);
+                ZeroDefault(worksheet, 68, 5, 70, 7);
 
-                    AddTitleDocument(worksheet, 78, 1, 78, 4, impCondition);
-                    AddParagraph(worksheet, 79, 81, 1, 21, importantCondition);
+                AddSingleParraf(worksheet, 68, 70, 1, 4, labels);
+                AddTitleDocument(worksheet, 72, 1, 72, 4, condition);
+                AddParagraph(worksheet, 73, 76, 1, 21, conditionLabels);
 
-                    AddTitleDocument(worksheet, 84, 1, 84, 4, constancy);
+                AddTitleDocument(worksheet, 78, 1, 78, 4, impCondition);
+                AddParagraph(worksheet, 79, 81, 1, 21, importantCondition);
 
-                    AddSingleParrafSignature(worksheet, 89, 1, programManagerInfo);
-                    AddSingleParrafSignature(worksheet, 89, 10, programStudentInfo);
+                AddTitleDocument(worksheet, 84, 1, 84, 4, constancy);
+
+                SignaMark(worksheet, 88, 1, 88, 2);
+                ProgramManagerSignature(worksheet, 96 + 2470, 1);
+                AddSingleParrafSignature(worksheet, 89, 1, programManagerInfo);
+                //AddSingleParrafSignature(worksheet, 89, 10, programStudentInfo);
 
             }
-
             else if (totalSubjects > 90 && totalSubjects <= 120)
-                {
-                SubjectsPerColumn = 40; // Size OK
+            {
+                SubjectsPerColumn = 40;
                 ExcelRange cellsMaximum = GetExcelRange(worksheet, 33, 1, 72, 21);
                 CellCenter(cellsMaximum);
                 ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "C33:C72", "C73");
                 ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "J33:J72", "J73");
                 ProcessScenario(worksheet, 33, 72, 1, 2, "TOTALES", "Q33:Q72", "Q73");
                 TotalSumColumns(worksheet, 73, 73, 3, 15, "C73:Q73", "E76");
+
+                BorderTable(worksheet, 77, 5, 80, 7);
+                TotalCreditsLabels(worksheet, 77, 5, 77, 6, 77, 7);
                 CellTotalSum(worksheet, 76, 5, 76, 7);
+                ZeroDefault(worksheet, 78, 5, 80, 7);
 
                 AddSingleParraf(worksheet, 78, 80, 1, 4, labels);
                 AddTitleDocument(worksheet, 82, 1, 82, 4, condition);
@@ -1056,135 +1005,113 @@ namespace PruebaExcel01.Controllers
 
                 AddTitleDocument(worksheet, 94, 1, 94, 4, constancy);
 
+                SignaMark(worksheet, 98, 1, 98, 2);
+                ProgramManagerSignature(worksheet, 96 + 2815, 1);
                 AddSingleParrafSignature(worksheet, 99, 1, programManagerInfo);
-                AddSingleParrafSignature(worksheet, 99, 10, programStudentInfo);
+                //AddSingleParrafSignature(worksheet, 99, 10, programStudentInfo);
             }
-
-            else if (totalSubjects > 0 && totalSubjects <= 60)
-                {
-                    SubjectsPerColumn = 14; // Cambiar el límite si hay entre 51 y 100 arreglos
-                }
 
 
             foreach (var subject in subjects)
-                {
-                    if (subjectCount >= SubjectsPerColumn)
-                    {
-                        column += 7;
-                        row = 33;
-                        subjectCount = 0;
-                    }
-
-                    AssignSubjectsToWorksheet(worksheet, row, column, subject);
-
-                    row++;
-                    subjectCount++;
-                }
-        }
-
-        // ------------------------------------------- MODELO ADECUADO A DATOS POR TAMAÑO DE SUBJECTS ------------------------------------- //
-
-        public void GenerateSumCell(ExcelWorksheet worksheet, int row, int column, ExcelRange[] ranges)
-        {
-            string addresses = string.Join(",", ranges.Select(range => range.Address));
-            string formula = $"SUM({addresses})";
-            worksheet.Cells[row, column].Formula = formula;
-        }
-
-
-
-        private void RecognizedCredits(ExcelWorksheet worksheet, int row, int column, int cellA, int cellB, int cellC)
-        {
-             //var totalSubjects = new ExcelRange[] { totalSubjects1, totalSubjects2, totalSubjects3 };
-            //GenerateSumCell(worksheet, 51, 5, totalSubjects);
-
-
-            var labelApproved = worksheet.Cells[52, 5];
-            labelApproved.Value = "APRO";
-            CellCenter(labelApproved);
-            FontWeightBold(labelApproved);
-
-            var labelPending = worksheet.Cells[52, 6];
-            labelPending.Value = "PEN";
-            CellCenter(labelPending);
-            FontWeightBold(labelPending);
-
-            var labelTotalCredits = worksheet.Cells[52, 7];
-            labelTotalCredits.Value = "TOTAL CRED";
-            CellCenter(labelTotalCredits);
-            FontWeightBold(labelTotalCredits);
-
-            ExcelRange celdasMateriasTotales = GetExcelRange(worksheet, 53, 5, 55, 7);
-            CellCenter(celdasMateriasTotales);
-
-            // IMPORTANTE: CODIGO PROPENSO A SER MODIFICADO //
-
-            var cellsToSetZero = new List<ExcelRange>
-                {
-                    worksheet.Cells["G53"],
-                    worksheet.Cells["E53"],
-                    worksheet.Cells["G54"],
-                    worksheet.Cells["E54"],
-                    worksheet.Cells["G55"],
-                    worksheet.Cells["E55"]
-                };
-
-            foreach (var cell in cellsToSetZero)
             {
-                cell.Value = 0;
+                if (subjectCount >= SubjectsPerColumn)
+                {
+                    column += 7;
+                    row = 33;
+                    subjectCount = 0;
+                }
+
+                AssignSubjectsToWorksheet(worksheet, row, column, subject);
+
+                row++;
+                subjectCount++;
             }
-
-            // FORMULAS TO DETERMINE CREDITS
-
-            // CREDITOS TECNICO PROFESIONAL (1)
-            var totalTechnicalCredits = worksheet.Cells["G53"]; // 3
-            var totalTechnicalApproved = worksheet.Cells["E53"]; // 1
-            var totalTechnicalPending = worksheet.Cells["F53"]; // 2
-            totalTechnicalPending.Formula = $"({totalTechnicalCredits.Address}) - ({totalTechnicalApproved.Address})";
-
-            // TOTAL CREDITOS APROBADOS (2)
-            var totalTechnologistCredits = worksheet.Cells["G54"];
-            var totalTechnologistApproved = worksheet.Cells["E54"];
-            var totalTechnologistPending = worksheet.Cells["F54"];
-            totalTechnologistPending.Formula = $"({totalTechnologistCredits.Address}) - ({totalTechnologistApproved.Address})";
-
-            // TOTAL CREDITOS PENDIENTES (3)
-            var totalProfessionalCredits = worksheet.Cells["G55"];
-            var totalProfessionalApproved = worksheet.Cells["E55"];
-            var totalProfessionalPending = worksheet.Cells["F55"];
-            totalProfessionalPending.Formula = $"({totalProfessionalCredits.Address}) - ({totalProfessionalApproved.Address})";
         }
 
-        
-        private void ContractArea(ExcelWorksheet worksheet)
+        private void BorderTable(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn)
         {
-            ExcelRange studentStatementArea = worksheet.Cells[70, 1, 79, 21];
-            ContentLeft(studentStatementArea);
+            ExcelRange totalValuesSubjects = worksheet.Cells[startRow, startColumn, endRow, endColumn];
+            CellCenter(totalValuesSubjects);
+        }
 
-            ExcelRange labelTitle4 = worksheet.Cells[70, 1, 70, 5]; // OK 
-            labelTitle4.Value = "En Constancia de lo anterior firman:";
-            FontWeightBold(labelTitle4);
-            MergedCells(labelTitle4);
+        // int rowTotal, int columnTotal
 
-            var parrafSquare = worksheet.Cells[73, 7];
-            parrafSquare.Value = "finalParraf";
-            ContentLeft(parrafSquare);
+        private void TotalCreditsLabels(ExcelWorksheet worksheet, int row1, int column1, int row2, int column2, int row3, int column3)
+        {
 
+            ContentText contentText = new ContentText();
 
-            // INFORMATION: JEFE DE PROGRAMA
-            ExcelRange cellSignatureProgramManager = worksheet.Cells[73, 1, 73, 2]; // OK 
-            MergedCells(cellSignatureProgramManager);
-            ApplySignatureBorders(cellSignatureProgramManager);
-            ProgramManagerSignature(worksheet);
+            var cellAproLabel = worksheet.Cells[row1, column1];
+            cellAproLabel.Value = contentText.TotalCreditsValue()[0];
+            FontWeightBold(cellAproLabel);
 
+            var cellPendingLabel = worksheet.Cells[row2, column2];
+            cellPendingLabel.Value = contentText.TotalCreditsValue()[1];
+            FontWeightBold(cellPendingLabel);
 
-            // INFORMATION: ESTUDIANTE
-            ExcelRange cellSignatureStudent = worksheet.Cells[73, 8, 73, 9]; // OK
-            MergedCells(cellSignatureStudent);
-            ApplySignatureBorders(cellSignatureStudent);
-            StudentSignature(worksheet);
+            var cellTotalCredLabel = worksheet.Cells[row3, column3];
+            cellTotalCredLabel.Value = contentText.TotalCreditsValue()[2];
+            FontWeightBold(cellTotalCredLabel);
 
         }
+
+        private void ZeroDefault(ExcelWorksheet worksheet, int startRow, int startColumn, int endRow, int endColumn)
+        {
+            for (int row = startRow; row <= endRow; row++)
+            {
+                for (int column = startColumn; column <= endColumn; column++)
+                {
+                    var cell = worksheet.Cells[row, column];
+                    cell.Value = 0;
+                }
+            }
+        }
+
+
+
+        //    ExcelRange celdasMateriasTotales = GetExcelRange(worksheet, 53, 5, 55, 7);
+        //    CellCenter(celdasMateriasTotales);
+
+        //    // IMPORTANTE: CODIGO PROPENSO A SER MODIFICADO //
+
+        //    var cellsToSetZero = new List<ExcelRange>
+        //        {
+        //            worksheet.Cells["G53"],
+        //            worksheet.Cells["E53"],
+        //            worksheet.Cells["G54"],
+        //            worksheet.Cells["E54"],
+        //            worksheet.Cells["G55"],
+        //            worksheet.Cells["E55"]
+        //        };
+
+        //    foreach (var cell in cellsToSetZero)
+        //    {
+        //        cell.Value = 0;
+        //    }
+
+        //    // FORMULAS TO DETERMINE CREDITS
+
+        //    // CREDITOS TECNICO PROFESIONAL (1)
+        //    var totalTechnicalCredits = worksheet.Cells["G53"]; // 3
+        //    var totalTechnicalApproved = worksheet.Cells["E53"]; // 1
+        //    var totalTechnicalPending = worksheet.Cells["F53"]; // 2
+        //    totalTechnicalPending.Formula = $"({totalTechnicalCredits.Address}) - ({totalTechnicalApproved.Address})";
+
+        //    // TOTAL CREDITOS APROBADOS (2)
+        //    var totalTechnologistCredits = worksheet.Cells["G54"];
+        //    var totalTechnologistApproved = worksheet.Cells["E54"];
+        //    var totalTechnologistPending = worksheet.Cells["F54"];
+        //    totalTechnologistPending.Formula = $"({totalTechnologistCredits.Address}) - ({totalTechnologistApproved.Address})";
+
+        //    // TOTAL CREDITOS PENDIENTES (3)
+        //    var totalProfessionalCredits = worksheet.Cells["G55"];
+        //    var totalProfessionalApproved = worksheet.Cells["E55"];
+        //    var totalProfessionalPending = worksheet.Cells["F55"];
+        //    totalProfessionalPending.Formula = $"({totalProfessionalCredits.Address}) - ({totalProfessionalApproved.Address})";
+        //}
+
+
+
 
         private void ApplyCellsFooter(ExcelWorksheet worksheet)
         {

@@ -9,7 +9,18 @@ namespace PruebaExcel01.Models
         public string TitleImportantCondition() { return "Manifestación expresa del estudiante"; }
         public string TextInConstancy() { return "En Constancia de lo anterior firman:"; }
 
-        public string[] HeaderTableCells()
+        public string[]TotalCreditsValue() 
+            {
+                return new string[]
+                {
+                "APRO",
+                "PEN",
+                "TOTAL CRED"
+                };
+            }
+
+
+            public string[] HeaderTableCells()
         {
             return new string[]
             {
